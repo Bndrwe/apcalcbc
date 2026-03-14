@@ -8,38 +8,69 @@
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#020208;--bg2:#08080F;--bg3:#0E0E1A;--bg4:#161624;
-  --border:rgba(129,140,248,0.09);--border2:rgba(129,140,248,0.2);
-  --text:#EEEEF8;--muted:#7B7B9C;--dim:#2E2E4A;
-  --accent:#818CF8;--accent2:#A855F7;
-  --glow:rgba(129,140,248,0.22);--glow2:rgba(168,85,247,0.18);
+  --bg:#06040A;--bg2:#090612;--bg3:#0D091A;--bg4:#120D22;
+  --border:rgba(180,80,110,0.08);--border2:rgba(180,80,110,0.20);
+  --text:#F8F0FF;--muted:#9980AA;--dim:#2A1535;
+  --accent:#C2607A;--accent2:#E090A8;
+  --glow:rgba(180,80,110,0.22);--glow2:rgba(200,110,140,0.16);
+  --neon1:rgba(194,96,122,0.85);--neon2:rgba(224,144,168,0.85);
+  --neon-white:rgba(240,230,235,0.90);--neon-cyan:#7FDDCC;
+  --neon-cyan-glow:rgba(127,221,204,0.18);
   --r:12px;--r2:8px;
 }
 html,body{background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;min-height:100vh;font-size:14px;line-height:1.6;overflow-x:hidden}
 a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 
 /* AURORA CANVAS */
-#aurora-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.35}
+#aurora-canvas{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.5}
 
 /* HEADER */
-.site-header{background:rgba(7,7,15,0.85);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);padding:0 24px;position:sticky;top:0;z-index:100;border-bottom:1px solid var(--border)}
-.header-inner{max-width:1300px;margin:0 auto;display:flex;align-items:center;gap:20px;height:60px}
-.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-0.5px;flex-shrink:0;cursor:pointer}
-.logo-mark{width:34px;height:34px;background:linear-gradient(135deg,#6366F1,#A855F7);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;box-shadow:0 0 16px rgba(99,102,241,0.5)}
+.site-header{background:rgba(2,0,5,0.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);padding:0 24px;position:sticky;top:0;z-index:100;border-bottom:1px solid rgba(180,80,110,0.08)}
+.header-inner{max-width:1400px;margin:0 auto;display:flex;align-items:center;justify-content:center;height:62px;gap:20px;position:relative}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:17px;letter-spacing:-0.5px;flex-shrink:0;cursor:pointer;position:absolute;left:0}
+.logo-mark{width:34px;height:34px;background:linear-gradient(135deg,#C2607A,#E090A8);border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:#fff;box-shadow:0 0 12px rgba(180,80,110,0.25),0 0 24px rgba(180,80,110,0.10)}
 .logo-text span{color:var(--accent2)}
-.tab-nav{display:flex;gap:2px;flex:1;justify-content:center}
-.tab-btn{background:none;border:none;color:var(--muted);cursor:pointer;padding:6px 14px;border-radius:var(--r2);font-size:13px;font-weight:500;transition:all .2s;display:flex;align-items:center;gap:6px}
-.tab-btn:hover{color:var(--text);background:var(--bg3)}
-.tab-btn.active{color:#fff;background:var(--bg4);border:1px solid var(--border2);box-shadow:0 0 12px var(--glow)}
-.tab-btn .dot{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+/* Header pill nav — the tubelight bar */
+.header-tl-nav{display:flex;align-items:center;gap:3px;background:rgba(8,0,12,0.75);border:1px solid rgba(180,80,110,0.12);backdrop-filter:blur(12px);padding:4px;border-radius:100px;box-shadow:0 0 24px rgba(180,80,110,0.08)}
+.header-tl-pill{position:relative;cursor:pointer;font-size:13px;font-weight:600;padding:7px 18px;border-radius:100px;border:none;background:none;color:rgba(248,240,255,0.5);transition:color .2s;white-space:nowrap;display:flex;align-items:center;gap:6px;line-height:1}
+.header-tl-pill svg{width:14px;height:14px;flex-shrink:0;opacity:.65;transition:opacity .2s}
+.header-tl-pill:hover{color:rgba(248,240,255,0.88)}
+.header-tl-pill:hover svg{opacity:.9}
+.header-tl-pill.tl-active{color:#fff}
+.header-tl-pill.tl-active svg{opacity:1}
+/* Tubelight bar on top edge of active pill */
+.header-tl-pill.tl-active::before{
+  content:'';position:absolute;top:-1px;left:50%;transform:translateX(-50%);
+  width:38%;height:2px;border-radius:0 0 3px 3px;
+  background:linear-gradient(90deg,#C2607A,#E090A8);
+  box-shadow:0 0 6px rgba(194,96,122,0.70),0 0 14px rgba(180,80,110,0.28);
+}
+/* Radial glow bloom above the bar */
+.header-tl-pill.tl-active::after{
+  content:'';position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+  width:90%;height:18px;
+  background:radial-gradient(ellipse at center,rgba(180,80,110,0.10) 0%,transparent 70%);
+  filter:blur(5px);border-radius:50%;
+}
+/* Sliding highlight behind active pill */
+.header-tl-pill.tl-active .tl-bg{
+  position:absolute;inset:0;border-radius:100px;
+  background:rgba(180,80,110,0.08);z-index:-1;
+}
+/* Mobile: hide text on small screens */
+@media(max-width:700px){
+  .header-tl-pill span.tl-label{display:none}
+  .header-tl-pill{padding:8px 12px}
+  .header-tl-pill svg{width:16px;height:16px;opacity:.85}
+}
 
 /* STATS BAR */
-.stats-bar{background:rgba(15,15,28,0.8);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:10px 24px;position:relative;z-index:10}
+.stats-bar{background:rgba(6,0,10,0.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);padding:10px 24px;position:relative;z-index:10}
 .stats-inner{max-width:1300px;margin:0 auto;display:flex;gap:32px;align-items:center;flex-wrap:wrap}
 .stat{text-align:center}
-.stat-n{font-size:20px;font-weight:700;line-height:1;background:linear-gradient(135deg,#818CF8,#A855F7);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.stat-n{font-size:20px;font-weight:700;line-height:1;background:linear-gradient(135deg,#C2607A,#E090A8);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .stat-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
-.bc-badge{margin-left:auto;background:linear-gradient(135deg,#6366F1,#A855F7);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px;box-shadow:0 0 16px rgba(99,102,241,0.4)}
+.bc-badge{margin-left:auto;background:linear-gradient(135deg,#C2607A,#E090A8);color:#fff;font-size:11px;font-weight:700;padding:4px 10px;border-radius:20px;letter-spacing:.5px;box-shadow:0 0 10px rgba(180,80,110,0.15)}
 
 /* LAYOUT */
 .page{display:none;max-width:1300px;margin:0 auto;padding:24px;position:relative;z-index:1}
@@ -53,44 +84,66 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 #page-home{min-height:calc(100vh - 100px);display:none;max-width:100%;padding:0;position:relative;z-index:1}
 #page-home.active{display:block}
 .home-hero{min-height:calc(100vh - 100px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px;text-align:center;position:relative}
-.home-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(129,140,248,0.08);border:1px solid rgba(129,140,248,0.25);border-radius:20px;padding:6px 16px;font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.5px;margin-bottom:28px;text-transform:uppercase}
-.home-eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 8px var(--accent);animation:pulse 2s infinite}
+.home-eyebrow{display:inline-flex;align-items:center;gap:8px;background:rgba(180,80,110,0.08);border:1px solid rgba(180,80,110,0.20);border-radius:20px;padding:6px 16px;font-size:12px;font-weight:600;color:var(--accent);letter-spacing:.5px;margin-bottom:28px;text-transform:uppercase}
+.home-eyebrow::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 12px var(--accent),0 0 24px var(--glow);animation:pulse 2s infinite}
 .home-title{font-size:clamp(52px,10vw,100px);font-weight:900;letter-spacing:-4px;line-height:1;margin-bottom:16px}
-.home-title .gradient-text{background:linear-gradient(135deg,#818CF8 0%,#A855F7 50%,#818CF8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% auto;animation:shimmer 4s linear infinite;display:block}
+.home-title .gradient-text{background:linear-gradient(135deg,#C2607A 0%,#E090A8 40%,#FFFFFF 70%,#E090A8 100%);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;background-size:200% auto;animation:shimmer 4s linear infinite;display:block}
 @keyframes shimmer{0%{background-position:0% center}100%{background-position:200% center}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .home-subtitle{font-size:clamp(15px,2vw,20px);color:var(--muted);max-width:600px;line-height:1.7;margin:0 auto 40px;font-weight:400}
 .home-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:80px}
-.btn-primary{background:linear-gradient(135deg,#6366F1,#A855F7);color:#fff;border:none;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 0 24px rgba(99,102,241,0.4),0 4px 16px rgba(0,0,0,0.3);transition:all .2s;letter-spacing:-.2px}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 36px rgba(99,102,241,0.6),0 8px 24px rgba(0,0,0,0.4)}
-.btn-secondary{background:rgba(129,140,248,0.08);color:var(--text);border:1px solid rgba(129,140,248,0.3);padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;backdrop-filter:blur(8px)}
-.btn-secondary:hover{background:rgba(129,140,248,0.15);border-color:var(--accent);box-shadow:0 0 20px var(--glow)}
-.home-stats{display:flex;gap:0;border:1px solid var(--border);border-radius:16px;background:rgba(15,15,28,0.6);backdrop-filter:blur(16px);overflow:hidden;margin-bottom:80px;flex-wrap:wrap}
+.btn-primary{background:linear-gradient(135deg,#B85070,#E090A8);color:#fff;border:none;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 0 16px rgba(180,80,110,0.22),0 4px 16px rgba(0,0,0,0.3);transition:all .2s;letter-spacing:-.2px}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(180,80,110,0.50),0 0 80px rgba(180,80,110,0.15),0 8px 24px rgba(0,0,0,0.4)}
+.btn-secondary{background:rgba(180,80,110,0.06);color:var(--text);border:1px solid rgba(180,80,110,0.16);padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;backdrop-filter:blur(8px)}
+.btn-secondary:hover{background:rgba(180,80,110,0.10);border-color:var(--accent);box-shadow:0 0 20px var(--glow)}
+.home-stats{display:flex;gap:0;border:1px solid var(--border);border-radius:16px;background:rgba(8,0,12,0.6);backdrop-filter:blur(16px);overflow:hidden;margin-bottom:80px;flex-wrap:wrap}
 .home-stat{flex:1;min-width:100px;padding:20px 24px;text-align:center;border-right:1px solid var(--border)}
 .home-stat:last-child{border-right:none}
-.home-stat-n{font-size:28px;font-weight:800;background:linear-gradient(135deg,#818CF8,#A855F7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px}
+.home-stat-n{font-size:28px;font-weight:800;background:linear-gradient(135deg,#C2607A,#E090A8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px}
 .home-stat-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
-.home-features{max-width:1100px;margin:0 auto;width:100%;padding:0 24px}
-.features-title{font-size:24px;font-weight:700;margin-bottom:24px;text-align:center;color:var(--muted)}
-.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px;margin-bottom:60px}
-.feature-card{background:rgba(15,15,28,0.7);border:1px solid var(--border);border-radius:14px;padding:22px;cursor:pointer;transition:all .25s;backdrop-filter:blur(8px);position:relative;overflow:hidden}
-.feature-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(129,140,248,0.04),rgba(168,85,247,0.02));opacity:0;transition:opacity .25s}
-.feature-card:hover{border-color:rgba(129,140,248,0.35);box-shadow:0 0 28px var(--glow),0 4px 20px rgba(0,0,0,0.3);transform:translateY(-3px)}
-.feature-card:hover::before{opacity:1}
-.feature-icon{font-size:28px;margin-bottom:12px;display:block}
-.feature-name{font-size:15px;font-weight:700;margin-bottom:6px;color:var(--text)}
-.feature-desc{font-size:12px;color:var(--muted);line-height:1.5}
-.feature-badge{position:absolute;top:14px;right:14px;background:rgba(129,140,248,0.15);border:1px solid rgba(129,140,248,0.3);color:var(--accent);font-size:10px;font-weight:700;padding:3px 8px;border-radius:10px}
+.home-features{max-width:1200px;margin:0 auto;width:100%;padding:0 24px}
+.features-title{font-size:22px;font-weight:700;margin-bottom:20px;text-align:center;color:var(--muted);letter-spacing:-.3px}
+/* Force exactly 5 equal columns — no wrapping */
+.feature-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:60px;align-items:stretch}
+.feature-card{background:rgba(6,0,10,0.80);border:1px solid var(--border);border-radius:14px;padding:20px 16px 18px;cursor:pointer;transition:all .25s;backdrop-filter:blur(8px);position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;min-width:0;height:100%;text-align:left}
+.feature-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(180,80,110,0.06),rgba(200,130,160,0.03));opacity:0;transition:opacity .25s}
+.feature-card:hover{border-color:rgba(180,80,110,0.30);box-shadow:0 0 32px var(--glow),0 0 60px var(--glow2),0 4px 20px rgba(0,0,0,0.35);transform:translateY(-3px)}
+.feature-card:hover::after{opacity:1}
+.feature-icon{font-size:24px;margin-bottom:12px;line-height:1;height:26px;display:flex;align-items:center}
+.feature-name{font-size:13.5px;font-weight:700;margin-bottom:6px;color:var(--text);line-height:1.3}
+.feature-desc{font-size:11.5px;color:var(--muted);line-height:1.55;flex:1;width:100%}
+.feature-badge{margin-top:10px;background:rgba(180,80,110,0.10);border:1px solid rgba(180,80,110,0.18);color:var(--accent);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;align-self:flex-start}
+@media(max-width:900px){.feature-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:600px){.feature-grid{grid-template-columns:repeat(2,1fr)}}
+
+/* ── Dotted particle canvas ─────────────────────────────────────── */
+#dots-canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.55}
+
+/* ── Tubelight nav pills ────────────────────────────────────────── */
+/* tubelight home pills removed */
+
+/* ── Centered hero rework ───────────────────────────────────────── */
+.home-centered{position:relative;min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px 40px;text-align:center;overflow:hidden}
+.home-centered .home-title{font-size:clamp(56px,9vw,108px);letter-spacing:-5px;line-height:.95;margin-bottom:22px}
+.home-centered .home-subtitle{margin:0 auto 36px;max-width:560px;font-size:17px}
+.home-centered .home-cta{margin-bottom:52px}
+.home-hero-stats{display:flex;gap:0;border:1px solid rgba(180,80,110,0.10);border-radius:14px;background:rgba(5,0,8,0.58);backdrop-filter:blur(16px);overflow:hidden;margin-bottom:52px;box-shadow:0 0 40px rgba(180,80,110,0.06)}
+.home-hero-stat{flex:1;min-width:80px;padding:16px 20px;text-align:center;border-right:1px solid rgba(180,80,110,0.08)}
+.home-hero-stat:last-child{border-right:none}
+.home-hero-stat-n{font-size:24px;font-weight:800;background:linear-gradient(135deg,#C2607A,#E090A8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:2px}
+.home-hero-stat-l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
+
 .float-anim{animation:float 4s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
 
+
 /* UNITS TAB */
 .units-layout{display:grid;grid-template-columns:220px 1fr;gap:20px;min-height:80vh}
-.unit-sidebar{border:1px solid var(--border);border-radius:var(--r);background:rgba(15,15,28,0.7);backdrop-filter:blur(8px);padding:12px;position:sticky;top:80px;max-height:calc(100vh - 100px);overflow-y:auto;height:fit-content}
+.unit-sidebar{border:1px solid var(--border);border-radius:var(--r);background:rgba(6,0,10,0.80);backdrop-filter:blur(8px);padding:12px;position:sticky;top:80px;max-height:calc(100vh - 100px);overflow-y:auto;height:fit-content}
 .unit-sidebar-title{font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;padding:4px 8px 10px}
 .unit-btn{display:flex;align-items:center;gap:10px;width:100%;background:none;border:none;color:var(--muted);cursor:pointer;padding:8px 10px;border-radius:8px;text-align:left;font-size:13px;font-weight:500;transition:all .15s;margin-bottom:2px}
 .unit-btn:hover{color:var(--text);background:var(--bg3)}
-.unit-btn.active{color:#fff;background:rgba(129,140,248,0.12);box-shadow:inset 0 0 12px rgba(129,140,248,0.1)}
+.unit-btn.active{color:#fff;background:rgba(180,80,110,0.08);box-shadow:inset 0 0 12px rgba(180,80,110,0.08)}
 .unit-num{width:22px;height:22px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0}
 
 /* UNIT CONTENT */
@@ -98,19 +151,19 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .unit-header{margin-bottom:24px}
 .unit-title{font-size:28px;font-weight:800;letter-spacing:-1px;line-height:1.2;margin-bottom:8px}
 .unit-subtitle{color:var(--muted);font-size:15px}
-.bc-only{display:inline-block;background:rgba(168,85,247,0.15);color:#A855F7;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;border:1px solid rgba(168,85,247,0.3);margin-left:8px;vertical-align:middle}
+.bc-only{display:inline-block;background:rgba(180,80,110,0.10);color:#C2607A;font-size:11px;font-weight:600;padding:2px 8px;border-radius:20px;border:1px solid rgba(180,80,110,0.18);margin-left:8px;vertical-align:middle}
 
 .concept-grid{display:grid;gap:16px;grid-template-columns:1fr 1fr}
-.concept-card{background:rgba(15,15,28,0.8);border:1px solid var(--border);border-radius:var(--r);padding:20px;transition:border-color .2s,box-shadow .2s;backdrop-filter:blur(4px)}
+.concept-card{background:rgba(6,0,10,0.85);border:1px solid var(--border);border-radius:var(--r);padding:20px;transition:border-color .2s,box-shadow .2s;backdrop-filter:blur(4px)}
 .concept-card:hover{border-color:var(--border2);box-shadow:0 0 20px var(--glow)}
 .concept-card.full{grid-column:1/-1}
 .concept-title{font-size:15px;font-weight:700;margin-bottom:10px;display:flex;align-items:center;gap:8px}
 .concept-title .icon{font-size:16px}
 .concept-body{color:#C8C8DC;font-size:13.5px;line-height:1.7}
-.formula-box{background:rgba(22,22,38,0.9);border:1px solid rgba(129,140,248,0.18);border-radius:8px;padding:12px 16px;margin:10px 0;text-align:center;font-size:15px;overflow-x:auto;box-shadow:inset 0 0 20px rgba(129,140,248,0.04)}
-.example-box{background:rgba(99,102,241,0.06);border:1px solid rgba(99,102,241,0.2);border-radius:8px;padding:14px 16px;margin:10px 0}
+.formula-box{background:rgba(5,0,10,0.95);border:1px solid rgba(180,80,110,0.16);border-radius:8px;padding:12px 16px;margin:10px 0;text-align:center;font-size:15px;overflow-x:auto;box-shadow:inset 0 0 20px rgba(180,80,110,0.05),0 0 16px rgba(180,80,110,0.08)}
+.example-box{background:rgba(180,80,110,0.05);border:1px solid rgba(180,80,110,0.12);border-radius:8px;padding:14px 16px;margin:10px 0}
 .example-box .ex-label{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.definition-box{background:rgba(168,85,247,0.05);border-left:3px solid var(--accent2);padding:10px 14px;margin:10px 0;border-radius:0 6px 6px 0}
+.definition-box{background:rgba(200,130,160,0.05);border-left:3px solid var(--accent2);box-shadow:-2px 0 12px rgba(200,130,160,0.14);padding:10px 14px;margin:10px 0;border-radius:0 6px 6px 0}
 .definition-box strong{color:var(--accent2);font-size:13px}
 .tip-box{background:rgba(52,211,153,0.06);border:1px solid rgba(52,211,153,0.2);border-radius:8px;padding:12px 14px;margin:10px 0}
 .tip-box .tip-label{font-size:11px;font-weight:700;color:#34D399;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
@@ -127,33 +180,32 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 
 /* FLASHCARDS TAB */
 .fc-controls{display:flex;align-items:center;gap:12px;margin-bottom:20px;flex-wrap:wrap}
-.fc-unit-filter{background:rgba(15,15,28,0.8);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-size:13px;cursor:pointer;backdrop-filter:blur(8px)}
+.fc-unit-filter{background:rgba(6,0,10,0.85);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-size:13px;cursor:pointer;backdrop-filter:blur(8px)}
 .fc-progress{flex:1;min-width:200px}
 .fc-progress-bar{height:4px;background:var(--bg4);border-radius:2px;overflow:hidden;margin-top:4px}
-.fc-progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s;box-shadow:0 0 8px var(--glow)}
+.fc-progress-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s;box-shadow:0 0 12px var(--glow),0 0 24px var(--glow)}
 .fc-progress-text{font-size:12px;color:var(--muted)}
 .flashcard-area{display:flex;flex-direction:column;align-items:center;gap:20px;padding:20px 0}
 .flashcard{width:100%;max-width:700px;height:300px;perspective:1200px;cursor:pointer}
 .flashcard-inner{width:100%;height:100%;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.4,0,.2,1)}
 .flashcard.flipped .flashcard-inner{transform:rotateY(180deg)}
 .flashcard-face{position:absolute;width:100%;height:100%;backface-visibility:hidden;border-radius:16px;border:1px solid var(--border2);padding:32px;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
-.fc-front{background:linear-gradient(135deg,rgba(15,15,28,0.95),rgba(22,22,38,0.95));backdrop-filter:blur(12px);box-shadow:0 0 30px rgba(129,140,248,0.15)}
-.fc-back{background:linear-gradient(135deg,rgba(22,22,38,0.95),rgba(30,30,50,0.95));transform:rotateY(180deg);backdrop-filter:blur(12px)}
+.fc-front{background:linear-gradient(135deg,rgba(6,0,10,0.96),rgba(14,6,20,0.96));backdrop-filter:blur(12px);box-shadow:0 0 20px rgba(180,80,110,0.08)}
+.fc-back{background:linear-gradient(135deg,rgba(8,0,14,0.96),rgba(18,4,24,0.96));transform:rotateY(180deg);backdrop-filter:blur(12px);box-shadow:0 0 30px rgba(200,130,160,0.08),0 0 60px rgba(180,80,110,0.05)}
 .fc-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;margin-bottom:16px;opacity:.5}
 .fc-question{font-size:18px;font-weight:600;line-height:1.5;color:var(--text)}
 .fc-answer{font-size:14px;line-height:1.7;color:#C8C8DC;white-space:pre-line}
 .fc-tag{margin-top:16px;background:var(--bg4);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:3px 10px;border-radius:20px}
 .fc-nav{display:flex;gap:12px;align-items:center}
-.fc-nav button{background:rgba(15,15,28,0.8);border:1px solid var(--border2);color:var(--text);padding:10px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;backdrop-filter:blur(8px)}
-.fc-nav button:hover{background:var(--bg3);border-color:var(--accent);box-shadow:0 0 12px var(--glow)}
+.fc-nav button{background:rgba(6,0,10,0.85);border:1px solid var(--border2);color:var(--text);padding:10px 20px;border-radius:8px;cursor:pointer;font-size:13px;font-weight:500;transition:all .15s;backdrop-filter:blur(8px)}
+.fc-nav button:hover{background:var(--bg3);border-color:var(--accent);box-shadow:0 0 16px var(--glow),0 0 32px var(--glow2)}
 .fc-counter{color:var(--muted);font-size:13px;min-width:80px;text-align:center}
 .fc-hint{color:var(--muted);font-size:12px;margin-top:8px}
 
 /* PRACTICE / FRQ TAB */
 .frq-grid{display:grid;gap:16px}
-.frq-card{background:rgba(15,15,28,0.8);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;backdrop-filter:blur(4px)}
 .frq-header{padding:16px 20px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:background .15s}
-.frq-header:hover{background:rgba(129,140,248,0.05)}
+.frq-header:hover{background:rgba(180,80,110,0.05)}
 .frq-title-row{display:flex;flex-direction:column;gap:4px}
 .frq-unit-tag{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.5px;color:var(--accent);opacity:.7}
 .frq-prompt{font-size:14px;font-weight:600;color:var(--text)}
@@ -162,22 +214,22 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .frq-body{padding:0 20px 20px;display:none;border-top:1px solid var(--border)}
 .frq-body.open{display:block;padding-top:16px}
 .frq-parts{display:grid;gap:12px}
-.frq-part{background:rgba(22,22,38,0.8);border-radius:8px;padding:14px 16px;border:1px solid var(--border)}
+.frq-part{background:rgba(8,0,14,0.88);border-radius:8px;padding:14px 16px;border:1px solid var(--border)}
 .frq-part-label{font-size:12px;font-weight:700;color:var(--accent);margin-bottom:6px}
 .frq-part-q{font-size:13.5px;color:var(--text);margin-bottom:10px}
 .solution-toggle{background:none;border:1px solid var(--border2);color:var(--muted);padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px;margin-top:8px;transition:all .15s}
 .solution-toggle:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 8px var(--glow)}
-.solution-content{display:none;margin-top:10px;padding:12px;background:rgba(99,102,241,0.05);border-radius:8px;border:1px solid rgba(129,140,248,0.18);font-size:13px;color:#C8C8DC;line-height:1.7;white-space:pre-line}
+.solution-content{display:none;margin-top:10px;padding:12px;background:rgba(180,80,110,0.05);border-radius:8px;border:1px solid rgba(180,80,110,0.12);font-size:13px;color:#C8C8DC;line-height:1.7;white-space:pre-line}
 .solution-content.open{display:block}
 
 /* VIDEOS TAB */
 .videos-layout{display:grid;gap:20px}
-.video-unit-section{background:rgba(15,15,28,0.8);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;backdrop-filter:blur(4px)}
+.video-unit-section{background:rgba(6,0,10,0.85);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;backdrop-filter:blur(4px)}
 .video-unit-header{padding:14px 20px;display:flex;align-items:center;gap:10px;cursor:pointer;border-bottom:1px solid var(--border);transition:background .15s}
-.video-unit-header:hover{background:rgba(129,140,248,0.05)}
+.video-unit-header:hover{background:rgba(180,80,110,0.05)}
 .video-unit-title{font-size:14px;font-weight:600}
 .video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px;padding:16px}
-.video-card{background:rgba(22,22,38,0.9);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s,transform .2s,box-shadow .2s}
+.video-card{background:rgba(8,0,14,0.92);border:1px solid var(--border);border-radius:10px;overflow:hidden;transition:border-color .2s,transform .2s,box-shadow .2s}
 .video-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:0 0 20px var(--glow)}
 .video-embed-container{width:100%;height:158px;position:relative;overflow:hidden;background:var(--bg3)}
 .video-thumb{width:100%;height:158px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;cursor:pointer;background:var(--bg3)}
@@ -185,58 +237,58 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .video-thumb:hover img{transform:scale(1.04)}
 .video-thumb .thumb-emoji{font-size:40px;z-index:1}
 .video-play{position:absolute;width:48px;height:48px;background:rgba(0,0,0,0.55);border:2px solid rgba(255,255,255,0.7);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:17px;color:#fff;transition:all .2s;backdrop-filter:blur(4px);z-index:2}
-.video-thumb:hover .video-play{background:rgba(99,102,241,0.85);border-color:var(--accent);box-shadow:0 0 24px rgba(129,140,248,0.5);transform:scale(1.1)}
+.video-thumb:hover .video-play{background:rgba(180,80,110,0.60);border-color:var(--accent);box-shadow:0 0 24px rgba(180,80,110,0.28);transform:scale(1.1)}
 .video-info{padding:12px}
 .video-title{font-size:13px;font-weight:600;margin-bottom:4px;line-height:1.4}
 .video-author{font-size:12px;color:var(--muted)}
-.video-link{display:flex;align-items:center;justify-content:center;gap:6px;margin:0 12px 12px;padding:8px;background:rgba(99,102,241,0.08);border:1px solid rgba(129,140,248,0.2);color:var(--accent);border-radius:6px;font-size:12px;font-weight:600;transition:all .15s;text-decoration:none}
-.video-link:hover{background:rgba(99,102,241,0.18);box-shadow:0 0 10px var(--glow);text-decoration:none}
+.video-link{display:flex;align-items:center;justify-content:center;gap:6px;margin:0 12px 12px;padding:8px;background:rgba(180,80,110,0.06);border:1px solid rgba(180,80,110,0.12);color:var(--accent);border-radius:6px;font-size:12px;font-weight:600;transition:all .15s;text-decoration:none}
+.video-link:hover{background:rgba(180,80,110,0.12);box-shadow:0 0 10px var(--glow);text-decoration:none}
 
 /* AI TUTOR TAB */
 .ai-layout{display:grid;grid-template-columns:1fr 280px;gap:20px;align-items:start}
-.chat-panel{display:flex;flex-direction:column;background:rgba(8,8,15,0.9);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;backdrop-filter:blur(8px);height:72vh;min-height:500px}
+.chat-panel{display:flex;flex-direction:column;background:rgba(4,0,8,0.92);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;backdrop-filter:blur(8px);height:72vh;min-height:500px}
 .chat-header{padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
-.ai-avatar{width:32px;height:32px;background:linear-gradient(135deg,#6366F1,#A855F7);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 0 12px rgba(99,102,241,0.4)}
+.ai-avatar{width:32px;height:32px;background:linear-gradient(135deg,#C2607A,#E090A8);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 0 12px rgba(180,80,110,0.25)}
 .chat-header-info h3{font-size:14px;font-weight:700}
 .chat-header-info p{font-size:11px;color:var(--muted)}
-.status-dot{width:8px;height:8px;border-radius:50%;background:#34D399;animation:pulse 2s infinite;margin-left:auto;flex-shrink:0;box-shadow:0 0 8px #34D399}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#34D399;animation:pulse 2s infinite;margin-left:auto;flex-shrink:0;box-shadow:0 0 10px #34D399,0 0 20px rgba(52,211,153,0.4)}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
 .msg{max-width:85%;display:flex;flex-direction:column;gap:4px}
 .msg.user{align-self:flex-end}
 .msg.ai{align-self:flex-start}
 .msg-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.6}
-.msg.user .msg-bubble{background:linear-gradient(135deg,#4F46E5,#7C3AED);color:#fff;border-radius:12px 12px 3px 12px;box-shadow:0 0 12px rgba(99,102,241,0.3)}
-.msg.ai .msg-bubble{background:rgba(22,22,38,0.9);border:1px solid var(--border);border-radius:12px 12px 12px 3px;color:#C8C8DC}
+.msg.user .msg-bubble{background:linear-gradient(135deg,#A04060,#C2607A);color:#fff;border-radius:12px 12px 3px 12px;box-shadow:0 0 12px rgba(99,102,241,0.3)}
+.msg.ai .msg-bubble{background:rgba(8,0,14,0.92);border:1px solid var(--border);border-radius:12px 12px 12px 3px;color:#C8C8DC}
 .msg-time{font-size:10px;color:var(--muted);padding:0 4px}
 .chat-input-area{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px}
-.chat-input{flex:1;background:rgba(22,22,38,0.9);border:1px solid var(--border2);color:var(--text);padding:10px 14px;border-radius:8px;font-size:13px;resize:none;min-height:42px;max-height:120px;font-family:inherit;outline:none;transition:border-color .2s}
-.chat-input:focus{border-color:var(--accent);box-shadow:0 0 12px var(--glow)}
-.send-btn{background:linear-gradient(135deg,#6366F1,#A855F7);border:none;color:#fff;width:42px;height:42px;border-radius:8px;cursor:pointer;font-size:16px;flex-shrink:0;transition:opacity .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;box-shadow:0 0 12px rgba(99,102,241,0.3)}
+.chat-input{flex:1;background:rgba(8,0,14,0.92);border:1px solid var(--border2);color:var(--text);padding:10px 14px;border-radius:8px;font-size:13px;resize:none;min-height:42px;max-height:120px;font-family:inherit;outline:none;transition:border-color .2s}
+.chat-input:focus{border-color:var(--accent);box-shadow:0 0 16px var(--glow),0 0 32px var(--glow2)}
+.send-btn{background:linear-gradient(135deg,#B85070,#E090A8);border:none;color:#fff;width:42px;height:42px;border-radius:8px;cursor:pointer;font-size:16px;flex-shrink:0;transition:opacity .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(180,80,110,0.25)}
 .send-btn:hover{opacity:.85;box-shadow:0 0 20px rgba(99,102,241,0.5)}
 .send-btn:disabled{opacity:.4;cursor:not-allowed}
-.typing-indicator{display:flex;gap:4px;padding:12px 14px;background:rgba(22,22,38,0.9);border:1px solid var(--border);border-radius:12px 12px 12px 3px;width:fit-content}
+.typing-indicator{display:flex;gap:4px;padding:12px 14px;background:rgba(8,0,14,0.92);border:1px solid var(--border);border-radius:12px 12px 12px 3px;width:fit-content}
 .typing-dot{width:6px;height:6px;border-radius:50%;background:var(--muted);animation:typing 1.2s infinite}
 .typing-dot:nth-child(2){animation-delay:.2s}
 .typing-dot:nth-child(3){animation-delay:.4s}
 @keyframes typing{0%,60%,100%{transform:translateY(0);opacity:.5}30%{transform:translateY(-6px);opacity:1}}
 .ai-sidebar{display:flex;flex-direction:column;gap:14px;overflow-y:auto}
-.ai-sidebar-card{background:rgba(15,15,28,0.8);border:1px solid var(--border);border-radius:var(--r);padding:14px;backdrop-filter:blur(8px)}
+.ai-sidebar-card{background:rgba(6,0,10,0.85);border:1px solid var(--border);border-radius:var(--r);padding:14px;backdrop-filter:blur(8px)}
 .ai-sidebar-card h4{font-size:13px;font-weight:700;margin-bottom:10px;color:var(--text)}
-.prompt-chip{display:block;width:100%;background:rgba(22,22,38,0.8);border:1px solid var(--border);color:var(--muted);text-align:left;padding:8px 10px;border-radius:7px;font-size:12px;cursor:pointer;margin-bottom:6px;transition:all .15s;font-family:inherit}
+.prompt-chip{display:block;width:100%;background:rgba(8,0,14,0.88);border:1px solid var(--border);color:var(--muted);text-align:left;padding:8px 10px;border-radius:7px;font-size:12px;cursor:pointer;margin-bottom:6px;transition:all .15s;font-family:inherit}
 .prompt-chip:hover{border-color:var(--accent);color:var(--text);box-shadow:0 0 8px var(--glow)}
-.model-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(99,102,241,0.1);border:1px solid rgba(129,140,248,0.25);color:var(--accent);font-size:11px;padding:4px 10px;border-radius:20px}
+.model-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(180,80,110,0.08);border:1px solid rgba(180,80,110,0.16);color:var(--accent);font-size:11px;padding:4px 10px;border-radius:20px}
 .model-status{font-size:11px;color:var(--muted);margin-top:8px;font-style:italic}
 
 /* DEMO SECTION */
-.demo-section{margin-top:20px;background:rgba(15,15,28,0.8);border:1px solid var(--border);border-radius:var(--r);padding:20px;backdrop-filter:blur(4px)}
+.demo-section{margin-top:20px;background:rgba(6,0,10,0.85);border:1px solid var(--border);border-radius:var(--r);padding:20px;backdrop-filter:blur(4px)}
 .demo-title{font-size:14px;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
 .demo-controls{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:14px;align-items:center}
 .demo-control label{font-size:12px;color:var(--muted);display:block;margin-bottom:4px}
 .demo-control input[type=range]{width:160px;accent-color:var(--accent)}
-.demo-control select{background:rgba(22,22,38,0.9);border:1px solid var(--border2);color:var(--text);padding:6px 10px;border-radius:6px;font-size:12px;cursor:pointer}
+.demo-control select{background:rgba(8,0,14,0.92);border:1px solid var(--border2);color:var(--text);padding:6px 10px;border-radius:6px;font-size:12px;cursor:pointer}
 .demo-value{font-size:13px;font-weight:700;color:var(--accent);min-width:60px}
-canvas{border-radius:8px;background:rgba(22,22,38,0.9)}
+canvas{border-radius:8px;background:rgba(8,0,14,0.92)}
 
 /* KATEX */
 .katex{font-size:1em!important;color:inherit}
@@ -244,17 +296,135 @@ canvas{border-radius:8px;background:rgba(22,22,38,0.9)}
 .katex-display>.katex{white-space:normal}
 
 /* UNIT COLORS */
-.uc-1{--uc:#818CF8}.uc-2{--uc:#818CF8}.uc-3{--uc:#A855F7}
-.uc-4{--uc:#A855F7}.uc-5{--uc:#818CF8}.uc-6{--uc:#818CF8}
-.uc-7{--uc:#A855F7}.uc-8{--uc:#A855F7}.uc-9{--uc:#818CF8}.uc-10{--uc:#818CF8}
+.uc-1{--uc:#C2607A}.uc-2{--uc:#D07090}.uc-3{--uc:#E090A8}
+.uc-4{--uc:#E090A8}.uc-5{--uc:#C2607A}.uc-6{--uc:#D07090}
+.uc-7{--uc:#E090A8}.uc-8{--uc:#E090A8}.uc-9{--uc:#C2607A}.uc-10{--uc:#D07090}
 .unit-color{color:var(--uc)}
-.unit-num-bg{background:rgba(129,140,248,0.12);color:var(--accent);border:1px solid rgba(129,140,248,0.25)}
-.unit-btn.active .unit-num{background:rgba(129,140,248,0.2);color:var(--accent)}
+.unit-num-bg{background:rgba(180,80,110,0.08);color:var(--accent);border:1px solid rgba(180,80,110,0.16)}
+.unit-btn.active .unit-num{background:rgba(180,80,110,0.12);color:var(--accent)}
 
 /* Scrollbar */
 ::-webkit-scrollbar{width:5px;height:5px}
 ::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:var(--dim);border-radius:3px}
+::-webkit-scrollbar-thumb{background:rgba(180,80,110,0.15);border-radius:3px}
+
+/* ===== GLOBAL NEON GRID OVERLAY ===== */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(180,80,110,0.015) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(180,80,110,0.015) 1px,transparent 1px);
+  background-size:60px 60px;
+  mask-image:radial-gradient(ellipse at 50% 50%,black 30%,transparent 80%);
+  animation:gridShift 20s linear infinite;
+}
+@keyframes gridShift{0%{background-position:0 0}100%{background-position:60px 60px}}
+
+/* ===== NEON SCAN LINE ===== */
+body::after{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:linear-gradient(transparent 50%,rgba(180,80,110,0.005) 50%);
+  background-size:100% 4px;
+  animation:scanPan 8s linear infinite;
+  opacity:0.4;
+}
+@keyframes scanPan{0%{background-position:0 0}100%{background-position:0 200px}}
+
+/* ===== PAGE ENTRY ANIMATIONS ===== */
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(22px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeIn{
+  from{opacity:0}to{opacity:1}
+}
+@keyframes neonFlicker{
+  0%,95%,100%{opacity:1}96%{opacity:0.7}97%{opacity:1}98%{opacity:0.75}99%{opacity:1}
+}
+@keyframes neonPulse{
+  0%,100%{box-shadow:0 0 6px rgba(180,80,110,0.14),0 0 14px rgba(180,80,110,0.08)}
+  50%{box-shadow:0 0 18px var(--glow),0 0 40px var(--glow2),0 0 60px rgba(180,80,110,0.08)}
+}
+@keyframes orbFloat{
+  0%,100%{transform:translate(0,0) scale(1)}
+  33%{transform:translate(30px,-20px) scale(1.08)}
+  66%{transform:translate(-20px,15px) scale(0.95)}
+}
+@keyframes glowPulseText{
+  0%,100%{text-shadow:0 0 12px rgba(180,80,110,0.25),0 0 24px rgba(180,80,110,0.12)}
+  50%{text-shadow:0 0 24px rgba(180,80,110,0.45),0 0 48px rgba(180,80,110,0.20),0 0 80px rgba(200,130,160,0.12)}
+}
+
+/* ===== ANIMATED NEON ORBS (shared across pages) ===== */
+.neon-orb{
+  position:fixed;border-radius:50%;pointer-events:none;z-index:0;
+  filter:blur(80px);mix-blend-mode:screen;animation:orbFloat 12s ease-in-out infinite;
+}
+.neon-orb-1{width:320px;height:320px;background:radial-gradient(circle,rgba(180,80,110,0.10),transparent 70%);top:10%;left:8%;animation-duration:14s}
+.neon-orb-2{width:260px;height:260px;background:radial-gradient(circle,rgba(200,130,160,0.07),transparent 70%);top:55%;right:6%;animation-duration:18s;animation-delay:-6s}
+.neon-orb-3{width:200px;height:200px;background:radial-gradient(circle,rgba(100,200,185,0.08),transparent 70%);bottom:15%;left:25%;animation-duration:22s;animation-delay:-9s}
+
+/* ===== PAGE SECTION HEADERS ===== */
+.page-heading-anim{
+  animation:fadeUp .55s ease both, glowPulseText 4s ease-in-out infinite;
+}
+.page h2{
+  background:linear-gradient(135deg,#FFFFFF 0%,#E090A8 60%,#C2607A 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text;
+  animation:fadeUp .5s ease both;
+}
+
+/* ===== CONCEPT CARD ENTRY ANIMATIONS ===== */
+.concept-card{
+  background:rgba(6,0,10,0.85);border:1px solid var(--border);border-radius:var(--r);padding:20px;
+  transition:border-color .2s,box-shadow .2s,transform .2s;backdrop-filter:blur(4px);
+  animation:fadeUp .45s ease both;
+}
+.concept-card:nth-child(1){animation-delay:.05s}
+.concept-card:nth-child(2){animation-delay:.10s}
+.concept-card:nth-child(3){animation-delay:.15s}
+.concept-card:nth-child(4){animation-delay:.20s}
+.concept-card:nth-child(5){animation-delay:.25s}
+.concept-card:hover{border-color:rgba(180,80,110,0.25);box-shadow:0 0 28px var(--glow),0 0 50px var(--glow2);transform:translateY(-2px)}
+
+/* ===== FRQ CARD ANIMATIONS ===== */
+.frq-card{
+  background:rgba(6,0,10,0.85);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;
+  backdrop-filter:blur(4px);animation:fadeUp .4s ease both;
+  transition:border-color .2s,box-shadow .2s;
+}
+.frq-card:nth-child(n){animation-delay:calc(var(--i,0) * .06s)}
+.frq-card:hover{border-color:rgba(180,80,110,0.18);box-shadow:0 0 20px var(--glow)}
+.frq-header:hover{background:rgba(180,80,110,0.05)}
+
+/* ===== VIDEO CARD ANIMATIONS ===== */
+.video-card{
+  background:rgba(8,0,14,0.92);border:1px solid var(--border);border-radius:10px;overflow:hidden;
+  transition:border-color .2s,transform .2s,box-shadow .2s;
+  animation:fadeUp .4s ease both;
+}
+.video-card:hover{border-color:rgba(180,80,110,0.25);transform:translateY(-3px);box-shadow:0 0 28px var(--glow),0 0 50px var(--glow2)}
+.video-unit-section{background:rgba(6,0,10,0.85);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;backdrop-filter:blur(4px);animation:fadeIn .5s ease both}
+
+/* ===== FLASHCARD NEON GLOW ANIMATION ===== */
+.flashcard:not(.flipped) .fc-front{animation:neonPulse 3s ease-in-out infinite}
+.fc-nav button:hover{background:rgba(180,80,110,0.06);border-color:var(--accent);box-shadow:0 0 16px var(--glow),0 0 32px var(--glow2)}
+
+/* ===== AI CHAT ANIMATIONS ===== */
+.ai-avatar{width:32px;height:32px;background:linear-gradient(135deg,#C2607A,#E090A8);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;box-shadow:0 0 12px rgba(180,80,110,0.20);animation:neonPulse 3s ease-in-out infinite}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#00F5D4;animation:pulse 2s infinite;margin-left:auto;flex-shrink:0;box-shadow:0 0 10px #00F5D4,0 0 20px rgba(0,245,212,0.4)}
+.msg.user .msg-bubble{background:linear-gradient(135deg,#A04060,#C2607A);color:#fff;border-radius:12px 12px 3px 12px;box-shadow:0 0 16px rgba(180,80,110,0.18)}
+.prompt-chip:hover{border-color:var(--accent);color:var(--text);box-shadow:0 0 10px var(--glow),0 0 20px var(--glow2)}
+.send-btn{background:linear-gradient(135deg,#B85070,#E090A8);border:none;color:#fff;width:42px;height:42px;border-radius:8px;cursor:pointer;font-size:16px;flex-shrink:0;transition:opacity .2s,box-shadow .2s;display:flex;align-items:center;justify-content:center;box-shadow:0 0 16px rgba(180,80,110,0.25)}
+.send-btn:hover{opacity:.85;box-shadow:0 0 28px rgba(180,80,110,0.35),0 0 50px rgba(180,80,110,0.16)}
+
+/* ===== SOLUTION/FRQ TOGGLE PINK ===== */
+.solution-toggle:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 10px var(--glow)}
+.solution-content{background:rgba(180,80,110,0.04);border-radius:8px;border:1px solid rgba(180,80,110,0.10)}
+
+/* ===== SCROLLBAR pink ===== */
+::-webkit-scrollbar-thumb{background:rgba(180,80,110,0.18);border-radius:3px}
 
 /* Responsive */
 @media(max-width:900px){
@@ -266,8 +436,6 @@ canvas{border-radius:8px;background:rgba(22,22,38,0.9)}
   .home-stats{flex-direction:row}
 }
 @media(max-width:600px){
-  .tab-btn span{display:none}
-  .tab-btn .dot{display:none}
   .stats-inner{gap:16px}
   .home-title{font-size:52px;letter-spacing:-3px}
 }
@@ -276,37 +444,51 @@ canvas{border-radius:8px;background:rgba(22,22,38,0.9)}
 <!-- AURORA CANVAS -->
 <canvas id="aurora-canvas"></canvas>
 
+<!-- NEON AMBIENT ORBS -->
+<div class="neon-orb neon-orb-1"></div>
+<div class="neon-orb neon-orb-2"></div>
+<div class="neon-orb neon-orb-3"></div>
+
 <!-- HEADER -->
 <header class="site-header">
   <div class="header-inner">
-    <div class="logo" onclick="switchTab('home')">
+    <!-- Logo -->
+    <div class="logo" onclick="headerNav('home')">
       <div class="logo-mark">∫</div>
       <div class="logo-text">CALC <span>BC</span></div>
     </div>
-    <nav class="tab-nav">
-      <button class="tab-btn" data-tab="home" onclick="switchTab('home')">
-        <span class="dot" style="background:#818CF8"></span>
-        <span>Home</span>
+
+    <!-- Tubelight pill nav -->
+    <nav class="header-tl-nav" id="header-tl-nav">
+      <button class="header-tl-pill" data-tab="home" onclick="headerNav('home')">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/></svg>
+        <span class="tl-label">Home</span>
+        <span class="tl-bg"></span>
       </button>
-      <button class="tab-btn active" data-tab="units" onclick="switchTab('units')">
-        <span class="dot" style="background:#818CF8"></span>
-        <span>Study Guide</span>
+      <button class="header-tl-pill tl-active" data-tab="units" onclick="headerNav('units')">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.396 0 2.695.37 3.8 1.013A9.027 9.027 0 018 12c0-1.07.17-2.1.48-3.067A8.018 8.018 0 009 8V4.804z"/><path d="M10.5 4.804A7.969 7.969 0 0114.5 4c1.255 0 2.443.29 3.5.804v10a7.969 7.969 0 00-3.5-.804 7.969 7.969 0 00-3.8 1.013A8.966 8.966 0 0012 12c0-1.07.17-2.1.48-3.067A8.018 8.018 0 0011 8V4.804z"/></svg>
+        <span class="tl-label">Study Guide</span>
+        <span class="tl-bg"></span>
       </button>
-      <button class="tab-btn" data-tab="flashcards" onclick="switchTab('flashcards')">
-        <span class="dot" style="background:#A855F7"></span>
-        <span>Flashcards</span>
+      <button class="header-tl-pill" data-tab="flashcards" onclick="headerNav('flashcards')">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zm0 6a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1v-2zm0 6a1 1 0 011-1h6a1 1 0 010 2H4a1 1 0 01-1-1z"/></svg>
+        <span class="tl-label">Flashcards</span>
+        <span class="tl-bg"></span>
       </button>
-      <button class="tab-btn" data-tab="practice" onclick="switchTab('practice')">
-        <span class="dot" style="background:#818CF8"></span>
-        <span>FRQ Practice</span>
+      <button class="header-tl-pill" data-tab="practice" onclick="headerNav('practice')">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M13.586 3.586a2 2 0 112.828 2.828l-.793.793-2.828-2.828.793-.793zM11.379 5.793L3 14.172V17h2.828l8.38-8.379-2.83-2.828z"/></svg>
+        <span class="tl-label">FRQ Practice</span>
+        <span class="tl-bg"></span>
       </button>
-      <button class="tab-btn" data-tab="videos" onclick="switchTab('videos')">
-        <span class="dot" style="background:#A855F7"></span>
-        <span>Videos</span>
+      <button class="header-tl-pill" data-tab="videos" onclick="headerNav('videos')">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 6a2 2 0 012-2h6a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zm12.553 1.106A1 1 0 0014 8v4a1 1 0 00.553.894l2 1A1 1 0 0018 13V7a1 1 0 00-1.447-.894l-2 1z"/></svg>
+        <span class="tl-label">Videos</span>
+        <span class="tl-bg"></span>
       </button>
-      <button class="tab-btn" data-tab="ai" onclick="switchTab('ai')">
-        <span class="dot" style="background:#818CF8"></span>
-        <span>AI Tutor</span>
+      <button class="header-tl-pill" data-tab="ai" onclick="headerNav('ai')">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5zm15.657 2.757a1 1 0 00-1.414-1.414L14 8.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
+        <span class="tl-label">AI Tutor</span>
+        <span class="tl-bg"></span>
       </button>
     </nav>
   </div>
@@ -317,7 +499,7 @@ canvas{border-radius:8px;background:rgba(22,22,38,0.9)}
   <div class="stats-inner">
     <div class="stat"><div class="stat-n">10</div><div class="stat-l">Units</div></div>
     <div class="stat"><div class="stat-n">180+</div><div class="stat-l">Flashcards</div></div>
-    <div class="stat"><div class="stat-n">25+</div><div class="stat-l">FRQ Prompts</div></div>
+    <div class="stat"><div class="stat-n">20+</div><div class="stat-l">FRQ Prompts</div></div>
     <div class="stat"><div class="stat-n">40+</div><div class="stat-l">Videos</div></div>
     <div class="stat"><div class="stat-n">∞</div><div class="stat-l">AI Questions</div></div>
     <div class="bc-badge">✦ AP EXAM READY</div>
@@ -326,52 +508,67 @@ canvas{border-radius:8px;background:rgba(22,22,38,0.9)}
 
 <!-- HOME PAGE -->
 <div id="page-home" class="page">
-  <div class="home-hero">
-    <div class="home-eyebrow float-anim">AP Calculus BC · 2025 Exam Prep</div>
-    <h1 class="home-title">
+  <div class="home-centered">
+    <!-- Dotted particle canvas (replaces accordion) -->
+    <canvas id="dots-canvas"></canvas>
+
+    <!-- Eyebrow -->
+    <div class="home-eyebrow float-anim" style="position:relative;z-index:1">AP Calculus BC · 2025 Exam Prep</div>
+
+    <!-- Title -->
+    <h1 class="home-title" style="position:relative;z-index:1">
       AP Calc BC
       <span class="gradient-text">Study Guide</span>
     </h1>
-    <p class="home-subtitle">Everything you need for a 5 — detailed notes with <em>why things work</em>, 180+ flashcards, FRQ practice, embedded videos, and a free AI tutor, all in one place.</p>
-    <div class="home-cta">
-      <button class="btn-primary" onclick="switchTab('units')">Start Studying →</button>
-      <button class="btn-secondary" onclick="switchTab('ai')">🧮 Ask AI Tutor</button>
+
+    <!-- Subtitle -->
+    <p class="home-subtitle" style="position:relative;z-index:1">
+      Everything you need for a 5 — detailed notes with <em>why things work</em>, 180+ flashcards, FRQ practice, embedded videos, and a free AI tutor.
+    </p>
+
+    <!-- CTA buttons -->
+    <div class="home-cta" style="position:relative;z-index:1">
+      <button class="btn-primary" onclick="headerNav('units')">Start Studying →</button>
+      <button class="btn-secondary" onclick="headerNav('ai')">🧮 Ask AI Tutor</button>
     </div>
-    <div class="home-stats">
-      <div class="home-stat"><div class="home-stat-n">10</div><div class="home-stat-l">Units</div></div>
-      <div class="home-stat"><div class="home-stat-n">180+</div><div class="home-stat-l">Flashcards</div></div>
-      <div class="home-stat"><div class="home-stat-n">25+</div><div class="home-stat-l">FRQ Sets</div></div>
-      <div class="home-stat"><div class="home-stat-n">40+</div><div class="home-stat-l">Videos</div></div>
-      <div class="home-stat"><div class="home-stat-n">∞</div><div class="home-stat-l">AI Help</div></div>
+
+    <!-- Stats strip -->
+    <div class="home-hero-stats" style="position:relative;z-index:1">
+      <div class="home-hero-stat"><div class="home-hero-stat-n">10</div><div class="home-hero-stat-l">Units</div></div>
+      <div class="home-hero-stat"><div class="home-hero-stat-n">180+</div><div class="home-hero-stat-l">Flashcards</div></div>
+      <div class="home-hero-stat"><div class="home-hero-stat-n">20+</div><div class="home-hero-stat-l">FRQ Sets</div></div>
+      <div class="home-hero-stat"><div class="home-hero-stat-n">40+</div><div class="home-hero-stat-l">Videos</div></div>
+      <div class="home-hero-stat"><div class="home-hero-stat-n">∞</div><div class="home-hero-stat-l">AI Help</div></div>
     </div>
-    <div class="home-features">
-      <div class="features-title">Everything you need to get a 5</div>
+
+    <!-- Feature cards — 5 across -->
+    <div class="home-features" style="position:relative;z-index:1">
       <div class="feature-grid">
-        <div class="feature-card" onclick="switchTab('units')">
+        <div class="feature-card" onclick="headerNav('units')">
           <span class="feature-icon">📖</span>
           <div class="feature-name">Study Guide</div>
-          <div class="feature-desc">10 units of detailed notes, formulas, definitions, and worked examples.</div>
+          <div class="feature-desc">10 units of detailed notes, formulas, and worked examples with reasoning.</div>
         </div>
-        <div class="feature-card" onclick="switchTab('flashcards')">
+        <div class="feature-card" onclick="headerNav('flashcards')">
           <span class="feature-icon">🃏</span>
           <div class="feature-name">Flashcards</div>
-          <div class="feature-desc">180+ cards with flip animations. Filter by unit, shuffle, and track what you know.</div>
+          <div class="feature-desc">180+ cards. Filter by unit, shuffle, and mark what you know.</div>
           <div class="feature-badge">180+ Cards</div>
         </div>
-        <div class="feature-card" onclick="switchTab('practice')">
+        <div class="feature-card" onclick="headerNav('practice')">
           <span class="feature-icon">✍️</span>
           <div class="feature-name">FRQ Practice</div>
-          <div class="feature-desc">AP-style free response questions with full worked solutions for every part.</div>
+          <div class="feature-desc">20+ AP-style free response questions with full worked solutions for every part.</div>
         </div>
-        <div class="feature-card" onclick="switchTab('videos')">
+        <div class="feature-card" onclick="headerNav('videos')">
           <span class="feature-icon">🎬</span>
           <div class="feature-name">Video Library</div>
-          <div class="feature-desc">Curated 3Blue1Brown, Professor Leonard, and more — embedded right here.</div>
+          <div class="feature-desc">3Blue1Brown, Prof. Leonard & more — real thumbnails, click to watch.</div>
         </div>
-        <div class="feature-card" onclick="switchTab('ai')">
+        <div class="feature-card" onclick="headerNav('ai')">
           <span class="feature-icon">🧮</span>
           <div class="feature-name">AI Tutor</div>
-          <div class="feature-desc">Ask anything about AP Calc BC. Powered by free AI — available 24/7.</div>
+          <div class="feature-desc">Ask anything about AP Calc BC. Free AI — available 24/7.</div>
           <div class="feature-badge">Free AI</div>
         </div>
       </div>
@@ -400,8 +597,8 @@ canvas{border-radius:8px;background:rgba(22,22,38,0.9)}
       <div class="fc-progress-text" id="fc-progress-text">Card 1 of 180</div>
       <div class="fc-progress-bar"><div class="fc-progress-fill" id="fc-progress-fill" style="width:1%"></div></div>
     </div>
-    <button onclick="shuffleCards()" style="background:rgba(15,15,28,0.8);border:1px solid var(--border2);color:var(--text);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;transition:all .15s" onmouseover="this.style.boxShadow='0 0 12px var(--glow)'" onmouseout="this.style.boxShadow=''">⇌ Shuffle</button>
-    <button onclick="resetCards()" style="background:rgba(15,15,28,0.8);border:1px solid var(--border2);color:var(--text);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;transition:all .15s">↺ Reset</button>
+    <button onclick="shuffleCards()" style="background:rgba(6,0,10,0.85);border:1px solid var(--border2);color:var(--text);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;transition:all .15s" onmouseover="this.style.boxShadow='0 0 12px var(--glow)'" onmouseout="this.style.boxShadow=''">⇌ Shuffle</button>
+    <button onclick="resetCards()" style="background:rgba(6,0,10,0.85);border:1px solid var(--border2);color:var(--text);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;transition:all .15s">↺ Reset</button>
   </div>
   <div class="flashcard-area">
     <div class="flashcard" id="flashcard" onclick="flipCard()">
@@ -425,7 +622,7 @@ canvas{border-radius:8px;background:rgba(22,22,38,0.9)}
     </div>
     <div style="display:flex;gap:10px;margin-top:4px">
       <button onclick="markKnown()" style="background:rgba(52,211,153,0.1);border:1px solid rgba(52,211,153,0.3);color:#34D399;padding:8px 18px;border-radius:8px;cursor:pointer;font-size:13px;transition:all .15s">✓ Know It</button>
-      <button onclick="markReview()" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);color:#A855F7;padding:8px 18px;border-radius:8px;cursor:pointer;font-size:13px">★ Review Later</button>
+      <button onclick="markReview()" style="background:rgba(168,85,247,0.1);border:1px solid rgba(180,80,110,0.18);color:#C2607A;padding:8px 18px;border-radius:8px;cursor:pointer;font-size:13px">★ Review Later</button>
     </div>
   </div>
 </div>
@@ -435,7 +632,7 @@ canvas{border-radius:8px;background:rgba(22,22,38,0.9)}
   <div style="margin-bottom:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
     <h2 style="font-size:22px;font-weight:800;letter-spacing:-0.5px">FRQ Practice</h2>
     <span style="color:var(--muted);font-size:14px">Modeled after real AP exam questions</span>
-    <select id="frq-filter" onchange="renderFRQs()" style="margin-left:auto;background:rgba(15,15,28,0.8);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-size:13px;cursor:pointer">
+    <select id="frq-filter" onchange="renderFRQs()" style="margin-left:auto;background:rgba(6,0,10,0.85);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-size:13px;cursor:pointer">
       <option value="all">All Units</option>
     </select>
   </div>
@@ -523,11 +720,11 @@ canvas{border-radius:8px;background:rgba(22,22,38,0.9)}
   resize();
   window.addEventListener('resize', resize);
   const blobs = [
-    {x:.15,y:.2,rx:.45,ry:.4,c:'rgba(99,102,241,',phase:0,speed:0.4},
-    {x:.65,y:.15,rx:.4,ry:.35,c:'rgba(168,85,247,',phase:2.1,speed:0.3},
-    {x:.45,y:.45,rx:.35,ry:.3,c:'rgba(129,140,248,',phase:4.2,speed:0.5},
-    {x:.8,y:.5,rx:.3,ry:.28,c:'rgba(139,92,246,',phase:1.0,speed:0.35},
-    {x:.1,y:.6,rx:.32,ry:.3,c:'rgba(99,102,241,',phase:3.5,speed:0.45},
+    {x:.15,y:.2,rx:.45,ry:.4,c:'rgba(180,80,110,',phase:0,speed:0.4},
+    {x:.65,y:.15,rx:.4,ry:.35,c:'rgba(200,130,160,',phase:2.1,speed:0.3},
+    {x:.45,y:.45,rx:.35,ry:.3,c:'rgba(180,80,110,',phase:4.2,speed:0.5},
+    {x:.8,y:.5,rx:.3,ry:.28,c:'rgba(100,200,185,',phase:1.0,speed:0.35},
+    {x:.1,y:.6,rx:.32,ry:.3,c:'rgba(200,130,160,',phase:3.5,speed:0.45},
   ];
   function draw(){
     ctx.clearRect(0,0,W,H);
@@ -569,11 +766,11 @@ const FREE_MODELS = [
 
 // =================== UNIT DATA ===================
 const UNIT_DATA = [
-{id:1,title:"Limits & Continuity",sub:"The Foundation of Calculus",color:"#818CF8",icon:"→",
+{id:1,title:"Limits & Continuity",sub:"The Foundation of Calculus",color:"#D07090",icon:"→",
 concepts:[
 {title:"The Limit",icon:"⟶",body:`<div class="definition-box"><strong>Definition:</strong> lim<sub>x→a</sub> f(x) = L means f(x) can be made arbitrarily close to L by taking x sufficiently close to a (but not equal to a).</div><div class="concept-body">A limit describes <em>approach</em>, not the actual value at a point. Limits can exist even when f(a) is undefined.</div><div class="formula-box">$$\\lim_{x \\to a} f(x) = L \\iff \\lim_{x \\to a^-} f(x) = \\lim_{x \\to a^+} f(x) = L$$</div><div class="tip-box"><div class="tip-label">⚡ Key Idea</div>The two-sided limit exists only when both one-sided limits exist AND are equal.</div><div class="example-box"><div class="ex-label">Example</div>For $f(x) = \\dfrac{x^2-4}{x-2}$, find $\\lim_{x\\to 2} f(x)$.<br><br>Factor: $\\dfrac{(x-2)(x+2)}{x-2} = x+2$ for $x\\neq 2$.<br>So $\\lim_{x\\to 2} f(x) = 4$. ✓</div>`},
 {title:"Limit Laws & Trig Limits",icon:"⚖️",body:`<ul class="formula-list"><li><span class="fl-name">Sum/Difference</span>$\\lim[f \\pm g] = L \\pm M$</li><li><span class="fl-name">Product</span>$\\lim[f \\cdot g] = L \\cdot M$</li><li><span class="fl-name">Quotient</span>$\\lim[f/g] = L/M\\;(M\\neq 0)$</li><li><span class="fl-name">Power/Root</span>$\\lim[f^n] = L^n$, $\\lim[\\sqrt[n]{f}]=\\sqrt[n]{L}$</li></ul><div class="formula-box">$$\\lim_{x\\to 0}\\frac{\\sin x}{x} = 1 \\qquad \\lim_{x\\to 0}\\frac{1-\\cos x}{x} = 0 \\qquad \\lim_{x\\to\\infty}\\left(1+\\frac{1}{x}\\right)^x = e$$</div><div class="warn-box"><div class="warn-label">⚠️ Radians Only</div>The trig limits lim sin(x)/x = 1 only work when x is in <strong>radians</strong> and x→0.</div>`},
-{title:"Continuity",icon:"〰️",body:`<div class="definition-box"><strong>f is continuous at x = a if:</strong></div><ol class="steps-list"><li>f(a) is defined (exists)</li><li>$\\lim_{x\\to a} f(x)$ exists</li><li>$\\lim_{x\\to a} f(x) = f(a)$</li></ol><div style="margin-top:12px"><strong style="color:var(--text)">Types of Discontinuity:</strong></div><ul style="margin:8px 0 0 16px;color:#C8C8DC;font-size:13px;display:grid;gap:6px"><li><strong style="color:#818CF8">Removable</strong> — hole; limit exists but ≠ f(a)</li><li><strong style="color:#A855F7">Jump</strong> — left and right limits exist but differ</li><li><strong style="color:#818CF8">Infinite</strong> — vertical asymptote; limit is ±∞</li></ul>`},
+{title:"Continuity",icon:"〰️",body:`<div class="definition-box"><strong>f is continuous at x = a if:</strong></div><ol class="steps-list"><li>f(a) is defined (exists)</li><li>$\\lim_{x\\to a} f(x)$ exists</li><li>$\\lim_{x\\to a} f(x) = f(a)$</li></ol><div style="margin-top:12px"><strong style="color:var(--text)">Types of Discontinuity:</strong></div><ul style="margin:8px 0 0 16px;color:#C8C8DC;font-size:13px;display:grid;gap:6px"><li><strong style="color:#D07090">Removable</strong> — hole; limit exists but ≠ f(a)</li><li><strong style="color:#C2607A">Jump</strong> — left and right limits exist but differ</li><li><strong style="color:#D07090">Infinite</strong> — vertical asymptote; limit is ±∞</li></ul>`},
 {title:"Squeeze Theorem & IVT",icon:"🥪",body:`<div class="formula-box">Squeeze: If $g(x) \\leq f(x) \\leq h(x)$ near $a$, and both outer limits $= L$, then $\\lim f(x) = L$</div><div class="definition-box"><strong>IVT:</strong> If f is continuous on [a,b] and k is between f(a) and f(b), then ∃ c ∈ (a,b) with f(c) = k.</div><div class="example-box"><div class="ex-label">Squeeze Example</div>$\\lim_{x\\to 0} x^2\\sin(1/x) = 0$: Since $-x^2 \\leq x^2\\sin(1/x) \\leq x^2$ and both bounds → 0.</div>`},
 {title:"Limits at Infinity",icon:"∞",body:`<div class="formula-box">$$\\lim_{x\\to\\infty}\\frac{a_n x^n + \\cdots}{b_m x^m + \\cdots} = \\begin{cases} \\frac{a_n}{b_n} & n=m \\\\ 0 & n < m \\\\ \\pm\\infty & n > m \\end{cases}$$</div><div class="concept-body">Divide by <strong>highest power of x in denominator</strong>. Horizontal asymptote: y = L when lim = L.</div><div class="example-box"><div class="ex-label">Example</div>$\\lim_{x\\to\\infty}\\frac{3x^2+2}{5x^2-1} = \\frac{3}{5}$ (equal degrees → ratio of leading coefficients)</div>`}
 ],
@@ -608,7 +805,7 @@ videos:[
 {title:"Squeeze Theorem",author:"blackpenredpen",emoji:"🖊️",embedId:"6wJseKIKHgo",url:"https://www.youtube.com/watch?v=6wJseKIKHgo"}
 ]},
 
-{id:2,title:"Differentiation: Basics",sub:"Rates of Change",color:"#818CF8",icon:"d/dx",
+{id:2,title:"Differentiation: Basics",sub:"Rates of Change",color:"#D07090",icon:"d/dx",
 concepts:[
 {title:"Why Do We Need the Derivative?",icon:"💡",full:true,body:`<div class="concept-body">Imagine driving and wanting to know your speed <em>right now</em> — not your average speed over an hour, but at this exact instant. That's what the derivative captures. The idea: take two points on a curve, find the slope of the secant line between them, then <strong>shrink the gap between them to zero</strong>. The secant becomes a tangent. The average rate of change becomes the <em>instantaneous</em> rate of change.</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px"><div class="definition-box"><strong>Average Rate of Change</strong> (secant slope)<br>$$\\frac{f(b)-f(a)}{b-a} = \\frac{\\Delta y}{\\Delta x}$$<div style="color:#9999B8;font-size:12px;margin-top:4px">Tells you: how much did f change overall from a to b?</div></div><div class="definition-box"><strong>Instantaneous Rate of Change</strong> (tangent slope)<br>$$f'(a) = \\lim_{h\\to 0}\\frac{f(a+h)-f(a)}{h}$$<div style="color:#9999B8;font-size:12px;margin-top:4px">Tells you: how fast is f changing at the single point x = a?</div></div></div><div class="tip-box"><div class="tip-label">The Big Picture</div>Every differentiation rule you'll learn is just a shortcut for computing this limit — because doing it from scratch for every function would take forever.</div>`},
 {title:"Limit Definition of Derivative",icon:"📐",body:`<div class="formula-box">$$f'(x) = \\lim_{h\\to 0}\\frac{f(x+h)-f(x)}{h}$$</div><div class="concept-body"><strong>How to read this:</strong> f(x+h) is the y-value a tiny bit to the right of x. f(x+h)−f(x) is the vertical rise. h is the horizontal run. Their ratio is slope. As h→0, the secant becomes the tangent.</div><div class="example-box"><div class="ex-label">Full Derivation: f(x) = x²</div>$\\dfrac{(x+h)^2 - x^2}{h} = \\dfrac{x^2 + 2xh + h^2 - x^2}{h} = \\dfrac{2xh + h^2}{h} = 2x + h$<br><br>As $h \\to 0$: $f'(x) = 2x$ ✓<br><div style="color:#9999B8;font-size:12px;margin-top:6px">This confirms the power rule! The algebra shows <em>why</em> it works for x².</div></div><div class="definition-box"><strong>Alternative form</strong> (useful for numerical problems):<br>$f'(a) = \\lim_{x\\to a}\\dfrac{f(x)-f(a)}{x-a}$<br><span style="color:#9999B8;font-size:12px">Same idea — x approaches a instead of h approaching 0.</span></div>`},
@@ -638,6 +835,11 @@ frqs:[
 {unit:"Differentiation Basics",prompt:"Derivative using definition and rules",parts:[
 {label:"(a)",q:"Using the limit definition, find the derivative of $f(x) = 3x^2 - x$ at $x = 2$.",soln:"f'(2) = lim(h→0) [f(2+h) - f(2)]/h\n= lim(h→0) [3(2+h)² - (2+h) - 10]/h\n= lim(h→0) [11h + 3h²]/h\n= lim(h→0) (11 + 3h) = 11"},
 {label:"(b)",q:"Write the equation of the tangent line to f at x = 2.",soln:"f(2) = 12 - 2 = 10; f'(2) = 11\nTangent: y - 10 = 11(x - 2)  →  y = 11x - 12"}
+]},
+{unit:"Differentiation Basics",prompt:"Product rule, quotient rule, and trig derivatives",parts:[
+{label:"(a)",q:"Differentiate $h(x) = x^3 \\sin x$.",soln:"Product rule: h'(x) = 3x²·sin x + x³·cos x"},
+{label:"(b)",q:"Differentiate $k(x) = \\dfrac{e^x}{\\cos x}$.",soln:"Quotient rule: k'(x) = (eˣ·cos x − eˣ·(−sin x)) / cos²x\n= eˣ(cos x + sin x) / cos²x"},
+{label:"(c)",q:"Find all x in [0, 2π] where the tangent to $y = \\sin x$ is horizontal.",soln:"y' = cos x = 0 → x = π/2 and x = 3π/2"}
 ]}
 ],
 videos:[
@@ -647,7 +849,7 @@ videos:[
 {title:"Limit Definition Practice",author:"blackpenredpen",emoji:"🔢",embedId:"O_cwHIkiSyI",url:"https://www.youtube.com/watch?v=O_cwHIkiSyI"}
 ]},
 
-{id:3,title:"Advanced Differentiation",sub:"Chain Rule, Implicit, Inverses",color:"#A855F7",icon:"∘",
+{id:3,title:"Advanced Differentiation",sub:"Chain Rule, Implicit, Inverses",color:"#C2607A",icon:"∘",
 concepts:[
 {title:"Chain Rule",icon:"⛓️",body:`<div class="formula-box">$$\\frac{d}{dx}[f(g(x))] = f'(g(x)) \\cdot g'(x)$$</div><div class="concept-body">"Derivative of outside (keeping inside) times derivative of inside."</div><div class="example-box"><div class="ex-label">Examples</div>$\\frac{d}{dx}[\\sin(x^3)] = \\cos(x^3) \\cdot 3x^2$<br><br>$\\frac{d}{dx}[e^{\\tan x}] = e^{\\tan x} \\cdot \\sec^2 x$<br><br>$\\frac{d}{dx}[(3x^2+1)^5] = 5(3x^2+1)^4 \\cdot 6x = 30x(3x^2+1)^4$</div>`},
 {title:"Implicit Differentiation",icon:"🔄",body:`<div class="concept-body">When y is not isolated, differentiate both sides w.r.t. x. Every y-term gets a dy/dx factor (chain rule).</div><ol class="steps-list"><li>Differentiate both sides w.r.t. x</li><li>Apply chain rule: d/dx[yⁿ] = nyⁿ⁻¹·(dy/dx)</li><li>Collect all dy/dx terms on one side</li><li>Factor out dy/dx and solve</li></ol><div class="example-box"><div class="ex-label">Example: Circle</div>$x^2 + y^2 = 25$: $2x + 2y\\dfrac{dy}{dx} = 0 \\Rightarrow \\dfrac{dy}{dx} = -\\dfrac{x}{y}$</div>`},
@@ -672,6 +874,11 @@ frqs:[
 {unit:"Advanced Differentiation",prompt:"Implicit differentiation and tangent lines",parts:[
 {label:"(a)",q:"Find $\\frac{dy}{dx}$ for $x^3 + xy^2 = 2y + 5$.",soln:"Differentiate: 3x² + y² + 2xy(dy/dx) = 2(dy/dx)\n(dy/dx)(2xy - 2) = -(3x² + y²)\ndy/dx = -(3x² + y²)/(2xy - 2)"},
 {label:"(b)",q:"Find the slope of the tangent at (1, 2).",soln:"Check: 1 + 1·4 = 5 = 2(2)+1 ✓\ndy/dx = -(3+4)/(4-2) = -7/2"}
+]},
+{unit:"Advanced Differentiation",prompt:"Chain rule and inverse functions",parts:[
+{label:"(a)",q:"Differentiate $f(x) = \\ln(\\sin^2 x)$.",soln:"f(x) = 2ln(sin x)\nf'(x) = 2·(cos x / sin x) = 2cot x"},
+{label:"(b)",q:"If $g(x) = \\arctan(3x)$, find $g'(x)$.",soln:"g'(x) = 3/(1+(3x)²) = 3/(1+9x²)"},
+{label:"(c)",q:"Use logarithmic differentiation to differentiate $y = x^{\\sin x}$.",soln:"ln y = sin x · ln x\n(1/y)y' = cos x · ln x + sin x · (1/x)\ny' = x^(sin x) [cos x · ln x + sin x / x]"}
 ]}
 ],
 videos:[
@@ -680,7 +887,7 @@ videos:[
 {title:"Inverse Trig Derivatives",author:"Khan Academy",emoji:"∠",embedId:"yUNJSu7b3qY",url:"https://www.youtube.com/watch?v=yUNJSu7b3qY"}
 ]},
 
-{id:4,title:"Contextual Applications",sub:"Related Rates & L'Hôpital",color:"#A855F7",icon:"Δ",
+{id:4,title:"Contextual Applications",sub:"Related Rates & L'Hôpital",color:"#C2607A",icon:"Δ",
 concepts:[
 {title:"Related Rates",icon:"🔗",body:`<div class="concept-body">Related rates: find how fast one quantity changes given another. Both are functions of time t.</div><ol class="steps-list"><li>Draw and label a diagram</li><li>Write an equation relating the variables</li><li>Differentiate both sides w.r.t. t</li><li>Substitute known values and solve</li></ol><div class="example-box"><div class="ex-label">Classic: Balloon Problem</div>V = (4/3)πr³. Differentiate: dV/dt = 4πr² · dr/dt.<br>If dV/dt = 10 and r = 5: dr/dt = 10/(100π) = 1/(10π) in/sec.</div>`},
 {title:"Linear Approximation",icon:"📏",body:`<div class="formula-box">$$L(x) = f(a) + f'(a)(x-a)$$</div><div class="concept-body">The tangent line at x = a approximates f near a (linearization).</div><div class="example-box"><div class="ex-label">Example</div>Approximate $\\sqrt{9.1}$. Use $f(x)=\\sqrt{x}$, $a=9$: $L(9.1) = 3 + \\frac{1}{6}(0.1) \\approx 3.017$</div>`},
@@ -703,6 +910,10 @@ frqs:[
 {unit:"Contextual Applications",prompt:"Related rates — volume and radius",parts:[
 {label:"(a)",q:"Air is pumped into a sphere at 10 in³/sec. How fast is r increasing when r = 5 in? ($V = \\frac{4}{3}\\pi r^3$)",soln:"dV/dt = 4πr² · dr/dt\n10 = 4π(25) · dr/dt\ndr/dt = 10/(100π) = 1/(10π) ≈ 0.032 in/sec"},
 {label:"(b)",q:"How fast is surface area increasing? ($SA = 4\\pi r^2$)",soln:"dSA/dt = 8πr · dr/dt = 8π(5) · 1/(10π) = 4 in²/sec"}
+]},
+{unit:"Contextual Applications",prompt:"L'Hôpital's Rule and particle motion",parts:[
+{label:"(a)",q:"Evaluate $\\displaystyle\\lim_{x\\to 0}\\frac{e^{2x}-1-2x}{x^2}$.",soln:"Form 0/0. Apply L'Hôpital: lim (2e^(2x)-2)/(2x) → still 0/0.\nApply again: lim 4e^(2x)/2 = 2."},
+{label:"(b)",q:"A particle's position is $s(t) = t^3 - 6t^2 + 9t$. Find the total distance traveled on [0,4].",soln:"v(t) = 3t²-12t+9 = 3(t-1)(t-3). Zeros at t=1,3.\ns(0)=0, s(1)=4, s(3)=0, s(4)=4.\nTotal distance = |4-0|+|0-4|+|4-0| = 4+4+4 = 12"}
 ]}
 ],
 videos:[
@@ -711,11 +922,11 @@ videos:[
 {title:"Linear Approximation",author:"Khan Academy",emoji:"📏",embedId:"G7JcNEqpRM4",url:"https://www.youtube.com/watch?v=G7JcNEqpRM4"}
 ]},
 
-{id:5,title:"Analytical Applications",sub:"Optimization & Curve Sketching",color:"#818CF8",icon:"max",
+{id:5,title:"Analytical Applications",sub:"Optimization & Curve Sketching",color:"#D07090",icon:"max",
 concepts:[
 {title:"EVT & Candidates Test",icon:"🏔️",body:`<div class="definition-box"><strong>EVT:</strong> If f is continuous on [a,b], then f attains both absolute max and min on [a,b].</div><div class="tip-box"><div class="tip-label">Candidates Test (Closed Interval Method)</div>1. Find all critical numbers in (a,b)<br>2. Evaluate f at each critical number AND endpoints a, b<br>3. Compare — largest is absolute max, smallest is absolute min</div>`},
 {title:"Mean Value Theorem (MVT)",icon:"⚖️",body:`<div class="formula-box">$$\\exists\\, c \\in (a,b): \\quad f'(c) = \\frac{f(b)-f(a)}{b-a}$$</div><div class="concept-body">If f is continuous on [a,b] and differentiable on (a,b), ∃ c where instantaneous rate = average rate.</div><div class="definition-box"><strong>Rolle's Theorem:</strong> Special case where f(a) = f(b) → ∃ c with f'(c) = 0.</div>`},
-{title:"Critical Points & Extrema",icon:"📍",body:`<div class="definition-box"><strong>Critical Number:</strong> x = c where f'(c) = 0 or f'(c) is undefined (and c is in domain of f).</div><div style="margin:12px 0"><strong>First Derivative Test:</strong></div><ul style="color:#C8C8DC;font-size:13px;margin-left:16px;display:grid;gap:4px"><li>f' changes + → − : <strong style="color:#818CF8">local MAX</strong></li><li>f' changes − → + : <strong style="color:#A855F7">local MIN</strong></li><li>f' doesn't change sign: neither</li></ul><div class="formula-box">2nd Derivative Test: $f'(c)=0$ and $f''(c)>0$ → min; $f''(c)<0$ → max; $f''(c)=0$ → inconclusive</div>`},
+{title:"Critical Points & Extrema",icon:"📍",body:`<div class="definition-box"><strong>Critical Number:</strong> x = c where f'(c) = 0 or f'(c) is undefined (and c is in domain of f).</div><div style="margin:12px 0"><strong>First Derivative Test:</strong></div><ul style="color:#C8C8DC;font-size:13px;margin-left:16px;display:grid;gap:4px"><li>f' changes + → − : <strong style="color:#D07090">local MAX</strong></li><li>f' changes − → + : <strong style="color:#C2607A">local MIN</strong></li><li>f' doesn't change sign: neither</li></ul><div class="formula-box">2nd Derivative Test: $f'(c)=0$ and $f''(c)>0$ → min; $f''(c)<0$ → max; $f''(c)=0$ → inconclusive</div>`},
 {title:"Concavity & Inflection Points",icon:"〽️",body:`<ul class="formula-list"><li><span class="fl-name">Concave up</span>$f''(x) > 0$ (holds water)</li><li><span class="fl-name">Concave down</span>$f''(x) < 0$ (spills water)</li><li><span class="fl-name">Inflection point</span>$f''$ changes sign at x=c</li></ul><div class="warn-box"><div class="warn-label">⚠️ Common Error</div>f''(c) = 0 does NOT guarantee an inflection point! The sign must CHANGE.</div>`},
 {title:"Optimization",icon:"🎯",body:`<ol class="steps-list"><li>Read carefully — identify objective function</li><li>Draw a diagram and label variables</li><li>Write the objective function</li><li>Use a constraint to reduce to one variable</li><li>Find critical numbers (set f' = 0)</li><li>Use EVT/1st or 2nd derivative test to confirm</li><li>Answer the question (include units!)</li></ol><div class="tip-box"><div class="tip-label">Always Justify!</div>Just saying f'=0 is not enough — prove it's actually a max or min.</div>`}
 ],
@@ -735,6 +946,10 @@ frqs:[
 {unit:"Analytical Applications",prompt:"Analyzing a function's behavior",parts:[
 {label:"(a)",q:"Let $f(x)=x^4-8x^2$. Find all critical numbers and classify each.",soln:"f'(x) = 4x³ - 16x = 4x(x-2)(x+2)\nCritical numbers: x = 0, 2, -2\nf''(x) = 12x² - 16\nf''(0) = -16 < 0 → local MAX\nf''(±2) = 32 > 0 → local MIN"},
 {label:"(b)",q:"Find intervals where f is concave up and locate inflection points.",soln:"f''(x) = 12x² - 16 = 0 → x = ±2/√3\nConcave up: |x| > 2/√3\nConcave down: |x| < 2/√3\nInflection points at x = ±2/√3 (sign changes confirmed)"}
+]},
+{unit:"Analytical Applications",prompt:"Optimization and Mean Value Theorem",parts:[
+{label:"(a)",q:"A farmer has 400 m of fence to enclose a rectangular field against a barn wall (no fence needed on one side). Find the dimensions that maximize area.",soln:"Let length = x (parallel to barn), width = y.\nConstraint: x + 2y = 400 → x = 400 - 2y\nA = xy = (400-2y)y = 400y - 2y²\nA' = 400 - 4y = 0 → y = 100, x = 200\nMax area = 200×100 = 20,000 m²"},
+{label:"(b)",q:"Verify that $f(x) = x^3 - x$ satisfies the MVT on [0, 2] and find the guaranteed c.",soln:"f is differentiable on [0,2].\nMVT slope = (f(2)-f(0))/(2-0) = (6-0)/2 = 3\nf'(x) = 3x²-1 = 3 → x² = 4/3 → x = 2/√3 ≈ 1.155\nc = 2/√3 ∈ (0,2) ✓"}
 ]}
 ],
 videos:[
@@ -743,7 +958,7 @@ videos:[
 {title:"Curve Sketching",author:"Professor Leonard",emoji:"📈",embedId:"9wF-mH6oGgU",url:"https://www.youtube.com/watch?v=9wF-mH6oGgU"}
 ]},
 
-{id:6,title:"Integration",sub:"Area and Accumulation",color:"#818CF8",icon:"∫",
+{id:6,title:"Integration",sub:"Area and Accumulation",color:"#D07090",icon:"∫",
 concepts:[
 {title:"Riemann Sums",icon:"📊",body:`<div class="formula-box">$$\\int_a^b f(x)\\,dx \\approx \\sum_{i=1}^{n} f(x_i^*)\\,\\Delta x, \\quad \\Delta x = \\frac{b-a}{n}$$</div><div class="concept-body"><strong>Left:</strong> x*ᵢ = a+(i-1)Δx | <strong>Right:</strong> x*ᵢ = a+iΔx | <strong>Mid:</strong> midpoint</div><div class="formula-box">Trapezoidal: $\\frac{\\Delta x}{2}[f(x_0)+2f(x_1)+\\cdots+2f(x_{n-1})+f(x_n)]$</div><div class="tip-box"><div class="tip-label">Exam Tip</div>Trap Rule overestimates for concave up, underestimates for concave down.</div>`},
 {title:"Fundamental Theorem of Calculus",icon:"🏛️",body:`<div class="formula-box">Part 1: $\\frac{d}{dx}\\int_a^{g(x)} f(t)\\,dt = f(g(x)) \\cdot g'(x)$<br><br>Part 2: $\\int_a^b f(x)\\,dx = F(b)-F(a)$ where $F'=f$</div><div class="example-box"><div class="ex-label">FTC Part 1 with Chain Rule</div>$\\frac{d}{dx}\\int_3^{x^2} \\sin(t)\\,dt = \\sin(x^2)\\cdot 2x$</div>`},
@@ -769,6 +984,10 @@ frqs:[
 {unit:"Integration",prompt:"FTC and definite integrals",parts:[
 {label:"(a)",q:"Let $g(x) = \\int_0^x (t^2 - 4)\\,dt$. Find $g(3)$ and $g'(3)$.",soln:"g(3) = [t³/3 - 4t]₀³ = (9-12) = -3\ng'(x) = x²-4 by FTC Part 1. g'(3) = 9-4 = 5"},
 {label:"(b)",q:"Find $\\int x^2 \\ln x \\, dx$.",soln:"u = ln x, dv = x²dx → du = (1/x)dx, v = x³/3\n= (x³/3)ln x - ∫(x²/3)dx\n= (x³/3)ln x - x³/9 + C"}
+]},
+{unit:"Integration",prompt:"U-substitution and accumulation functions",parts:[
+{label:"(a)",q:"Evaluate $\\int_0^{\\pi/2} \\sin^3(x)\\cos(x)\\,dx$.",soln:"u = sin x, du = cos x dx. Limits: u(0)=0, u(π/2)=1\n∫₀¹ u³ du = [u⁴/4]₀¹ = 1/4"},
+{label:"(b)",q:"A function f is continuous. $\\int_0^4 f(x)\\,dx = 10$ and $\\int_0^4 [f(x)]^2\\,dx = 36$. Find the average value of $[f(x)]^2$ on [0,4].",soln:"Average value = (1/(4-0))∫₀⁴[f(x)]²dx = 36/4 = 9"}
 ]}
 ],
 videos:[
@@ -778,7 +997,7 @@ videos:[
 {title:"FTC — Essence",author:"3Blue1Brown",emoji:"🏛️",embedId:"FnJqaIESC2s",url:"https://www.youtube.com/watch?v=FnJqaIESC2s"}
 ]},
 
-{id:7,title:"Differential Equations",sub:"Slopes, Fields & Growth",color:"#A855F7",icon:"dy/dx",
+{id:7,title:"Differential Equations",sub:"Slopes, Fields & Growth",color:"#C2607A",icon:"dy/dx",
 concepts:[
 {title:"Slope Fields",icon:"🌊",body:`<div class="concept-body">A slope field (direction field) visualizes $\\dfrac{dy}{dx} = f(x,y)$. At each (x,y), draw a short segment with slope f(x,y).</div><div class="tip-box"><div class="tip-label">Reading Slope Fields</div>• Horizontal segments: dy/dx = 0<br>• Solution curves are tangent to segments<br>• Multiple solution curves — one per initial condition</div><div class="example-box"><div class="ex-label">Example</div>For dy/dx = x + y: at (0,0) slope = 0; at (1,1) slope = 2; at (-1,0) slope = -1.</div>`},
 {title:"Separation of Variables",icon:"÷",body:`<ol class="steps-list"><li>Rewrite as $\\frac{dy}{dx} = g(x)h(y)$</li><li>Separate: $\\frac{dy}{h(y)} = g(x)\\,dx$</li><li>Integrate both sides</li><li>Solve for y and apply initial condition</li></ol><div class="example-box"><div class="ex-label">Exponential Growth</div>$\\frac{dy}{dx} = ky \\Rightarrow \\frac{dy}{y} = k\\,dx \\Rightarrow y = Ae^{kx}$</div>`},
@@ -801,6 +1020,10 @@ frqs:[
 {unit:"Differential Equations",prompt:"Separable DE and logistic growth",parts:[
 {label:"(a)",q:"Solve: $\\frac{dy}{dx} = \\frac{x}{y}$, $y(0) = 3$.",soln:"y dy = x dx\n∫y dy = ∫x dx\ny²/2 = x²/2 + C\nIC: 9/2 = 0 + C → C = 9/2\ny² = x² + 9 → y = √(x²+9)"},
 {label:"(b)",q:"A population with K=1000, k=0.1, P(0)=100. When is growth rate highest?",soln:"Growth rate max at P = K/2 = 500.\nP(t) = 1000/(1+9e^(-0.1t))\nSet = 500: 1+9e^(-0.1t) = 2\nt = ln(9)/0.1 ≈ 21.97"}
+]},
+{unit:"Differential Equations",prompt:"Euler's method and slope fields",parts:[
+{label:"(a)",q:"Use Euler's method with step $h=0.5$ to approximate $y(1)$, given $\\frac{dy}{dx}=x+y$, $y(0)=1$.",soln:"Step 1: x=0, y=1. slope=0+1=1. y(0.5)=1+1(0.5)=1.5\nStep 2: x=0.5, y=1.5. slope=0.5+1.5=2. y(1)=1.5+2(0.5)=2.5"},
+{label:"(b)",q:"Describe the slope field for $\\frac{dy}{dx} = y - x$. Where are slopes zero?",soln:"Slopes are zero along y = x (an isocline).\nAbove y=x: slopes positive (y increasing)\nBelow y=x: slopes negative (y decreasing)\nThe equilibrium solution is y = x + 1."}
 ]}
 ],
 videos:[
@@ -810,7 +1033,7 @@ videos:[
 {title:"Logistic Growth",author:"Khan Academy",emoji:"📈",embedId:"IYFkXWlgC_w",url:"https://www.youtube.com/watch?v=IYFkXWlgC_w"}
 ]},
 
-{id:8,title:"Applications of Integration",sub:"Area, Volume & More",color:"#A855F7",icon:"V",
+{id:8,title:"Applications of Integration",sub:"Area, Volume & More",color:"#C2607A",icon:"V",
 concepts:[
 {title:"Area Between Curves",icon:"📐",body:`<div class="formula-box">$$A = \\int_a^b [f(x)-g(x)]\\,dx \\quad (f \\geq g)$$</div><div class="concept-body">Find bounds by setting f(x)=g(x). For horizontal slices: A = ∫[right−left] dy.</div><div class="example-box"><div class="ex-label">Example</div>Area between $y=x^2$ and $y=x$:<br>$\\int_0^1 (x-x^2)\\,dx = 1/2-1/3 = 1/6$</div>`},
 {title:"Volume: Disc & Washer",icon:"💿",body:`<div class="formula-box">Disc: $V = \\pi\\int_a^b [f(x)]^2\\,dx$<br><br>Washer: $V = \\pi\\int_a^b\\left([R(x)]^2-[r(x)]^2\\right)\\,dx$</div><div class="tip-box"><div class="tip-label">R vs r</div>R = outer radius (farther from axis)<br>r = inner radius (closer to axis)<br>Washer = disc with hole (donut cross-section)</div>`},
@@ -833,6 +1056,10 @@ frqs:[
 {unit:"Applications of Integration",prompt:"Volume and area problems",parts:[
 {label:"(a)",q:"Find the area enclosed by $y=x^2$ and $y=2x-x^2$.",soln:"Set equal: x²=2x-x² → 2x²-2x=0 → x=0,1\nA = ∫₀¹(2x-2x²)dx = [x²-2x³/3]₀¹ = 1-2/3 = 1/3"},
 {label:"(b)",q:"Find the volume rotating the region between $y=\\sqrt{x}$ and $y=x^2$ about the x-axis.",soln:"Outer: √x, Inner: x². Intersect at 0,1.\nV = π∫₀¹(x - x⁴)dx = π[x²/2 - x⁵/5]₀¹ = π(1/2-1/5) = 3π/10"}
+]},
+{unit:"Applications of Integration",prompt:"Shell method and arc length",parts:[
+{label:"(a)",q:"Use the shell method to find the volume of the solid formed by rotating $y = x^2$ on $[0,2]$ about the y-axis.",soln:"V = 2π∫₀² x·x² dx = 2π∫₀² x³ dx = 2π[x⁴/4]₀² = 2π·4 = 8π"},
+{label:"(b)",q:"Set up (do not evaluate) the arc length of $f(x) = x^{3/2}$ on $[1,4]$.",soln:"f'(x) = (3/2)x^(1/2)\nL = ∫₁⁴ √(1 + (9/4)x) dx"}
 ]}
 ],
 videos:[
@@ -842,7 +1069,7 @@ videos:[
 {title:"Average Value",author:"Khan Academy",emoji:"📊",embedId:"ZTqTbaHMRR4",url:"https://www.youtube.com/watch?v=ZTqTbaHMRR4"}
 ]},
 
-{id:9,title:"Parametric, Polar & Vectors",sub:"BC Exclusive Unit",color:"#818CF8",icon:"⃗",
+{id:9,title:"Parametric, Polar & Vectors",sub:"BC Exclusive Unit",color:"#D07090",icon:"⃗",
 concepts:[
 {title:"Parametric Equations",icon:"📍",body:`<div class="definition-box"><strong>Parametric curve:</strong> x = f(t), y = g(t) — x and y both depend on parameter t.</div><div class="formula-box">$$\\frac{dy}{dx} = \\frac{dy/dt}{dx/dt} \\qquad \\frac{d^2y}{dx^2} = \\frac{\\frac{d}{dt}\\left[\\frac{dy}{dx}\\right]}{dx/dt}$$</div><div class="warn-box"><div class="warn-label">⚠️ Second Derivative</div>To find d²y/dx², differentiate dy/dx with respect to t THEN divide by dx/dt!</div>`},
 {title:"Parametric Speed & Arc Length",icon:"🏃",body:`<div class="formula-box">$$L = \\int_{t_1}^{t_2} \\sqrt{\\left(\\frac{dx}{dt}\\right)^2+\\left(\\frac{dy}{dt}\\right)^2}\\,dt$$</div><div class="formula-box">Speed $= |\\mathbf{v}(t)| = \\sqrt{(x')^2+(y')^2}$</div><div class="definition-box"><strong>Total distance:</strong> ∫|v(t)|dt · <strong>Displacement:</strong> final − initial position</div>`},
@@ -866,6 +1093,10 @@ frqs:[
 {label:"(a)",q:"A particle: $x(t)=t^2-1$, $y(t)=2t^3-3t$. Find slope of tangent at $t=1$.",soln:"dx/dt = 2t → at t=1: 2\ndy/dt = 6t²-3 → at t=1: 3\ndy/dx = 3/2"},
 {label:"(b)",q:"Find speed at $t=2$.",soln:"dx/dt=4, dy/dt=21\nSpeed = √(16+441) = √457 ≈ 21.4"},
 {label:"(c)",q:"Total distance from $t=0$ to $t=2$.",soln:"L = ∫₀² √(4t²+(6t²-3)²)dt ≈ 15.2 units (calculator)"}
+]},
+{unit:"Parametric, Polar & Vectors",prompt:"Polar area and arc length",parts:[
+{label:"(a)",q:"Find the area enclosed by $r = 2\\cos\\theta$.",soln:"Full circle: A = (1/2)∫₀^π (2cosθ)²dθ = (1/2)∫₀^π 4cos²θ dθ\n= 2∫₀^π (1+cos2θ)/2 dθ = [θ/2 + sin(2θ)/4]₀^π... Hmm — r=2cosθ is a circle of radius 1.\nFaster: it's a full circle, A = π(1)² = π"},
+{label:"(b)",q:"Find the area inside $r=3\\sin\\theta$ and outside $r=1+\\sin\\theta$.",soln:"Set equal: 3sinθ = 1+sinθ → sinθ = 1/2 → θ = π/6, 5π/6\nA = (1/2)∫_{π/6}^{5π/6} [(3sinθ)²-(1+sinθ)²] dθ\n= (1/2)∫(9sin²θ - 1 - 2sinθ - sin²θ)dθ\nEvaluates to π (calculator check recommended)"}
 ]}
 ],
 videos:[
@@ -875,7 +1106,7 @@ videos:[
 {title:"Parametric Calculus",author:"blackpenredpen",emoji:"✏️",embedId:"v_ZnIjHGEHE",url:"https://www.youtube.com/watch?v=v_ZnIjHGEHE"}
 ]},
 
-{id:10,title:"Sequences & Series",sub:"BC Exclusive — Most Important!",color:"#818CF8",icon:"Σ",
+{id:10,title:"Sequences & Series",sub:"BC Exclusive — Most Important!",color:"#D07090",icon:"Σ",
 concepts:[
 {title:"Sequences & Series",icon:"…",body:`<div class="definition-box"><strong>Sequence:</strong> {aₙ} converges to L if lim(n→∞) aₙ = L.</div><div class="formula-box">Geometric Series: $\\sum_{n=0}^{\\infty} ar^n = \\dfrac{a}{1-r}\\;(|r|<1)$, diverges if $|r|\\geq 1$</div><div class="example-box"><div class="ex-label">Example</div>$\\sum_{n=0}^{\\infty}\\frac{1}{2^n} = \\frac{1}{1-1/2} = 2$</div>`},
 {title:"Convergence Tests",icon:"🧪",body:`<ul class="formula-list"><li><span class="fl-name">Divergence Test</span>If $\\lim a_n \\neq 0$, series diverges</li><li><span class="fl-name">p-Series</span>$\\sum 1/n^p$: converges iff $p>1$</li><li><span class="fl-name">Integral Test</span>$\\sum a_n$ and $\\int f(x)dx$ same behavior</li><li><span class="fl-name">Limit Comparison</span>$\\lim a_n/b_n = c > 0$: same behavior</li><li><span class="fl-name">Alternating Series</span>Converges if $a_n$ decreasing → 0</li><li><span class="fl-name">Ratio Test</span>$L=\\lim|a_{n+1}/a_n|$: conv if $L<1$</li></ul><div class="warn-box"><div class="warn-label">⚠️ Divergence Test Caveat</div>lim aₙ = 0 does NOT mean series converges! (harmonic series diverges!)</div>`},
@@ -904,6 +1135,11 @@ frqs:[
 ]},
 {unit:"Sequences & Series",prompt:"Lagrange error bound",parts:[
 {label:"(a)",q:"Approximate $e^{0.5}$ using degree-3 Taylor poly. Bound the error.",soln:"P₃(0.5) = 1 + 0.5 + 0.125 + 0.0208 ≈ 1.6458\nLagrange: |R₃| ≤ M(0.5)⁴/4! where M ≥ eˢ for s ∈ (0,0.5)\nUsing M=2: |R₃| ≤ 2(0.0625)/24 ≈ 0.0052"}
+]},
+{unit:"Sequences & Series",prompt:"Convergence tests and series manipulation",parts:[
+{label:"(a)",q:"Determine whether $\\displaystyle\\sum_{n=1}^{\\infty}\\frac{n^2+1}{3n^3-2}$ converges or diverges.",soln:"Limit comparison with Σ1/n (harmonic):\nlim (n²+1)/(3n³-2) ÷ (1/n) = lim n(n²+1)/(3n³-2) = 1/3 > 0\nSince Σ1/n diverges → this series DIVERGES"},
+{label:"(b)",q:"Use the ratio test on $\\displaystyle\\sum_{n=0}^{\\infty}\\frac{2^n}{n!}$.",soln:"L = lim |a_{n+1}/aₙ| = lim 2^(n+1)/(n+1)! · n!/2^n\n= lim 2/(n+1) = 0 < 1\n→ Converges absolutely"},
+{label:"(c)",q:"Find the first four nonzero terms of the Maclaurin series for $e^x \\sin x$.",soln:"eˣ = 1+x+x²/2+x³/6+...\nsinx = x-x³/6+...\nProduct: x + x² + x³/2 - x³/6 + ... = x + x² + x³/3 + ..."}
 ]}
 ],
 videos:[
@@ -930,6 +1166,7 @@ function init() {
   buildFRQDropdowns();
   renderFRQs();
   renderVideos();
+  initAccordion();
   document.addEventListener('keydown', e => {
     if(document.getElementById('page-flashcards').classList.contains('active')) {
       if(e.key === 'ArrowRight') nextCard();
@@ -939,20 +1176,111 @@ function init() {
   });
 }
 
+// =================== DOTTED PARTICLE WAVE ===================
+(function() {
+  const canvas = document.getElementById('dots-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  const SEP = 110, AMX = 28, AMY = 20;
+  let W, H, count = 0, raf;
+
+  function resize() {
+    const hero = canvas.parentElement;
+    if (!hero) return;
+    W = canvas.width  = hero.offsetWidth  || window.innerWidth;
+    H = canvas.height = hero.offsetHeight || window.innerHeight;
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    // Camera projection: isometric-ish view
+    // Centre the grid
+    const offX = W / 2;
+    const offY = H * 0.62;
+
+    for (let ix = 0; ix < AMX; ix++) {
+      for (let iy = 0; iy < AMY; iy++) {
+        const wx = (ix - AMX / 2) * SEP;
+        const wz = (iy - AMY / 2) * SEP;
+        const wy = Math.sin((ix + count) * 0.38) * 44 +
+                   Math.sin((iy + count) * 0.52) * 44;
+
+        // Project: simple perspective
+        const fov = 700;
+        const camZ = 1100;
+        const scale = fov / (fov + wz * 0.55 + camZ * 0.05);
+        const px = offX + wx * scale * 0.9;
+        const py = offY - (wy + wz * 0.35) * scale * 0.7;
+
+        // Size & opacity based on wave height and depth
+        const size = Math.max(0.8, 2.8 * scale * (1 + wy / 120));
+        const alpha = 0.15 + 0.55 * scale * (0.5 + wy / 160);
+
+        // Color: soft rose-to-white gradient by wave height
+        const t2 = (wy + 88) / 176; // 0..1
+        const r = Math.round(200 + (235 - 200) * t2);
+        const g = Math.round(140 + (210 - 140) * t2);
+        const b2 = Math.round(165 + (225 - 165) * t2);
+        ctx.beginPath();
+        ctx.arc(px, py, size, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${r},${g},${b2},${Math.min(1, alpha)})`;
+        ctx.fill();
+      }
+    }
+    count += 0.035;
+    raf = requestAnimationFrame(draw);
+  }
+
+  resize();
+  window.addEventListener('resize', resize);
+  draw();
+})();
+
+// =================== TUBELIGHT NAV — single source of truth ===================
+function headerNav(tab) {
+  // Update header pill active state
+  document.querySelectorAll('.header-tl-pill').forEach(p => {
+    p.classList.toggle('tl-active', p.dataset.tab === tab);
+  });
+  switchTab(tab);
+}
+
+// Keep backward compat for internal switchTab calls (unit quick-action buttons etc.)
 // =================== TABS ===================
 function switchTab(tab) {
   document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-  document.getElementById('page-'+tab)?.classList.add('active');
-  document.querySelector(`[data-tab="${tab}"]`)?.classList.add('active');
+  const activePage = document.getElementById('page-' + tab);
+  if (activePage) {
+    activePage.classList.add('active');
+    // Trigger entry animation by briefly removing and re-adding a class
+    activePage.style.animation = 'none';
+    activePage.style.opacity = '0';
+    activePage.style.transform = 'translateY(16px)';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        activePage.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+        activePage.style.opacity = '1';
+        activePage.style.transform = 'translateY(0)';
+        setTimeout(() => { activePage.style.transition = ''; activePage.style.animation = ''; }, 500);
+      });
+    });
+  }
+  // Sync header pills
+  document.querySelectorAll('.header-tl-pill').forEach(p => {
+    p.classList.toggle('tl-active', p.dataset.tab === tab);
+  });
   const statsBar = document.getElementById('stats-bar');
-  if(tab === 'home') {
+  if (tab === 'home') {
     statsBar.style.display = 'none';
   } else {
     statsBar.style.display = 'block';
-    if(tab==='units'||tab==='flashcards'||tab==='practice') setTimeout(renderKatex,100);
+    if (tab === 'units' || tab === 'flashcards' || tab === 'practice') setTimeout(renderKatex, 100);
   }
 }
+
+// Legacy no-ops (tubelight on home page removed)
+function tlSwitch(tab, btn) { headerNav(tab); }
+function initAccordion() {}
 
 // =================== UNITS ===================
 function buildUnitList() {
@@ -973,15 +1301,15 @@ function buildUnitContent(id) {
   if(!u) return;
   const html = `
     <div class="unit-header">
-      <div class="unit-title" style="color:${u.color}">
+      <div class="unit-title" style="background:linear-gradient(135deg,#FFFFFF,#E090A8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text">
         Unit ${id}: ${u.title}
         ${id>=9?'<span class="bc-only">BC Only</span>':''}
       </div>
       <div class="unit-subtitle">${u.sub}</div>
     </div>
     <div class="concept-grid">
-      ${u.concepts.map(c => `
-        <div class="concept-card glow-card ${c.full?'full':''}">
+      ${u.concepts.map((c,i) => `
+        <div class="concept-card glow-card ${c.full?'full':''}" style="animation-delay:${i*0.07}s">
           <div class="concept-title">
             <span class="icon">${c.icon}</span>
             ${c.title}
@@ -996,11 +1324,11 @@ function buildUnitContent(id) {
     ${id===7 ? buildSlopeFieldDemo() : ''}
     ${id===9 ? buildPolarDemo() : ''}
     ${id===10 ? buildSeriesDemo() : ''}
-    <div style="margin-top:24px;padding:16px;background:rgba(15,15,28,0.8);border:1px solid var(--border);border-radius:var(--r);display:flex;gap:12px;flex-wrap:wrap;backdrop-filter:blur(8px)">
+    <div style="margin-top:24px;padding:16px;background:rgba(6,0,10,0.85);border:1px solid var(--border);border-radius:var(--r);display:flex;gap:12px;flex-wrap:wrap;backdrop-filter:blur(8px);animation:fadeUp .5s .3s ease both">
       <span style="color:var(--muted);font-size:13px">Unit ${id} quick actions:</span>
-      <button onclick="switchTab('flashcards');filterByUnit(${id})" style="background:rgba(129,140,248,0.1);border:1px solid rgba(129,140,248,0.25);color:var(--accent);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">🃏 Flashcards</button>
-      <button onclick="switchTab('practice');filterFRQByUnit(${id})" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.25);color:var(--accent2);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600">✍️ FRQ Practice</button>
-      <button onclick="switchTab('videos')" style="background:rgba(129,140,248,0.08);border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px">🎬 Videos</button>
+      <button onclick="switchTab('flashcards');filterByUnit(${id})" style="background:rgba(180,80,110,0.08);border:1px solid rgba(180,80,110,0.18);color:var(--accent);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:all .2s" onmouseover="this.style.boxShadow='0 0 14px rgba(180,80,110,0.20)'" onmouseout="this.style.boxShadow=''">🃏 Flashcards</button>
+      <button onclick="switchTab('practice');filterFRQByUnit(${id})" style="background:rgba(180,80,110,0.06);border:1px solid rgba(200,130,160,0.14);color:var(--accent2);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;font-weight:600;transition:all .2s" onmouseover="this.style.boxShadow='0 0 14px rgba(200,130,160,0.18)'" onmouseout="this.style.boxShadow=''">✍️ FRQ Practice</button>
+      <button onclick="switchTab('videos')" style="background:rgba(180,80,110,0.05);border:1px solid var(--border);color:var(--muted);padding:6px 14px;border-radius:6px;cursor:pointer;font-size:12px;transition:all .2s" onmouseover="this.style.color='var(--text)'" onmouseout="this.style.color='var(--muted)'">🎬 Videos</button>
     </div>
   `;
   document.getElementById('unit-content').innerHTML = html;
@@ -1026,7 +1354,7 @@ function buildDerivDemo() {
   return `<div class="demo-section">
     <div class="demo-title">📐 Derivative Explorer — Secant → Tangent</div>
     <div style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.6">
-      Drag <strong style="color:#A855F7">h</strong> toward zero — watch the <strong style="color:rgba(168,85,247,0.9)">secant</strong> collapse into the <strong style="color:#34D399">tangent</strong>. That limit <em>is</em> f′(a).
+      Drag <strong style="color:#C2607A">h</strong> toward zero — watch the <strong style="color:rgba(180,80,110,0.65)">secant</strong> collapse into the <strong style="color:#34D399">tangent</strong>. That limit <em>is</em> f′(a).
     </div>
     <div class="demo-controls" style="flex-wrap:wrap;gap:10px">
       <div class="demo-control">
@@ -1058,7 +1386,7 @@ function buildDerivDemo() {
     <canvas id="deriv-canvas" width="640" height="260" style="width:100%;max-width:640px;margin-top:8px;border-radius:8px"></canvas>
     <div id="deriv-expr-err" style="font-size:11px;min-height:16px;margin:4px 0 0;font-family:monospace"></div>
     <div style="margin-top:10px;display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:640px">
-      <div style="background:rgba(99,102,241,0.07);border:1px solid rgba(129,140,248,0.18);border-radius:8px;padding:10px;text-align:center">
+      <div style="background:rgba(180,80,110,0.06);border:1px solid rgba(180,80,110,0.12);border-radius:8px;padding:10px;text-align:center">
         <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Secant Slope</div>
         <div id="d-secant" style="font-size:16px;font-weight:700;color:var(--accent)">—</div>
         <div style="font-size:10px;color:var(--muted);margin-top:2px">[f(a+h)−f(a)] / h</div>
@@ -1068,9 +1396,9 @@ function buildDerivDemo() {
         <div id="d-deriv" style="font-size:16px;font-weight:700;color:#34D399">—</div>
         <div style="font-size:10px;color:var(--muted);margin-top:2px">lim h→0</div>
       </div>
-      <div style="background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.2);border-radius:8px;padding:10px;text-align:center">
+      <div style="background:rgba(180,80,110,0.05);border:1px solid rgba(180,80,110,0.12);border-radius:8px;padding:10px;text-align:center">
         <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">Error |Δ|</div>
-        <div id="d-error" style="font-size:16px;font-weight:700;color:#A855F7">—</div>
+        <div id="d-error" style="font-size:16px;font-weight:700;color:#C2607A">—</div>
         <div style="font-size:10px;color:var(--muted);margin-top:2px">→ 0 as h→0</div>
       </div>
     </div>
@@ -1209,7 +1537,7 @@ function drawDeriv() {
   const toY=y=>H-pad.b-(y-yMin)/(yMax-yMin)*(H-pad.t-pad.b);
   ctx.clearRect(0,0,W,H);
   // Grid
-  ctx.strokeStyle='rgba(129,140,248,0.07)';ctx.lineWidth=1;
+  ctx.strokeStyle='rgba(180,80,110,0.06)';ctx.lineWidth=1;
   for(let gx=Math.ceil(xMin);gx<=xMax;gx++){ctx.beginPath();ctx.moveTo(toX(gx),pad.t);ctx.lineTo(toX(gx),H-pad.b);ctx.stroke();}
   for(let gy=Math.floor(yMin);gy<=yMax;gy+=2){ctx.beginPath();ctx.moveTo(pad.l,toY(gy));ctx.lineTo(W-pad.r,toY(gy));ctx.stroke();}
   // Axes
@@ -1220,7 +1548,7 @@ function drawDeriv() {
   ctx.fillStyle='rgba(255,255,255,0.18)';ctx.font='10px system-ui';ctx.textAlign='center';
   for(let gx=Math.ceil(xMin);gx<=xMax;gx++){if(!gx)continue;ctx.fillText(gx,toX(gx),H-pad.b+12);}
   // f(x) curve
-  ctx.beginPath();ctx.strokeStyle='#818CF8';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.strokeStyle='#D07090';ctx.lineWidth=2.5;
   let first=true;
   for(let i=0;i<=500;i++){
     const x=xMin+i*(xMax-xMin)/500, y=f(x);
@@ -1241,17 +1569,17 @@ function drawDeriv() {
   const fah=f(a+h);
   if(!isNaN(fah)&&isFinite(fah)){
     const sec=(fah-fa)/h;
-    line(sec,a,fa,'rgba(168,85,247,0.85)',[7,4]);
+    line(sec,a,fa,'rgba(180,80,110,0.60)',[7,4]);
     // h bracket
-    ctx.strokeStyle='rgba(168,85,247,0.35)';ctx.lineWidth=1;ctx.setLineDash([3,3]);
+    ctx.strokeStyle='rgba(180,80,110,0.18)';ctx.lineWidth=1;ctx.setLineDash([3,3]);
     ctx.beginPath();ctx.moveTo(toX(a),toY(fa));ctx.lineTo(toX(a+h),toY(fa));ctx.stroke();
     ctx.beginPath();ctx.moveTo(toX(a+h),toY(fa));ctx.lineTo(toX(a+h),toY(fah));ctx.stroke();
     ctx.setLineDash([]);
-    ctx.fillStyle='rgba(168,85,247,0.7)';ctx.font='10px system-ui';ctx.textAlign='center';
+    ctx.fillStyle='rgba(180,80,110,0.40)';ctx.font='10px system-ui';ctx.textAlign='center';
     const midPy=toY(fa); if(midPy>0&&midPy<H) ctx.fillText('h',toX(a+h/2),midPy+13);
     // a+h dot
     const py2=toY(fah);
-    if(py2>-10&&py2<H+10){ctx.beginPath();ctx.arc(toX(a+h),py2,4,0,Math.PI*2);ctx.fillStyle='rgba(168,85,247,0.9)';ctx.fill();}
+    if(py2>-10&&py2<H+10){ctx.beginPath();ctx.arc(toX(a+h),py2,4,0,Math.PI*2);ctx.fillStyle='rgba(180,80,110,0.65)';ctx.fill();}
     if(document.getElementById('d-secant'))document.getElementById('d-secant').textContent=isFinite(sec)?sec.toFixed(4):'—';
   }
   // Tangent
@@ -1259,15 +1587,15 @@ function drawDeriv() {
   line(td,a,fa,'#34D399',null);
   // a dot
   ctx.beginPath();ctx.arc(toX(a),toY(fa),5,0,Math.PI*2);
-  ctx.fillStyle='#818CF8';ctx.fill();ctx.strokeStyle='rgba(0,0,0,0.4)';ctx.lineWidth=1.5;ctx.stroke();
+  ctx.fillStyle='#D07090';ctx.fill();ctx.strokeStyle='rgba(0,0,0,0.4)';ctx.lineWidth=1.5;ctx.stroke();
   // Readouts
   const secSlope=!isNaN(fah)&&isFinite(fah)?(fah-fa)/h:NaN;
   if(document.getElementById('d-deriv'))document.getElementById('d-deriv').textContent=isFinite(td)?td.toFixed(4):'—';
   if(document.getElementById('d-error'))document.getElementById('d-error').textContent=isFinite(secSlope)&&isFinite(td)?Math.abs(secSlope-td).toFixed(4):'—';
   // Legend
   ctx.font='11px system-ui';ctx.textAlign='left';
-  ctx.fillStyle='#818CF8';ctx.fillText('— f(x)',pad.l+4,pad.t+14);
-  ctx.fillStyle='rgba(168,85,247,0.85)';ctx.fillText('- secant',pad.l+60,pad.t+14);
+  ctx.fillStyle='#D07090';ctx.fillText('— f(x)',pad.l+4,pad.t+14);
+  ctx.fillStyle='rgba(180,80,110,0.60)';ctx.fillText('- secant',pad.l+60,pad.t+14);
   ctx.fillStyle='#34D399';ctx.fillText('— tangent',pad.l+126,pad.t+14);
 }
 
@@ -1336,7 +1664,7 @@ function drawRiemann() {
   const toY=y=>H-pad.b-(y-yMin)/(yMax-yMin)*(H-pad.t-pad.b);
   ctx.clearRect(0,0,W,H);
   // Grid
-  ctx.strokeStyle='rgba(129,140,248,0.07)';ctx.lineWidth=1;
+  ctx.strokeStyle='rgba(180,80,110,0.06)';ctx.lineWidth=1;
   for(let gx=0;gx<=6;gx++){const xv=a+gx*(b-a)/6;ctx.beginPath();ctx.moveTo(toX(xv),pad.t);ctx.lineTo(toX(xv),H-pad.b);ctx.stroke();}
   // Riemann bars
   let sum=0;
@@ -1345,17 +1673,17 @@ function drawRiemann() {
     let fval=method==='left'?f(x0):method==='right'?f(x1):method==='mid'?f((x0+x1)/2):(f(x0)+f(x1))/2;
     if(!isFinite(fval)) continue;
     sum+=fval*h;
-    ctx.fillStyle='rgba(129,140,248,0.22)';
+    ctx.fillStyle='rgba(180,80,110,0.14)';
     if(method==='trap'){
       ctx.beginPath();ctx.moveTo(toX(x0),toY(0));ctx.lineTo(toX(x0),toY(f(x0)));ctx.lineTo(toX(x1),toY(f(x1)));ctx.lineTo(toX(x1),toY(0));ctx.closePath();ctx.fill();
-      ctx.strokeStyle='rgba(129,140,248,0.6)';ctx.lineWidth=1;ctx.stroke();
+      ctx.strokeStyle='rgba(180,80,110,0.35)';ctx.lineWidth=1;ctx.stroke();
     } else {
       ctx.fillRect(toX(x0),toY(fval),toX(x1)-toX(x0)-0.5,toY(0)-toY(fval));
-      ctx.strokeStyle='rgba(129,140,248,0.55)';ctx.lineWidth=1;ctx.strokeRect(toX(x0),toY(fval),toX(x1)-toX(x0)-0.5,toY(0)-toY(fval));
+      ctx.strokeStyle='rgba(180,80,110,0.30)';ctx.lineWidth=1;ctx.strokeRect(toX(x0),toY(fval),toX(x1)-toX(x0)-0.5,toY(0)-toY(fval));
     }
   }
   // f(x) curve
-  ctx.beginPath();ctx.strokeStyle='#A855F7';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.strokeStyle='#C2607A';ctx.lineWidth=2.5;
   let first=true;
   for(let i=0;i<=300;i++){const x=a+i*(b-a)/300,y=f(x);if(!isFinite(y)){first=true;continue;}const py=toY(y);if(py<-50||py>H+50){first=true;continue;}first?ctx.moveTo(toX(x),py):ctx.lineTo(toX(x),py);first=false;}
   ctx.stroke();
@@ -1392,7 +1720,7 @@ function buildSlopeFieldDemo() {
           onkeydown="if(event.key==='Enter') applySFCustom()">
         <button onclick="applySFCustom()" style="background:var(--accent);border:none;color:#fff;padding:6px 10px;border-radius:6px;cursor:pointer;font-size:12px">Go</button>
       </div>
-      <button onclick="window.sf_curves=[];drawSlopeField()" style="background:rgba(168,85,247,0.1);border:1px solid rgba(168,85,247,0.3);color:#A855F7;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px">Clear curves</button>
+      <button onclick="window.sf_curves=[];drawSlopeField()" style="background:rgba(168,85,247,0.1);border:1px solid rgba(180,80,110,0.18);color:#C2607A;padding:6px 12px;border-radius:6px;cursor:pointer;font-size:12px">Clear curves</button>
     </div>
     <canvas id="sf-canvas" width="640" height="320" style="width:100%;max-width:640px;border-radius:8px;margin-top:8px;cursor:crosshair" onclick="sfClick(event)"></canvas>
     <div id="sf-expr-err" style="font-size:11px;min-height:16px;margin:4px 0 2px;font-family:monospace"></div>
@@ -1463,7 +1791,7 @@ function drawSlopeField() {
   // Solution curves
   if(!window.sf_curves) window.sf_curves=[];
   window.sf_curves.forEach(({x0,y0})=>{
-    const colors=['#34D399','#A855F7','#818CF8','#FBBF24','#F87171'];
+    const colors=['#34D399','#C2607A','#D07090','#FBBF24','#F87171'];
     const ci=window.sf_curves.indexOf(window.sf_curves.find(c=>c.x0===x0&&c.y0===y0));
     ctx.strokeStyle=colors[ci%colors.length];ctx.lineWidth=2;
     // Forward
@@ -1569,7 +1897,7 @@ function drawPolar() {
   const scale=(W/2-24)/maxR;
   ctx.clearRect(0,0,W,H);
   // Grid circles
-  ctx.strokeStyle='rgba(129,140,248,0.1)';ctx.lineWidth=1;
+  ctx.strokeStyle='rgba(180,80,110,0.08)';ctx.lineWidth=1;
   for(let i=1;i<=4;i++){ctx.beginPath();ctx.arc(cx,cy,scale*maxR*(i/4),0,Math.PI*2);ctx.stroke();}
   // Grid lines (8 directions)
   for(let a=0;a<Math.PI;a+=Math.PI/8){ctx.beginPath();ctx.moveTo(cx,cy);ctx.lineTo(cx+Math.cos(a)*W*0.5,cy-Math.sin(a)*H*0.5);ctx.moveTo(cx,cy);ctx.lineTo(cx-Math.cos(a)*W*0.5,cy+Math.sin(a)*H*0.5);ctx.stroke();}
@@ -1587,9 +1915,9 @@ function drawPolar() {
     started?(i===0?ctx.moveTo(px,py):ctx.lineTo(px,py)):(ctx.moveTo(cx,cy),ctx.lineTo(px,py),started=true);
   }
   ctx.closePath();
-  ctx.fillStyle='rgba(129,140,248,0.1)';ctx.fill();
+  ctx.fillStyle='rgba(180,80,110,0.08)';ctx.fill();
   // Curve
-  ctx.beginPath();ctx.strokeStyle='#818CF8';ctx.lineWidth=2.5;
+  ctx.beginPath();ctx.strokeStyle='#D07090';ctx.lineWidth=2.5;
   started=false;
   for(let i=0;i<=steps;i++){
     const t=i*tMax/steps, rv=r_fn(t);
@@ -1599,7 +1927,7 @@ function drawPolar() {
   }
   ctx.stroke();
   // Pole
-  ctx.beginPath();ctx.arc(cx,cy,3,0,Math.PI*2);ctx.fillStyle='rgba(168,85,247,0.8)';ctx.fill();
+  ctx.beginPath();ctx.arc(cx,cy,3,0,Math.PI*2);ctx.fillStyle='rgba(180,80,110,0.55)';ctx.fill();
   // Info
   const infoEl=document.getElementById('polar-info');
   if(infoEl){
@@ -1615,7 +1943,7 @@ function buildSeriesDemo() {
   return `<div class="demo-section">
     <div class="demo-title">🔮 Taylor Series Approximation</div>
     <div style="font-size:12px;color:var(--muted);margin-bottom:12px;line-height:1.6">
-      Drag the degree slider to add more terms. Watch how the <span style="color:#A855F7">purple polynomial</span> wraps around the <span style="color:#34D399">actual function</span>.
+      Drag the degree slider to add more terms. Watch how the <span style="color:#C2607A">purple polynomial</span> wraps around the <span style="color:#34D399">actual function</span>.
     </div>
     <div class="demo-controls" style="flex-wrap:wrap;gap:10px">
       <div class="demo-control">
@@ -1641,7 +1969,7 @@ function buildSeriesDemo() {
     </div>
     <canvas id="taylor-canvas" width="640" height="280" style="width:100%;max-width:640px;border-radius:8px;margin-top:8px"></canvas>
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;max-width:640px;margin-top:10px">
-      <div style="background:rgba(168,85,247,0.06);border:1px solid rgba(168,85,247,0.2);border-radius:8px;padding:10px">
+      <div style="background:rgba(180,80,110,0.05);border:1px solid rgba(180,80,110,0.12);border-radius:8px;padding:10px">
         <div style="font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px;margin-bottom:4px">Polynomial formula</div>
         <div id="t-formula" style="font-size:12px;color:#C8C8DC;font-family:monospace;word-break:break-all;line-height:1.6"></div>
       </div>
@@ -1774,7 +2102,7 @@ function drawTaylor() {
   ctx.clearRect(0, 0, W, H);
 
   // ── Grid ────────────────────────────────────────────────────────────────
-  ctx.strokeStyle = 'rgba(129,140,248,0.07)'; ctx.lineWidth = 1;
+  ctx.strokeStyle = 'rgba(180,80,110,0.06)'; ctx.lineWidth = 1;
   for (let gx = Math.ceil(xMin); gx <= xMax; gx++) {
     ctx.beginPath(); ctx.moveTo(toX(gx), pad.t); ctx.lineTo(toX(gx), H - pad.b); ctx.stroke();
   }
@@ -1810,14 +2138,14 @@ function drawTaylor() {
   let convR = Infinity;
   if (fn === 'ln' || fn === 'geo') convR = 1;
   if (convR < Infinity) {
-    ctx.fillStyle = 'rgba(129,140,248,0.05)';
+    ctx.fillStyle = 'rgba(180,80,110,0.05)';
     const lx = toX(a - convR), rx = toX(a + convR);
     ctx.fillRect(lx, pad.t, rx - lx, H - pad.t - pad.b);
-    ctx.strokeStyle = 'rgba(129,140,248,0.2)'; ctx.lineWidth = 1; ctx.setLineDash([4, 3]);
+    ctx.strokeStyle = 'rgba(180,80,110,0.12)'; ctx.lineWidth = 1; ctx.setLineDash([4, 3]);
     ctx.beginPath(); ctx.moveTo(lx, pad.t); ctx.lineTo(lx, H - pad.b); ctx.stroke();
     ctx.beginPath(); ctx.moveTo(rx, pad.t); ctx.lineTo(rx, H - pad.b); ctx.stroke();
     ctx.setLineDash([]);
-    ctx.fillStyle = 'rgba(129,140,248,0.5)'; ctx.font = '9px system-ui'; ctx.textAlign = 'center';
+    ctx.fillStyle = 'rgba(180,80,110,0.28)'; ctx.font = '9px system-ui'; ctx.textAlign = 'center';
     ctx.fillText('ROC = ' + convR, toX(a), pad.t + 10);
   }
 
@@ -1836,7 +2164,7 @@ function drawTaylor() {
   ctx.stroke();
 
   // ── Taylor polynomial curve ──────────────────────────────────────────────
-  ctx.beginPath(); ctx.strokeStyle = '#A855F7'; ctx.lineWidth = 2.5; ctx.setLineDash([7, 4]);
+  ctx.beginPath(); ctx.strokeStyle = '#C2607A'; ctx.lineWidth = 2.5; ctx.setLineDash([7, 4]);
   first = true;
   for (let i = 0; i <= 400; i++) {
     const x = xMin + i * (xMax - xMin) / 400;
@@ -1864,7 +2192,7 @@ function drawTaylor() {
   // ── Legend ──────────────────────────────────────────────────────────────
   ctx.font = '11px system-ui'; ctx.textAlign = 'left';
   ctx.fillStyle = '#34D399'; ctx.fillText('— actual f(x)', pad.l + 4, pad.t + 14);
-  ctx.fillStyle = '#A855F7'; ctx.fillText('- - P' + N + '(x)', pad.l + 110, pad.t + 14);
+  ctx.fillStyle = '#C2607A'; ctx.fillText('- - P' + N + '(x)', pad.l + 110, pad.t + 14);
 
   // ── Formula display ──────────────────────────────────────────────────────
   const formulaEl = document.getElementById('t-formula');
@@ -1972,7 +2300,7 @@ function renderFRQs() {
   UNIT_DATA.forEach(u => { if(val==='all'||u.id==val) u.frqs.forEach((frq,fi)=>frqs.push({...frq,uid:u.id,fi})); });
   const grid = document.getElementById('frq-grid');
   grid.innerHTML = frqs.map((frq,idx) => `
-    <div class="frq-card">
+    <div class="frq-card" style="--i:${idx}">
       <div class="frq-header" onclick="toggleFRQ(${idx})">
         <div class="frq-title-row">
           <span class="frq-unit-tag">Unit ${frq.uid}</span>
@@ -2106,7 +2434,7 @@ function swapEmbedToFallback(card, watchUrl) {
   if (!wrap) return;
   wrap.style.cssText = 'width:100%;height:158px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;padding:16px;background:rgba(6,6,12,0.95)';
   wrap.innerHTML = '<div style="font-size:12px;color:var(--muted);text-align:center">Embedding is disabled<br>for this video</div>'
-    + '<a href="' + watchUrl + '" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#4F46E5,#7C3AED);color:#fff;padding:8px 18px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:7px;box-shadow:0 0 16px rgba(99,102,241,0.4)">'
+    + '<a href="' + watchUrl + '" target="_blank" rel="noopener" style="background:linear-gradient(135deg,#A84068,#C2607A);color:#fff;padding:8px 18px;border-radius:8px;font-size:12px;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:7px;box-shadow:0 0 16px rgba(99,102,241,0.4)">'
     + '<svg width="14" height="10" viewBox="0 0 14 10" fill="none"><rect width="14" height="10" rx="2" fill="#FF0000"/><path d="M5.5 2.2L9.5 5L5.5 7.8Z" fill="white"/></svg>'
     + 'Watch on YouTube</a>';
 }
