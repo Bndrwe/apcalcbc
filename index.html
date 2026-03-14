@@ -131,7 +131,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .home-hero-stats{display:inline-flex;gap:0;border:1px solid rgba(180,80,110,0.10);border-radius:14px;background:rgba(5,0,8,0.58);backdrop-filter:blur(16px);overflow:hidden;margin:0 auto 52px;box-shadow:0 0 40px rgba(180,80,110,0.06)}
 .home-hero-stat{flex:1;min-width:80px;padding:16px 20px;text-align:center;border-right:1px solid rgba(180,80,110,0.08)}
 .home-hero-stat:last-child{border-right:none}
-.home-hero-stat-n{font-size:24px;font-weight:800;background:linear-gradient(135deg,#C2607A,#E090A8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:2px}
+.home-hero-stat-n{font-size:24px;font-weight:800;background:linear-gradient(135deg,#C2607A,#E090A8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:2px;white-space:nowrap;display:flex;align-items:baseline;justify-content:center;gap:0}
 .home-hero-stat-l{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.6px}
 
 .float-anim{animation:float 4s ease-in-out infinite}
@@ -551,9 +551,9 @@ body::after{
 <div class="stats-bar" id="stats-bar">
   <div class="stats-inner">
     <div class="stat"><div class="stat-n">10</div><div class="stat-l">Units</div></div>
-    <div class="stat"><div class="stat-n">180+</div><div class="stat-l">Flashcards</div></div>
-    <div class="stat"><div class="stat-n">100+</div><div class="stat-l">MCQ</div></div>
-    <div class="stat"><div class="stat-n">20+</div><div class="stat-l">FRQ Prompts</div></div>
+    <div class="stat"><div class="stat-n">180<sup style="font-size:14px;font-weight:700;vertical-align:super;margin-left:1px">+</sup></div><div class="stat-l">Flashcards</div></div>
+    <div class="stat"><div class="stat-n">35<sup style="font-size:11px;font-weight:700;vertical-align:super;margin-left:1px">+</sup></div><div class="stat-l">MCQ</div></div>
+    <div class="stat"><div class="stat-n">20<sup style="font-size:12px;font-weight:700;vertical-align:super;margin-left:1px">+</sup></div><div class="stat-l">FRQ Prompts</div></div>
     <div class="stat"><div class="stat-n">3</div><div class="stat-l">Practice Exams</div></div>
     <div class="bc-badge">✦ AP EXAM READY</div>
   </div>
@@ -588,9 +588,9 @@ body::after{
     <!-- Stats strip -->
     <div class="home-hero-stats" style="position:relative;z-index:1">
       <div class="home-hero-stat"><div class="home-hero-stat-n">10</div><div class="home-hero-stat-l">Units</div></div>
-      <div class="home-hero-stat"><div class="home-hero-stat-n">180+</div><div class="home-hero-stat-l">Flashcards</div></div>
-      <div class="home-hero-stat"><div class="home-hero-stat-n">20+</div><div class="home-hero-stat-l">FRQ Sets</div></div>
-      <div class="home-hero-stat"><div class="home-hero-stat-n">40+</div><div class="home-hero-stat-l">Videos</div></div>
+      <div class="home-hero-stat"><div class="home-hero-stat-n">180<sup style="font-size:14px;font-weight:700;vertical-align:super;margin-left:1px">+</sup></div><div class="home-hero-stat-l">Flashcards</div></div>
+      <div class="home-hero-stat"><div class="home-hero-stat-n">20<sup style="font-size:12px;font-weight:700;vertical-align:super;margin-left:1px">+</sup></div><div class="home-hero-stat-l">FRQ Sets</div></div>
+      <div class="home-hero-stat"><div class="home-hero-stat-n">40<sup style="font-size:12px;font-weight:700;vertical-align:super;margin-left:1px">+</sup></div><div class="home-hero-stat-l">Videos</div></div>
       <div class="home-hero-stat"><div class="home-hero-stat-n">∞</div><div class="home-hero-stat-l">AI Help</div></div>
     </div>
 
@@ -3020,7 +3020,7 @@ async function sendMessage() {
     if(modelLabel) modelLabel.textContent = `Trying ${shortName}…`;
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 15000); // 15s timeout
+      const timeout = setTimeout(() => controller.abort(), 60000); // 60s timeout
       const res = await fetch(PROXY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -3189,6 +3189,8 @@ const KATEX_OPTS = {
     {left:'\\[',right:'\\]',display:true},
     {left:'\\(',right:'\\)',display:false}
   ],
+  ignoredTags:['script','noscript','style','textarea','pre','code','option','svg'],
+  ignoredClasses:['stat-n','home-hero-stat-n','home-hero-stat-l','stat-l','bc-badge','exam-meta-n','exam-breakdown-n','mcq-score-text','fc-counter'],
   throwOnError:false,
   strict:false
 };
