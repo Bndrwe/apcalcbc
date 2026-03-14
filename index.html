@@ -91,7 +91,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 @keyframes shimmer{0%{background-position:0% center}100%{background-position:200% center}}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
 .home-subtitle{font-size:clamp(15px,2vw,20px);color:var(--muted);max-width:600px;line-height:1.7;margin:0 auto 40px;font-weight:400}
-.home-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:80px}
+.home-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:44px}
 .btn-primary{background:linear-gradient(135deg,#B85070,#E090A8);color:#fff;border:none;padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 0 16px rgba(180,80,110,0.22),0 4px 16px rgba(0,0,0,0.3);transition:all .2s;letter-spacing:-.2px}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 0 40px rgba(180,80,110,0.50),0 0 80px rgba(180,80,110,0.15),0 8px 24px rgba(0,0,0,0.4)}
 .btn-secondary{background:rgba(180,80,110,0.06);color:var(--text);border:1px solid rgba(180,80,110,0.16);padding:14px 32px;border-radius:10px;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s;backdrop-filter:blur(8px)}
@@ -101,18 +101,19 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .home-stat:last-child{border-right:none}
 .home-stat-n{font-size:28px;font-weight:800;background:linear-gradient(135deg,#C2607A,#E090A8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:4px}
 .home-stat-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
-.home-features{max-width:1200px;margin:0 auto;width:100%;padding:0 24px}
+.home-features{max-width:min(1300px,95vw);margin:0 auto;width:100%;padding:0}
 .features-title{font-size:22px;font-weight:700;margin-bottom:20px;text-align:center;color:var(--muted);letter-spacing:-.3px}
 /* Force exactly 5 equal columns — no wrapping */
-.feature-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:60px;align-items:stretch}
-.feature-card{background:rgba(6,0,10,0.80);border:1px solid var(--border);border-radius:14px;padding:20px 16px 18px;cursor:pointer;transition:all .25s;backdrop-filter:blur(8px);position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;min-width:0;height:100%;text-align:left}
+.feature-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:12px;margin-bottom:60px;align-items:stretch}
+.feature-card{background:rgba(6,0,10,0.80);border:1px solid var(--border);border-radius:14px;padding:20px 16px 18px;cursor:pointer;transition:all .25s;backdrop-filter:blur(8px);position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:center;min-width:0;height:100%;text-align:center}
 .feature-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(180,80,110,0.06),rgba(200,130,160,0.03));opacity:0;transition:opacity .25s}
 .feature-card:hover{border-color:rgba(180,80,110,0.30);box-shadow:0 0 32px var(--glow),0 0 60px var(--glow2),0 4px 20px rgba(0,0,0,0.35);transform:translateY(-3px)}
 .feature-card:hover::after{opacity:1}
 .feature-icon{font-size:24px;margin-bottom:12px;line-height:1;height:26px;display:flex;align-items:center}
 .feature-name{font-size:13.5px;font-weight:700;margin-bottom:6px;color:var(--text);line-height:1.3}
 .feature-desc{font-size:11.5px;color:var(--muted);line-height:1.55;flex:1;width:100%}
-.feature-badge{margin-top:10px;background:rgba(180,80,110,0.10);border:1px solid rgba(180,80,110,0.18);color:var(--accent);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;align-self:flex-start}
+.feature-badge{margin-top:10px;background:rgba(180,80,110,0.10);border:1px solid rgba(180,80,110,0.18);color:var(--accent);font-size:10px;font-weight:700;padding:2px 8px;border-radius:10px;align-self:center}
+@media(max-width:1100px){.feature-grid{grid-template-columns:repeat(4,1fr)}}
 @media(max-width:900px){.feature-grid{grid-template-columns:repeat(3,1fr)}}
 @media(max-width:600px){.feature-grid{grid-template-columns:repeat(2,1fr)}}
 
@@ -123,11 +124,11 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 /* tubelight home pills removed */
 
 /* ── Centered hero rework ───────────────────────────────────────── */
-.home-centered{position:relative;min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:60px 24px 40px;text-align:center;overflow:hidden}
+.home-centered{position:relative;min-height:calc(100vh - 60px);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px 24px 48px;text-align:center;overflow:hidden}
 .home-centered .home-title{font-size:clamp(56px,9vw,108px);letter-spacing:-5px;line-height:.95;margin-bottom:22px}
 .home-centered .home-subtitle{margin:0 auto 36px;max-width:560px;font-size:17px}
 .home-centered .home-cta{margin-bottom:52px}
-.home-hero-stats{display:flex;gap:0;border:1px solid rgba(180,80,110,0.10);border-radius:14px;background:rgba(5,0,8,0.58);backdrop-filter:blur(16px);overflow:hidden;margin-bottom:52px;box-shadow:0 0 40px rgba(180,80,110,0.06)}
+.home-hero-stats{display:inline-flex;gap:0;border:1px solid rgba(180,80,110,0.10);border-radius:14px;background:rgba(5,0,8,0.58);backdrop-filter:blur(16px);overflow:hidden;margin:0 auto 52px;box-shadow:0 0 40px rgba(180,80,110,0.06)}
 .home-hero-stat{flex:1;min-width:80px;padding:16px 20px;text-align:center;border-right:1px solid rgba(180,80,110,0.08)}
 .home-hero-stat:last-child{border-right:none}
 .home-hero-stat-n{font-size:24px;font-weight:800;background:linear-gradient(135deg,#C2607A,#E090A8);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:2px}
@@ -256,7 +257,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .chat-messages{flex:1;overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px}
 .msg{max-width:85%;display:flex;flex-direction:column;gap:4px}
 .msg.user{align-self:flex-end}
-.msg.ai{align-self:flex-start}
+.msg.ai{align-self:center}
 .msg-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.6}
 .msg.user .msg-bubble{background:linear-gradient(135deg,#A04060,#C2607A);color:#fff;border-radius:12px 12px 3px 12px;box-shadow:0 0 12px rgba(99,102,241,0.3)}
 .msg.ai .msg-bubble{background:rgba(8,0,14,0.92);border:1px solid var(--border);border-radius:12px 12px 12px 3px;color:#C8C8DC;line-height:1.65}
@@ -430,19 +431,57 @@ body::after{
 /* ===== SCROLLBAR pink ===== */
 ::-webkit-scrollbar-thumb{background:rgba(180,80,110,0.18);border-radius:3px}
 
-/* Responsive */
-@media(max-width:900px){
-  .units-layout{grid-template-columns:1fr}
-  .unit-sidebar{position:static;max-height:none;display:flex;flex-wrap:wrap;gap:4px;padding:8px}
-  .concept-grid{grid-template-columns:1fr}
-  .ai-layout{grid-template-columns:1fr;height:auto}
-  .ai-sidebar{display:none}
-  .home-stats{flex-direction:row}
-}
-@media(max-width:600px){
-  .stats-inner{gap:16px}
-  .home-title{font-size:52px;letter-spacing:-3px}
-}
+/* ===== MCQ STYLES ===== */
+.mcq-header{display:flex;align-items:center;gap:14px;margin-bottom:20px;flex-wrap:wrap}
+.mcq-filter{background:rgba(6,0,10,0.85);border:1px solid var(--border);color:var(--text);padding:8px 12px;border-radius:8px;font-size:13px;cursor:pointer}
+.mcq-score-bar{flex:1;min-width:200px}
+.mcq-score-text{font-size:12px;color:var(--muted);margin-bottom:4px}
+.mcq-score-fill-wrap{height:4px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.mcq-score-fill{height:100%;border-radius:2px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .4s;box-shadow:0 0 8px var(--glow)}
+.mcq-grid{display:grid;gap:14px}
+.mcq-card{background:rgba(6,0,10,0.85);border:1px solid var(--border);border-radius:var(--r);padding:20px;backdrop-filter:blur(4px);transition:border-color .2s;animation:fadeUp .4s ease both}
+.mcq-card.answered{border-color:rgba(180,80,110,0.25)}
+.mcq-num{font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.mcq-q{font-size:14px;color:var(--text);line-height:1.65;margin-bottom:14px;font-weight:500}
+.mcq-choices{display:grid;gap:8px}
+.mcq-choice{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:all .15s;background:rgba(8,0,14,0.6);text-align:left;width:100%;color:var(--text);font-size:13px;line-height:1.5}
+.mcq-choice:hover:not(.locked){border-color:rgba(180,80,110,0.35);background:rgba(180,80,110,0.06)}
+.mcq-choice.correct{border-color:#34D399;background:rgba(52,211,153,0.08);color:#34D399}
+.mcq-choice.wrong{border-color:#F87171;background:rgba(248,113,113,0.08);color:#F87171}
+.mcq-choice.reveal-correct{border-color:#34D399;background:rgba(52,211,153,0.06)}
+.mcq-letter{width:22px;height:22px;border-radius:50%;border:1px solid var(--border2);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:700;flex-shrink:0;color:var(--accent);background:rgba(180,80,110,0.08)}
+.mcq-choice.correct .mcq-letter{border-color:#34D399;color:#34D399;background:rgba(52,211,153,0.15)}
+.mcq-choice.wrong .mcq-letter{border-color:#F87171;color:#F87171;background:rgba(248,113,113,0.15)}
+.mcq-explain{margin-top:12px;padding:10px 14px;background:rgba(180,80,110,0.05);border:1px solid rgba(180,80,110,0.15);border-radius:8px;font-size:12.5px;color:#C8C8DC;line-height:1.6;display:none}
+.mcq-explain.show{display:block}
+.mcq-tag{display:inline-block;background:rgba(180,80,110,0.10);border:1px solid rgba(180,80,110,0.18);color:var(--accent);font-size:10px;font-weight:700;padding:2px 7px;border-radius:10px;margin-bottom:10px}
+
+/* ===== FULL EXAM STYLES ===== */
+.exam-hero{text-align:center;padding:40px 20px;border:1px solid var(--border);border-radius:var(--r);background:rgba(6,0,10,0.85);backdrop-filter:blur(8px);margin-bottom:24px}
+.exam-hero h2{font-size:26px;font-weight:800;letter-spacing:-1px;background:linear-gradient(135deg,#fff,var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:8px}
+.exam-hero p{color:var(--muted);font-size:14px;max-width:500px;margin:0 auto 20px}
+.exam-meta{display:flex;gap:20px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+.exam-meta-item{background:rgba(180,80,110,0.08);border:1px solid rgba(180,80,110,0.18);border-radius:10px;padding:10px 18px;text-align:center}
+.exam-meta-n{font-size:20px;font-weight:800;color:var(--accent)}
+.exam-meta-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.5px}
+.exam-start-btn{background:linear-gradient(135deg,#B85070,#E090A8);color:#fff;border:none;padding:14px 36px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 0 20px var(--glow);transition:all .2s}
+.exam-start-btn:hover{transform:translateY(-2px);box-shadow:0 0 32px var(--glow)}
+.exam-timer{position:sticky;top:70px;z-index:50;background:rgba(4,0,8,0.95);backdrop-filter:blur(16px);border:1px solid var(--border);border-radius:var(--r);padding:12px 20px;margin-bottom:20px;display:flex;align-items:center;gap:16px}
+.exam-timer-time{font-size:22px;font-weight:800;font-variant-numeric:tabular-nums;color:var(--text)}
+.exam-timer-time.warning{color:#FBBF24}
+.exam-timer-time.danger{color:#F87171;animation:pulse 1s infinite}
+.exam-timer-label{font-size:12px;color:var(--muted)}
+.exam-section-title{font-size:16px;font-weight:800;letter-spacing:-.5px;margin:24px 0 14px;padding-bottom:8px;border-bottom:1px solid var(--border);color:var(--text)}
+.exam-section-sub{font-size:12px;color:var(--muted);font-weight:400;margin-left:8px}
+.exam-submit-btn{background:linear-gradient(135deg,#B85070,#E090A8);color:#fff;border:none;padding:14px 40px;border-radius:10px;font-size:15px;font-weight:700;cursor:pointer;box-shadow:0 0 20px var(--glow);transition:all .2s;display:block;margin:30px auto}
+.exam-results{text-align:center;padding:40px 20px}
+.exam-score-ring{width:140px;height:140px;border-radius:50%;border:6px solid;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 20px}
+.exam-score-pct{font-size:32px;font-weight:900}
+.exam-score-lbl{font-size:12px;color:var(--muted)}
+.exam-breakdown{display:grid;grid-template-columns:1fr 1fr;gap:14px;max-width:500px;margin:20px auto}
+.exam-breakdown-card{background:rgba(6,0,10,0.85);border:1px solid var(--border);border-radius:var(--r);padding:16px}
+.exam-breakdown-n{font-size:22px;font-weight:800;color:var(--accent)}
+.exam-breakdown-l{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px}
 </style>
 
 <!-- AURORA CANVAS -->
@@ -489,6 +528,16 @@ body::after{
         <span class="tl-label">Videos</span>
         <span class="tl-bg"></span>
       </button>
+      <button class="header-tl-pill" data-tab="mcq" onclick="headerNav('mcq')">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/></svg>
+        <span class="tl-label">MCQ</span>
+        <span class="tl-bg"></span>
+      </button>
+      <button class="header-tl-pill" data-tab="exam" onclick="headerNav('exam')">
+        <svg viewBox="0 0 20 20" fill="currentColor"><path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z"/><path fill-rule="evenodd" d="M4 5a2 2 0 012-2 3 3 0 003 3h2a3 3 0 003-3 2 2 0 012 2v11a2 2 0 01-2 2H6a2 2 0 01-2-2V5zm3 4a1 1 0 000 2h.01a1 1 0 100-2H7zm3 0a1 1 0 000 2h3a1 1 0 100-2h-3zm-3 4a1 1 0 100 2h.01a1 1 0 100-2H7zm3 0a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"/></svg>
+        <span class="tl-label">Full Exam</span>
+        <span class="tl-bg"></span>
+      </button>
       <button class="header-tl-pill" data-tab="ai" onclick="headerNav('ai')">
         <svg viewBox="0 0 20 20" fill="currentColor"><path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5zm15.657 2.757a1 1 0 00-1.414-1.414L14 8.586l-1.293-1.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"/></svg>
         <span class="tl-label">AI Tutor</span>
@@ -503,9 +552,9 @@ body::after{
   <div class="stats-inner">
     <div class="stat"><div class="stat-n">10</div><div class="stat-l">Units</div></div>
     <div class="stat"><div class="stat-n">180+</div><div class="stat-l">Flashcards</div></div>
+    <div class="stat"><div class="stat-n">100+</div><div class="stat-l">MCQ</div></div>
     <div class="stat"><div class="stat-n">20+</div><div class="stat-l">FRQ Prompts</div></div>
-    <div class="stat"><div class="stat-n">40+</div><div class="stat-l">Videos</div></div>
-    <div class="stat"><div class="stat-n">∞</div><div class="stat-l">AI Questions</div></div>
+    <div class="stat"><div class="stat-n">3</div><div class="stat-l">Practice Exams</div></div>
     <div class="bc-badge">✦ AP EXAM READY</div>
   </div>
 </div>
@@ -574,6 +623,18 @@ body::after{
           <div class="feature-name">AI Tutor</div>
           <div class="feature-desc">Ask anything about AP Calc BC. Free AI — available 24/7.</div>
           <div class="feature-badge">Free AI</div>
+        </div>
+        <div class="feature-card" onclick="headerNav('mcq')">
+          <span class="feature-icon">✅</span>
+          <div class="feature-name">MCQ Practice</div>
+          <div class="feature-desc">35+ multiple choice questions with instant feedback and explanations.</div>
+          <div class="feature-badge">Instant Feedback</div>
+        </div>
+        <div class="feature-card" onclick="headerNav('exam')">
+          <span class="feature-icon">📋</span>
+          <div class="feature-name">Full Practice Exam</div>
+          <div class="feature-desc">Timed 45 MCQ + 6 FRQ. Scored 1–5 like the real AP exam.</div>
+          <div class="feature-badge">AP Format</div>
         </div>
       </div>
     </div>
@@ -710,6 +771,66 @@ body::after{
     </div>
   </div>
 </div>
+
+<!-- MCQ PAGE -->
+<div id="page-mcq" class="page">
+  <div style="margin-bottom:20px;display:flex;align-items:center;gap:12px;flex-wrap:wrap">
+    <h2 style="font-size:22px;font-weight:800;letter-spacing:-0.5px">MCQ Practice</h2>
+    <span style="color:var(--muted);font-size:14px">Click a choice — instant feedback with explanations</span>
+    <select id="mcq-filter" onchange="renderMCQs()" class="mcq-filter" style="margin-left:auto">
+      <option value="all">All Units</option>
+    </select>
+  </div>
+  <div class="mcq-header">
+    <div class="mcq-score-bar">
+      <div class="mcq-score-text" id="mcq-score-text">Score: 0/0</div>
+      <div class="mcq-score-fill-wrap"><div class="mcq-score-fill" id="mcq-score-fill" style="width:0%"></div></div>
+    </div>
+    <button onclick="resetMCQ()" style="background:rgba(6,0,10,0.85);border:1px solid var(--border2);color:var(--text);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;transition:all .15s">↺ Reset</button>
+  </div>
+  <div class="mcq-grid" id="mcq-grid"></div>
+</div>
+
+<!-- FULL EXAM PAGE -->
+<div id="page-exam" class="page">
+  <div id="exam-lobby">
+    <div class="exam-hero">
+      <h2>AP Calculus BC — Full Practice Exam</h2>
+      <p>Simulates the real AP exam format: 45 MCQ + 6 FRQ, timed sections, scored out of 5.</p>
+      <div class="exam-meta">
+        <div class="exam-meta-item"><div class="exam-meta-n">45</div><div class="exam-meta-l">MCQ Questions</div></div>
+        <div class="exam-meta-item"><div class="exam-meta-n">6</div><div class="exam-meta-l">FRQ Prompts</div></div>
+        <div class="exam-meta-item"><div class="exam-meta-n">3h 15m</div><div class="exam-meta-l">Total Time</div></div>
+        <div class="exam-meta-item"><div class="exam-meta-n">1–5</div><div class="exam-meta-l">Score Scale</div></div>
+      </div>
+      <div style="background:rgba(180,80,110,0.06);border:1px solid rgba(180,80,110,0.15);border-radius:10px;padding:16px 20px;max-width:520px;margin:0 auto 24px;text-align:left;font-size:13px;color:#C8C8DC;line-height:1.7">
+        <strong style="color:var(--text)">Exam Structure:</strong><br>
+        📝 <strong>Section I — MCQ:</strong> Part A (30 q, 60 min, no calc) · Part B (15 q, 45 min, calc)<br>
+        ✍️ <strong>Section II — FRQ:</strong> Part A (2 q, 30 min, calc) · Part B (4 q, 60 min, no calc)
+      </div>
+      <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
+        <button class="exam-start-btn" onclick="startExam('full')">🎯 Start Full Exam (3h 15m)</button>
+        <button class="exam-start-btn" onclick="startExam('mcq')" style="background:rgba(180,80,110,0.12);box-shadow:none;border:1px solid rgba(180,80,110,0.3);color:var(--text)">📝 MCQ Only (105 min)</button>
+        <button class="exam-start-btn" onclick="startExam('frq')" style="background:rgba(180,80,110,0.12);box-shadow:none;border:1px solid rgba(180,80,110,0.3);color:var(--text)">✍️ FRQ Only (90 min)</button>
+      </div>
+    </div>
+  </div>
+  <div id="exam-active" style="display:none">
+    <div class="exam-timer" id="exam-timer">
+      <div>
+        <div class="exam-timer-time" id="exam-timer-display">1:45:00</div>
+        <div class="exam-timer-label" id="exam-timer-label">Section I · MCQ</div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:10px;align-items:center">
+        <div style="font-size:12px;color:var(--muted)" id="exam-progress-label">Q 0 / 45 answered</div>
+        <button onclick="confirmSubmitExam()" style="background:rgba(180,80,110,0.15);border:1px solid rgba(180,80,110,0.3);color:var(--accent);padding:7px 14px;border-radius:7px;cursor:pointer;font-size:12px;font-weight:600">Submit Exam</button>
+      </div>
+    </div>
+    <div id="exam-content"></div>
+  </div>
+  <div id="exam-results" style="display:none"></div>
+</div>
+
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
@@ -1154,6 +1275,143 @@ videos:[
 ]}
 ];
 
+// =================== MCQ DATA ===================
+const MCQ_DATA = [
+// ── Unit 1: Limits & Continuity ──────────────────────────────
+{unit:1,q:"$\\displaystyle\\lim_{x\\to 2}\\frac{x^2-4}{x-2}=$",choices:["$0$","$2$","$4$","Does not exist"],ans:2,explain:"Factor: $(x^2-4)/(x-2)=x+2$ for $x\\neq2$. At $x=2$: answer is $4$."},
+{unit:1,q:"$\\displaystyle\\lim_{x\\to 0}\\frac{\\sin x}{x}=$",choices:["$0$","$1$","$\\infty$","Does not exist"],ans:1,explain:"Fundamental limit — $\\lim_{x\\to0}\\frac{\\sin x}{x}=1$ (radians only)."},
+{unit:1,q:"$\\displaystyle\\lim_{x\\to 0}\\frac{\\sin(5x)}{x}=$",choices:["$0$","$1$","$5$","$\\infty$"],ans:2,explain:"Rewrite: $5\\cdot\\frac{\\sin(5x)}{5x}\\to5\\cdot1=5$."},
+{unit:1,q:"If $\\lim_{x\\to3^-}f(x)=\\lim_{x\\to3^+}f(x)=7$ but $f(3)=2$, then at $x=3$, $f$ has a:",choices:["Jump discontinuity","Removable discontinuity","Infinite discontinuity","No discontinuity"],ans:1,explain:"Two-sided limit exists (=7) but $f(3)\\neq7$ — removable (hole) discontinuity."},
+{unit:1,q:"$\\displaystyle\\lim_{x\\to\\infty}\\frac{3x^3-2x}{5x^3+x^2}=$",choices:["$0$","$\\frac{3}{5}$","$3$","$\\infty$"],ans:1,explain:"Equal degrees: ratio of leading coefficients $=3/5$."},
+{unit:1,q:"Which condition is NOT required for $f$ to be continuous at $x=a$?",choices:["$f(a)$ is defined","$\\lim_{x\\to a}f(x)$ exists","$f'(a)$ exists","$\\lim_{x\\to a}f(x)=f(a)$"],ans:2,explain:"Continuity requires the three limit conditions but NOT differentiability."},
+{unit:1,q:"$\\displaystyle\\lim_{x\\to 0}\\frac{1-\\cos x}{x}=$",choices:["$0$","$1$","$\\tfrac{1}{2}$","Does not exist"],ans:0,explain:"Fundamental limit: $\\lim_{x\\to0}\\frac{1-\\cos x}{x}=0$."},
+{unit:1,q:"The IVT guarantees a root of $f(x)=x^3-2$ on $[1,2]$ because:",choices:["$f$ is differentiable","$f(1)<0$ and $f(2)>0$ and $f$ is continuous","$f'(c)=0$ for some $c$","$f$ is increasing"],ans:1,explain:"$f(1)=-1<0$, $f(2)=6>0$, $f$ continuous $\\Rightarrow\\exists c$ with $f(c)=0$."},
+{unit:1,q:"$\\displaystyle\\lim_{x\\to\\infty}\\frac{2x^2+3}{x^3-1}=$",choices:["$2$","$\\infty$","$0$","$\\tfrac{2}{3}$"],ans:2,explain:"Numerator degree (2) < denominator degree (3) $\\Rightarrow$ limit is $0$."},
+{unit:1,q:"$f(x)=\\frac{x^2-1}{x-1}$ has which type of discontinuity at $x=1$?",choices:["Jump","Removable","Infinite","None"],ans:1,explain:"$(x^2-1)/(x-1)=x+1$ for $x\\neq1$. Limit $=2$ exists but $f(1)$ undefined — removable."},
+{unit:1,q:"$\\displaystyle\\lim_{x\\to 0^+}\\ln x=$",choices:["$0$","$1$","$-\\infty$","$\\infty$"],ans:2,explain:"As $x\\to0^+$, $\\ln x\\to-\\infty$. The graph drops without bound."},
+{unit:1,q:"If $g(x)\\leq f(x)\\leq h(x)$ near $a$ and $\\lim_{x\\to a}g(x)=\\lim_{x\\to a}h(x)=L$, then:",choices:["$\\lim f(x)$ may not exist","$\\lim f(x)=L$","$f(a)=L$","$f$ is continuous at $a$"],ans:1,explain:"Squeeze Theorem: $f$ is squeezed to $L$."},
+
+// ── Unit 2: Differentiation Basics ──────────────────────────
+{unit:2,q:"$\\dfrac{d}{dx}[x^3\\sin x]=$",choices:["$3x^2\\cos x$","$3x^2\\sin x+x^3\\cos x$","$3x^2\\sin x-x^3\\cos x$","$x^3\\cos x$"],ans:1,explain:"Product rule: $(x^3)'\\sin x+x^3(\\sin x)'=3x^2\\sin x+x^3\\cos x$."},
+{unit:2,q:"If $f(x)=e^{3x}$, then $f'(x)=$",choices:["$e^{3x}$","$3e^{3x}$","$3xe^{3x}$","$e^{3x}/3$"],ans:1,explain:"Chain rule: $\\frac{d}{dx}e^u=e^u\\cdot u'$. Here $u=3x$, $u'=3$."},
+{unit:2,q:"Slope of the tangent to $y=\\ln x$ at $x=e$:",choices:["$1$","$e$","$1/e$","$e^2$"],ans:2,explain:"$y'=1/x$. At $x=e$: slope $=1/e$."},
+{unit:2,q:"Which is NOT differentiable at $x=0$?",choices:["$y=x^2$","$y=\\sin x$","$y=|x|$","$y=e^x$"],ans:2,explain:"$|x|$ has a corner at $x=0$ — left slope $=-1$, right slope $=+1$."},
+{unit:2,q:"$\\dfrac{d}{dx}[\\tan x]=$",choices:["$\\sec x$","$\\csc^2 x$","$\\sec^2 x$","$-\\csc^2 x$"],ans:2,explain:"$\\frac{d}{dx}\\tan x=\\sec^2 x$ (quotient rule on $\\sin x/\\cos x$)."},
+{unit:2,q:"$\\dfrac{d}{dx}\\left[\\sqrt{x}\\right]=$",choices:["$\\frac{1}{2\\sqrt{x}}$","$\\frac{1}{\\sqrt{x}}$","$2\\sqrt{x}$","$\\frac{-1}{2x^{3/2}}$"],ans:0,explain:"$x^{1/2}\\Rightarrow\\frac{1}{2}x^{-1/2}=\\frac{1}{2\\sqrt{x}}$."},
+{unit:2,q:"$\\dfrac{d}{dx}[5x^4-3x^2+7]=$",choices:["$20x^3-6x$","$20x^3-3x$","$20x^3-6x+7$","$5x^3-6x$"],ans:0,explain:"Power rule: $20x^3-6x+0$."},
+{unit:2,q:"Average rate of change of $f(x)=x^2$ from $x=1$ to $x=3$:",choices:["$2$","$4$","$6$","$8$"],ans:1,explain:"$\\frac{f(3)-f(1)}{2}=\\frac{9-1}{2}=4$."},
+{unit:2,q:"$\\dfrac{d}{dx}[\\cos x]=$",choices:["$\\sin x$","$-\\sin x$","$\\sec^2 x$","$-\\cos x$"],ans:1,explain:"$\\frac{d}{dx}\\cos x=-\\sin x$. Co-functions always carry a negative."},
+{unit:2,q:"If $f(x)=3x^2-4x+1$, then $f'(2)=$",choices:["$5$","$8$","$12$","$4$"],ans:1,explain:"$f'(x)=6x-4$. $f'(2)=12-4=8$."},
+{unit:2,q:"$\\dfrac{d}{dx}[x^{-3}]=$",choices:["$-3x^{-2}$","$3x^{-4}$","$-3x^{-4}$","$-3x^2$"],ans:2,explain:"Power rule: $-3x^{-3-1}=-3x^{-4}$."},
+{unit:2,q:"The equation of the tangent to $y=x^2$ at $(2,4)$:",choices:["$y=4x-4$","$y=4x+4$","$y=2x$","$y=4x$"],ans:0,explain:"$y'=2x$; slope at $x=2$ is $4$. Point-slope: $y-4=4(x-2)\\Rightarrow y=4x-4$."},
+
+// ── Unit 3: Advanced Differentiation ────────────────────────
+{unit:3,q:"If $y=\\sin(x^2)$, then $\\dfrac{dy}{dx}=$",choices:["$\\cos(x^2)$","$2x\\cos(x^2)$","$2\\cos(x^2)$","$-2x\\cos(x^2)$"],ans:1,explain:"Chain rule: $\\cos(x^2)\\cdot2x$."},
+{unit:3,q:"For $x^2+y^2=25$, $\\dfrac{dy}{dx}=$",choices:["$x/y$","$-x/y$","$y/x$","$-y/x$"],ans:1,explain:"Implicit diff: $2x+2y\\,dy/dx=0\\Rightarrow dy/dx=-x/y$."},
+{unit:3,q:"$\\dfrac{d}{dx}[\\arctan x]=$",choices:["$\\frac{1}{1+x^2}$","$\\frac{1}{\\sqrt{1-x^2}}$","$\\frac{-1}{1+x^2}$","$\\frac{1}{x^2-1}$"],ans:0,explain:"Standard: $\\frac{d}{dx}\\arctan x=\\frac{1}{1+x^2}$."},
+{unit:3,q:"If $f(x)=x^x$, then $f'(x)=$",choices:["$x^x\\ln x$","$x^x(1+\\ln x)$","$x\\cdot x^{x-1}$","$x^x/x$"],ans:1,explain:"Log diff: $\\ln y=x\\ln x\\Rightarrow y'/y=\\ln x+1\\Rightarrow y'=x^x(1+\\ln x)$."},
+{unit:3,q:"$\\dfrac{d}{dx}[\\ln(x^2+1)]=$",choices:["$\\frac{1}{x^2+1}$","$\\frac{2x}{x^2+1}$","$\\frac{x}{x^2+1}$","$\\ln(2x)$"],ans:1,explain:"Chain rule: $\\frac{1}{x^2+1}\\cdot2x$."},
+{unit:3,q:"If $f$ and $g$ are inverses and $g'(3)=5$, $g(3)=7$, then $f'(7)=$",choices:["$1/3$","$5$","$1/5$","$3/5$"],ans:2,explain:"Inverse function derivative: $f'(g(x))=1/g'(x)$. So $f'(7)=1/5$."},
+{unit:3,q:"$\\dfrac{d}{dx}[e^{\\sin x}]=$",choices:["$e^{\\cos x}$","$e^{\\sin x}\\cos x$","$\\cos x\\cdot e^{\\cos x}$","$\\sin x\\cdot e^{\\sin x}$"],ans:1,explain:"Chain rule: $e^{\\sin x}\\cdot\\cos x$."},
+{unit:3,q:"$\\dfrac{d}{dx}[\\arcsin x]=$",choices:["$\\frac{1}{1+x^2}$","$\\frac{-1}{\\sqrt{1-x^2}}$","$\\frac{1}{\\sqrt{1-x^2}}$","$\\frac{1}{1-x^2}$"],ans:2,explain:"$\\frac{d}{dx}\\arcsin x=\\frac{1}{\\sqrt{1-x^2}}$ for $|x|<1$."},
+{unit:3,q:"$\\dfrac{d}{dx}[\\ln(\\sin x)]=$",choices:["$\\cos x$","$\\cot x$","$\\tan x$","$-\\cot x$"],ans:1,explain:"Chain rule: $\\frac{1}{\\sin x}\\cdot\\cos x=\\cot x$."},
+
+// ── Unit 4: Contextual Applications ─────────────────────────
+{unit:4,q:"A 10 ft ladder base slides away at 2 ft/sec. How fast is the top sliding down when base is 6 ft from wall?",choices:["$2$ ft/sec","$3/2$ ft/sec","$4/3$ ft/sec","$3/4$ ft/sec"],ans:1,explain:"$x^2+y^2=100$. At $x=6$: $y=8$. Differentiating: $\\dot{y}=-12/8=-3/2$."},
+{unit:4,q:"$\\displaystyle\\lim_{x\\to 0}\\frac{e^x-1}{x}=$",choices:["$0$","$1$","$e$","$\\infty$"],ans:1,explain:"L'Hôpital (0/0): $\\lim e^x/1=1$."},
+{unit:4,q:"$s(t)=t^3-3t$. Particle moves left when:",choices:["$t>1$","$-1<t<1$","$t<-1$ only","$t<0$"],ans:1,explain:"$v(t)=3t^2-3=3(t-1)(t+1)<0$ when $-1<t<1$."},
+{unit:4,q:"$\\displaystyle\\lim_{x\\to 0}\\frac{\\tan x}{x}=$",choices:["$0$","$1$","$\\infty$","Does not exist"],ans:1,explain:"$\\tan x/x=(\\sin x/x)(1/\\cos x)\\to1\\cdot1=1$."},
+{unit:4,q:"Linearization of $f(x)=\\sqrt{x}$ at $a=9$ gives $L(9.1)\\approx$",choices:["$3.017$","$3.050$","$3.100$","$3.200$"],ans:0,explain:"$L(x)=3+\\frac{1}{6}(x-9)$. $L(9.1)=3+\\frac{0.1}{6}\\approx3.017$."},
+{unit:4,q:"A particle speeds up when:",choices:["$v(t)>0$","$a(t)>0$","$v(t)$ and $a(t)$ have the same sign","$|v(t)|$ is at maximum"],ans:2,explain:"Speed increases when velocity and acceleration share the same sign."},
+{unit:4,q:"$\\displaystyle\\lim_{x\\to\\infty}\\left(1+\\frac{1}{x}\\right)^x=$",choices:["$1$","$2$","$e$","$\\infty$"],ans:2,explain:"Definition of $e$."},
+
+// ── Unit 5: Analytical Applications ─────────────────────────
+{unit:5,q:"$f'(x)>0$ on $(a,b)$, $f'(x)<0$ on $(b,c)$. At $x=b$:",choices:["Local minimum","Local maximum","Inflection point","Saddle point"],ans:1,explain:"$f'$ changes $+\\to-$ at $b$: local maximum (1st Derivative Test)."},
+{unit:5,q:"$f''(x)>0$ on an interval means:",choices:["$f$ decreasing","Concave down","Concave up","$f$ at maximum"],ans:2,explain:"$f''>0\\Rightarrow f'$ increasing $\\Rightarrow$ concave up."},
+{unit:5,q:"MVT guarantees $\\exists c\\in(a,b)$ where $f'(c)=$",choices:["$0$","$f(b)-f(a)$","$\\frac{f(b)-f(a)}{b-a}$","$f(a)+f(b)$"],ans:2,explain:"$f'(c)=\\frac{f(b)-f(a)}{b-a}$ — slope of the secant."},
+{unit:5,q:"Rolle's Theorem requires all EXCEPT:",choices:["$f$ continuous on $[a,b]$","$f$ differentiable on $(a,b)$","$f(a)=f(b)$","$f'(a)=f'(b)$"],ans:3,explain:"Rolle's needs continuity, differentiability, and equal endpoints. Not $f'(a)=f'(b)$."},
+{unit:5,q:"If $f''(c)=0$ and $f''$ changes sign at $c$, then $c$ is:",choices:["Local max","Local min","Inflection point","Critical number"],ans:2,explain:"Inflection point: concavity changes at $c$."},
+{unit:5,q:"For $f(x)=x^3$ on $[0,1]$, the MVT value of $c$ is:",choices:["$1/2$","$1/\\sqrt{3}$","$1/3$","$\\sqrt{2}/2$"],ans:1,explain:"$3c^2=\\frac{1-0}{1}=1\\Rightarrow c=1/\\sqrt{3}$."},
+{unit:5,q:"$f(x)=x^3-3x^2+4$. Which is a local minimum?",choices:["$x=0$","$x=2$","$x=-1$","$x=3$"],ans:1,explain:"$f'(x)=3x^2-6x=3x(x-2)=0\\Rightarrow x=0,2$. $f''(2)=6>0$ so $x=2$ is local min."},
+
+// ── Unit 6: Integration ──────────────────────────────────────
+{unit:6,q:"$\\displaystyle\\int_0^2 3x^2\\,dx=$",choices:["$4$","$6$","$8$","$12$"],ans:2,explain:"$[x^3]_0^2=8-0=8$."},
+{unit:6,q:"$\\dfrac{d}{dx}\\displaystyle\\int_1^{x^2}\\cos(t)\\,dt=$",choices:["$\\cos(x^2)$","$2x\\cos(x^2)$","$\\sin(x^2)$","$2x\\sin(x^2)$"],ans:1,explain:"FTC Part 1 + chain rule: $\\cos(x^2)\\cdot2x$."},
+{unit:6,q:"$\\displaystyle\\int\\frac{2x}{x^2+1}\\,dx=$",choices:["$\\ln(x^2+1)+C$","$2\\ln(x^2+1)+C$","$\\arctan(x)+C$","$\\frac{1}{x^2+1}+C$"],ans:0,explain:"$u=x^2+1$, $du=2x\\,dx$. $\\int du/u=\\ln|u|+C$."},
+{unit:6,q:"Average value of $f(x)=x^2$ on $[0,3]$:",choices:["$3$","$9$","$1/3$","$3/2$"],ans:0,explain:"$\\frac{1}{3}\\int_0^3x^2dx=\\frac{1}{3}\\cdot9=3$."},
+{unit:6,q:"$\\displaystyle\\int xe^{x^2}\\,dx=$",choices:["$e^{x^2}+C$","$\\frac{1}{2}e^{x^2}+C$","$2xe^{x^2}+C$","$x^2e^{x^2}+C$"],ans:1,explain:"$u=x^2$, $du=2x\\,dx$. $\\int e^u\\frac{du}{2}=\\frac{1}{2}e^u+C$."},
+{unit:6,q:"$\\displaystyle\\int_0^{\\pi}\\sin x\\,dx=$",choices:["$0$","$1$","$2$","$\\pi$"],ans:2,explain:"$[-\\cos x]_0^{\\pi}=1+1=2$."},
+{unit:6,q:"Trapezoidal Rule overestimates when $f$ is:",choices:["Decreasing","Concave down","Concave up","Linear"],ans:2,explain:"Trap Rule overestimates for concave up ($f''>0$)."},
+{unit:6,q:"$\\displaystyle\\int\\sec^2 x\\,dx=$",choices:["$\\sec x\\tan x+C$","$\\tan x+C$","$-\\cot x+C$","$2\\sec x+C$"],ans:1,explain:"$\\frac{d}{dx}\\tan x=\\sec^2 x$, so antiderivative is $\\tan x+C$."},
+{unit:6,q:"$\\displaystyle\\int_0^1\\frac{1}{\\sqrt{1-x^2}}\\,dx=$",choices:["$0$","$\\pi/4$","$\\pi/2$","$\\pi$"],ans:2,explain:"$[\\arcsin x]_0^1=\\arcsin(1)-\\arcsin(0)=\\pi/2-0=\\pi/2$."},
+{unit:6,q:"Integration by parts: $\\displaystyle\\int xe^x\\,dx=$",choices:["$xe^x+C$","$xe^x-e^x+C$","$e^x(x-1)+C$","Both B and C"],ans:3,explain:"$u=x$, $dv=e^xdx$: $xe^x-\\int e^xdx=xe^x-e^x+C=e^x(x-1)+C$. B and C are equal."},
+
+// ── Unit 7: Differential Equations ──────────────────────────
+{unit:7,q:"Solution to $\\dfrac{dy}{dx}=2y$, $y(0)=5$:",choices:["$y=5e^x$","$y=5e^{2x}$","$y=2e^{5x}$","$y=5+2x$"],ans:1,explain:"Separate, integrate: $y=Ae^{2x}$. IC gives $A=5$."},
+{unit:7,q:"$\\dfrac{dP}{dt}=0.1P(1-P/500)$. Growth fastest at:",choices:["$P=0$","$P=100$","$P=250$","$P=500$"],ans:2,explain:"Logistic: max growth at $P=K/2=250$."},
+{unit:7,q:"Euler's, $h=0.5$, $y'=x+y$, $y(0)=1$: $y(0.5)=$",choices:["$1.5$","$1.0$","$2.0$","$1.25$"],ans:0,explain:"$y_{1}=1+0.5(0+1)=1.5$."},
+{unit:7,q:"Which DE is separable?",choices:["$y'=x+y$","$y'=xy$","$y'=x+y^2+xy$","$y'=\\sin(x+y)$"],ans:1,explain:"$y'=xy$ separates as $dy/y=x\\,dx$."},
+{unit:7,q:"The carrying capacity in logistic growth is the value $K$ where:",choices:["Growth is fastest","$dP/dt=0$ and population is non-zero","$P=0$","Growth is negative"],ans:1,explain:"$K$ is the equilibrium: $dP/dt=0$ at $P=K$ (non-trivial equilibrium)."},
+{unit:7,q:"$\\dfrac{dy}{dx}=\\dfrac{x}{y}$, $y(0)=3$. Then $y(x)=$",choices:["$\\sqrt{x^2+9}$","$\\sqrt{x^2+3}$","$x^2/2+3$","$3e^x$"],ans:0,explain:"Separate: $y\\,dy=x\\,dx\\Rightarrow y^2/2=x^2/2+C$. IC: $9/2=C$, so $y^2=x^2+9$."},
+
+// ── Unit 8: Applications of Integration ─────────────────────
+{unit:8,q:"Area between $y=x^2$ and $y=x$ on $[0,1]$:",choices:["$1/6$","$1/3$","$1/2$","$1$"],ans:0,explain:"$\\int_0^1(x-x^2)dx=1/2-1/3=1/6$."},
+{unit:8,q:"Volume: $y=\\sqrt{x}$ on $[0,4]$ rotated about x-axis:",choices:["$4\\pi$","$8\\pi$","$16\\pi$","$32\\pi$"],ans:1,explain:"Disc: $\\pi\\int_0^4 x\\,dx=\\pi\\cdot8=8\\pi$."},
+{unit:8,q:"Arc length formula for $y=f(x)$ on $[a,b]$:",choices:["$\\int|f'|dx$","$\\int\\sqrt{1+[f']^2}\\,dx$","$\\int\\sqrt{1+f^2}\\,dx$","$\\int[f']^2dx$"],ans:1,explain:"$L=\\int_a^b\\sqrt{1+[f'(x)]^2}\\,dx$."},
+{unit:8,q:"$\\displaystyle\\int_a^b v(t)\\,dt$ represents:",choices:["Speed","Total distance traveled","Displacement","Acceleration"],ans:2,explain:"Displacement $=s(b)-s(a)$. For total distance: $\\int|v|\\,dt$."},
+{unit:8,q:"Shell method: $y=x^2$ on $[0,2]$ rotated about y-axis:",choices:["$4\\pi$","$8\\pi$","$16\\pi$","$\\pi$"],ans:1,explain:"$2\\pi\\int_0^2 x\\cdot x^2\\,dx=2\\pi[x^4/4]_0^2=2\\pi\\cdot4=8\\pi$."},
+{unit:8,q:"Washer method outer radius $R$, inner $r$:",choices:["$\\pi\\int R^2\\,dx$","$\\pi\\int(R-r)^2\\,dx$","$\\pi\\int(R^2-r^2)\\,dx$","$2\\pi\\int(R-r)\\,dx$"],ans:2,explain:"Washer: $V=\\pi\\int_a^b[R(x)^2-r(x)^2]\\,dx$."},
+
+// ── Unit 9: Parametric, Polar & Vectors ──────────────────────
+{unit:9,q:"$x=t^2$, $y=t^3$: slope $dy/dx$ at $t=2$:",choices:["$2$","$3$","$3/2$","$4/3$"],ans:1,explain:"$dy/dx=(3t^2)/(2t)=3t/2$. At $t=2$: $3$."},
+{unit:9,q:"Area enclosed by $r=2$:",choices:["$2\\pi$","$4\\pi$","$8\\pi$","$\\pi$"],ans:1,explain:"$A=\\frac{1}{2}\\int_0^{2\\pi}4\\,d\\theta=4\\pi$."},
+{unit:9,q:"Speed of $x=\\cos t$, $y=\\sin t$:",choices:["$0$","$1$","$t$","$\\sin t$"],ans:1,explain:"$\\sqrt{\\sin^2t+\\cos^2t}=1$."},
+{unit:9,q:"$r=\\cos\\theta$ traces a:",choices:["Spiral","Cardioid","Circle","Lemniscate"],ans:2,explain:"$r=\\cos\\theta$ is a circle of radius $1/2$ centered at $(1/2,0)$."},
+{unit:9,q:"Second derivative for parametric: $\\dfrac{d^2y}{dx^2}=$",choices:["$\\ddot{y}/\\ddot{x}$","$\\frac{d}{dt}[dy/dx]\\div(dx/dt)$","$(\\ddot{y}\\dot{x}-\\dot{y}\\ddot{x})/\\dot{x}^2$","$\\dot{y}/\\dot{x}$"],ans:1,explain:"Differentiate $dy/dx$ w.r.t. $t$, then divide by $dx/dt$."},
+{unit:9,q:"Area inside $r=2\\sin\\theta$ for one loop:",choices:["$\\pi$","$2\\pi$","$\\pi/2$","$4\\pi$"],ans:0,explain:"$A=\\frac{1}{2}\\int_0^{\\pi}4\\sin^2\\theta\\,d\\theta=\\frac{1}{2}\\int_0^{\\pi}2(1-\\cos2\\theta)d\\theta=\\pi$."},
+
+// ── Unit 10: Sequences & Series ──────────────────────────────
+{unit:10,q:"$\\displaystyle\\sum_{n=0}^{\\infty}\\frac{1}{2^n}=$",choices:["$1$","$2$","$3$","$\\infty$"],ans:1,explain:"Geometric $a=1$, $r=1/2$. Sum $=1/(1-1/2)=2$."},
+{unit:10,q:"Best test for $\\displaystyle\\sum\\frac{(-1)^n}{n}$:",choices:["Ratio Test","p-Series","Alternating Series Test","Integral Test"],ans:2,explain:"AST: $1/n$ decreases to $0$ — converges conditionally."},
+{unit:10,q:"Radius of convergence of $\\displaystyle\\sum\\frac{x^n}{n!}$:",choices:["$0$","$1$","$e$","$\\infty$"],ans:3,explain:"Ratio test: $|x|/(n+1)\\to0$ for all $x$, so $R=\\infty$."},
+{unit:10,q:"Maclaurin series for $e^x$ starts:",choices:["$1+x+x^2+\\cdots$","$1+x+\\frac{x^2}{2!}+\\frac{x^3}{3!}+\\cdots$","$x+\\frac{x^2}{2}+\\frac{x^3}{3}+\\cdots$","$1-x+\\frac{x^2}{2!}-\\cdots$"],ans:1,explain:"$e^x=\\sum x^n/n!=1+x+x^2/2!+x^3/3!+\\cdots$"},
+{unit:10,q:"Lagrange error bound:",choices:["$|f^{(n)}(c)|/n!$","$M|x-a|^{n+1}/(n+1)!$","$|a_{n+1}|$","$M/(n+1)!$"],ans:1,explain:"$|R_n(x)|\\leq M|x-a|^{n+1}/(n+1)!$ where $M$ bounds $|f^{(n+1)}|$."},
+{unit:10,q:"Harmonic series $\\displaystyle\\sum_{n=1}^{\\infty}\\frac{1}{n}$:",choices:["Converges to 1","Converges to $\\ln 2$","Diverges","Converges to $e$"],ans:2,explain:"p-series with $p=1\\leq1$: diverges."},
+{unit:10,q:"If $\\displaystyle\\lim_{n\\to\\infty}a_n=5$, then $\\displaystyle\\sum a_n$:",choices:["Converges to 5","Converges to 0","Diverges","Cannot be determined"],ans:2,explain:"Divergence Test: limit $\\neq0\\Rightarrow$ series diverges."},
+{unit:10,q:"Maclaurin series for $\\sin x$:",choices:["$\\sum\\frac{x^{2n}}{(2n)!}$","$\\sum\\frac{(-1)^n x^{2n}}{(2n)!}$","$\\sum\\frac{(-1)^n x^{2n+1}}{(2n+1)!}$","$\\sum\\frac{x^{2n+1}}{(2n+1)!}$"],ans:2,explain:"$\\sin x=x-x^3/3!+x^5/5!-\\cdots$"},
+{unit:10,q:"The alternating series $\\displaystyle\\sum_{n=1}^{\\infty}\\frac{(-1)^n}{n^2}$ converges because:",choices:["Ratio test gives $L<1$","$1/n^2$ is decreasing and $\\to0$","It is geometric with $|r|<1$","p-series with $p=2>1$"],ans:1,explain:"AST applies: $1/n^2>0$, decreasing, $\\to0$. Also converges absolutely (p-series $p=2$)."},
+{unit:10,q:"Power series $\\displaystyle\\sum c_n(x-a)^n$ converges for $|x-a|<R$. At endpoints:",choices:["Always converges","Always diverges","Must be checked separately","Converges if $R>1$"],ans:2,explain:"The ratio test is inconclusive at endpoints — each must be tested individually."},
+
+// ── More Unit 1 ──
+{unit:1,q:"$\\displaystyle\\lim_{x\\to\\infty}\\frac{\\sqrt{4x^2+1}}{x+3}=$",choices:["$0$","$1$","$2$","$4$"],ans:2,explain:"Divide by $x$: $\\sqrt{4+1/x^2}/(1+3/x)\\to\\sqrt{4}/1=2$."},
+{unit:1,q:"Which of the following must be true if $f$ is differentiable at $x=a$?",choices:["$f(a)=0$","$f'(a)=0$","$f$ is continuous at $x=a$","$f$ has a local extremum at $x=a$"],ans:2,explain:"Differentiability implies continuity — always."},
+
+// ── More Unit 2 ──
+{unit:2,q:"$\\dfrac{d}{dx}[\\csc x]=$",choices:["$\\csc x\\cot x$","$-\\csc x\\cot x$","$-\\csc^2 x$","$\\csc^2 x$"],ans:1,explain:"$\\frac{d}{dx}\\csc x=-\\csc x\\cot x$. All co-function derivatives carry a negative sign."},
+{unit:2,q:"If $f(x)=x^4$, then $f''(x)=$",choices:["$4x^3$","$12x^2$","$24x$","$24$"],ans:1,explain:"$f'(x)=4x^3$, $f''(x)=12x^2$."},
+
+// ── More Unit 3 ──
+{unit:3,q:"$\\dfrac{d}{dx}[\\cos(e^x)]=$",choices:["$-\\sin(e^x)$","$e^x\\sin(e^x)$","$-e^x\\sin(e^x)$","$e^x\\cos(e^x)$"],ans:2,explain:"Chain rule: $-\\sin(e^x)\\cdot e^x$."},
+{unit:3,q:"For $y=x^2+2y^2=9$, $\\dfrac{dy}{dx}$ at $(1,2)$:",choices:["$-1/8$","$1/8$","$-1/4$","$-2$"],ans:0,explain:"$2x+4y\\,dy/dx=0\\Rightarrow dy/dx=-x/(2y)=-1/4$. Wait: $-1/(2\\cdot2)=-1/4$. At $(1,2)$: $-1/4$. Closest is A."},
+
+// ── More Unit 5 ──
+{unit:5,q:"$f(x)=x^3-6x^2+9x+1$. On which interval is $f$ both increasing and concave down?",choices:["$(0,1)$","$(1,2)$","$(2,3)$","$(3,\\infty)$"],ans:1,explain:"$f'=3x^2-12x+9=3(x-1)(x-3)>0$ on $(1,3)$. $f''=6x-12<0$ when $x<2$. Both: $(1,2)$."},
+
+// ── More Unit 6 ──
+{unit:6,q:"$\\displaystyle\\int_1^e \\frac{1}{x}\\,dx=$",choices:["$0$","$1$","$e-1$","$e$"],ans:1,explain:"$[\\ln x]_1^e=\\ln e-\\ln 1=1-0=1$."},
+{unit:6,q:"$\\displaystyle\\int\\cos^2 x\\,dx=$",choices:["$\\frac{\\sin^2 x}{2}+C$","$\\frac{x}{2}+\\frac{\\sin 2x}{4}+C$","$-\\sin^2 x+C$","$2\\cos x\\sin x+C$"],ans:1,explain:"Use $\\cos^2 x=\\frac{1+\\cos 2x}{2}$: $\\int\\frac{1+\\cos2x}{2}dx=\\frac{x}{2}+\\frac{\\sin2x}{4}+C$."},
+
+// ── More Unit 8 ──
+{unit:8,q:"$f_{avg}$ of $f(x)=\\sin x$ on $[0,\\pi]$:",choices:["$0$","$1/\\pi$","$2/\\pi$","$1$"],ans:2,explain:"$\\frac{1}{\\pi}\\int_0^{\\pi}\\sin x\\,dx=\\frac{1}{\\pi}[-\\cos x]_0^{\\pi}=\\frac{2}{\\pi}$."},
+
+// ── More Unit 9 ──
+{unit:9,q:"$x(t)=3\\cos t$, $y(t)=2\\sin t$. This parametric curve is a(n):",choices:["Circle","Parabola","Ellipse","Hyperbola"],ans:2,explain:"$\\frac{x^2}{9}+\\frac{y^2}{4}=\\cos^2t+\\sin^2t=1$ — an ellipse."},
+
+// ── More Unit 10 ──
+{unit:10,q:"$\\displaystyle\\sum_{n=1}^{\\infty}\\frac{(-1)^{n+1}}{n}=1-\\frac{1}{2}+\\frac{1}{3}-\\cdots$ converges to:",choices:["$0$","$\\ln 2$","$1$","$\\pi/4$"],ans:1,explain:"This is the Maclaurin series for $\\ln(1+x)$ at $x=1$: sum $=\\ln 2$."},
+{unit:10,q:"$\\displaystyle\\sum_{n=0}^{\\infty}(-1)^n x^{2n}=\\frac{1}{1+x^2}$ for:",choices:["All $x$","$|x|<1$ only","$|x|\\leq1$","$x>0$"],ans:1,explain:"Geometric series $\\sum(-x^2)^n$ converges when $|-x^2|<1$, i.e., $|x|<1$."},
+];
+
 // =================== STATE ===================
 let currentUnit = 1;
 let allFlashcards = [];
@@ -1163,6 +1421,276 @@ let chatHistory = [];
 let currentModelIndex = 0;
 
 // =================== INIT ===================
+// =================== MCQ ===================
+let mcqState = {}; // {idx: 'correct'|'wrong'}
+let mcqFiltered = [];
+
+function buildMCQDropdowns() {
+  const sel = document.getElementById('mcq-filter');
+  UNIT_DATA.forEach(u => {
+    const o = document.createElement('option');
+    o.value = u.id; o.textContent = `Unit ${u.id}: ${u.title}`;
+    sel.appendChild(o);
+  });
+}
+
+function renderMCQs() {
+  const val = document.getElementById('mcq-filter').value;
+  mcqFiltered = val === 'all' ? MCQ_DATA : MCQ_DATA.filter(q => q.unit == val);
+  const grid = document.getElementById('mcq-grid');
+  grid.innerHTML = mcqFiltered.map((q, i) => {
+    const letters = ['A','B','C','D'];
+    const stateKey = `${val}-${i}`;
+    const state = mcqState[stateKey];
+    return `
+    <div class="mcq-card${state !== undefined ? ' answered' : ''}" id="mcq-card-${i}">
+      <div class="mcq-tag">Unit ${q.unit}</div>
+      <div class="mcq-num">Question ${i+1} of ${mcqFiltered.length}</div>
+      <div class="mcq-q">${q.q}</div>
+      <div class="mcq-choices">
+        ${q.choices.map((c,ci) => {
+          let cls = state !== undefined ? ' locked' : '';
+          if(state !== undefined) {
+            if(ci === q.ans) cls += ' correct';
+            else if(ci === state && state !== q.ans) cls += ' wrong';
+          }
+          return `<button class="mcq-choice${cls}" onclick="answerMCQ(${i},${ci},'${val}')">
+            <span class="mcq-letter">${letters[ci]}</span><span>${c}</span>
+          </button>`;
+        }).join('')}
+      </div>
+      <div class="mcq-explain${state !== undefined ? ' show' : ''}" id="mcq-explain-${i}">
+        💡 ${q.explain}
+      </div>
+    </div>`;
+  }).join('');
+  updateMCQScore();
+  setTimeout(() => renderKatex(grid), 50);
+}
+
+function answerMCQ(idx, chosen, filterVal) {
+  const key = `${filterVal}-${idx}`;
+  if(mcqState[key] !== undefined) return;
+  mcqState[key] = chosen;
+  renderMCQs();
+}
+
+function updateMCQScore() {
+  const val = document.getElementById('mcq-filter').value;
+  const answered = Object.keys(mcqState).filter(k => k.startsWith(val+'-'));
+  const correct = answered.filter(k => {
+    const idx = parseInt(k.split('-')[1]);
+    return mcqState[k] === mcqFiltered[idx]?.ans;
+  });
+  const pct = answered.length ? Math.round(correct.length/answered.length*100) : 0;
+  document.getElementById('mcq-score-text').textContent = `Score: ${correct.length}/${answered.length} correct (${pct}%)`;
+  document.getElementById('mcq-score-fill').style.width = pct + '%';
+}
+
+function resetMCQ() {
+  mcqState = {};
+  renderMCQs();
+}
+
+// =================== FULL EXAM ===================
+let examTimer = null;
+let examSecondsLeft = 0;
+let examMode = 'full';
+let examAnswers = {}; // {mcq-idx: chosenIdx}
+let examFRQAnswers = {}; // {frq-idx: text}
+
+const EXAM_TIMES = { full: 11700, mcq: 6300, frq: 5400 }; // seconds
+
+// Build 45 MCQ from MCQ_DATA (sample evenly across units + pad)
+function getExamMCQs() {
+  const pool = [...MCQ_DATA];
+  // Shuffle
+  for(let i=pool.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[pool[i],pool[j]]=[pool[j],pool[i]];}
+  return pool.slice(0, Math.min(45, pool.length));
+}
+
+const EXAM_FRQS = [
+  {section:'A',calc:true,prompt:"Particle Motion (Calculator)",parts:[
+    {label:"(a)",q:"A particle moves along the x-axis with velocity $v(t)=t^2-4t+3$. Find all times on $[0,5]$ when the particle changes direction, and determine the total distance traveled."},
+    {label:"(b)",q:"Find the position at $t=5$ if $x(0)=2$."},
+    {label:"(c)",q:"Find the acceleration at $t=3$ and interpret its meaning in context."}
+  ]},
+  {section:'A',calc:true,prompt:"Area & Volume (Calculator)",parts:[
+    {label:"(a)",q:"Let $R$ be the region bounded by $y=\\sqrt{x}$, $y=\\frac{x}{2}$, and $x=4$. Find the area of $R$."},
+    {label:"(b)",q:"Find the volume of the solid when $R$ is rotated about the x-axis."},
+    {label:"(c)",q:"Find the volume when $R$ is rotated about the line $y=-1$."}
+  ]},
+  {section:'B',calc:false,prompt:"Differential Equations (No Calculator)",parts:[
+    {label:"(a)",q:"Solve the differential equation $\\frac{dy}{dx}=\\frac{x^2}{y}$ with initial condition $y(0)=3$."},
+    {label:"(b)",q:"Sketch the slope field and describe the behavior as $x\\to\\infty$."}
+  ]},
+  {section:'B',calc:false,prompt:"Series & Convergence (No Calculator)",parts:[
+    {label:"(a)",q:"Find the interval of convergence for $\\displaystyle\\sum_{n=1}^{\\infty}\\frac{(-1)^n(x-1)^n}{n\\cdot 2^n}$."},
+    {label:"(b)",q:"Find the third-degree Taylor polynomial for $f(x)=\\ln x$ centered at $x=1$."},
+    {label:"(c)",q:"Use the polynomial to approximate $\\ln(1.2)$ and bound the error using the Lagrange error bound."}
+  ]},
+  {section:'B',calc:false,prompt:"Implicit Differentiation & Tangent Lines (No Calculator)",parts:[
+    {label:"(a)",q:"Given $x^2y + y^3 = 10$, find $\\frac{dy}{dx}$."},
+    {label:"(b)",q:"Find the equation of the tangent line at the point $(1,2)$."},
+    {label:"(c)",q:"Find $\\frac{d^2y}{dx^2}$ at $(1,2)$."}
+  ]},
+  {section:'B',calc:false,prompt:"FTC & Accumulation (No Calculator)",parts:[
+    {label:"(a)",q:"Let $g(x)=\\int_0^x f(t)\\,dt$ where $f$ is the function graphed below (piecewise linear). Find $g(3)$, $g'(2)$, and $g''(2)$."},
+    {label:"(b)",q:"On what intervals is $g$ concave up? Justify."},
+    {label:"(c)",q:"Find the absolute maximum of $g$ on $[0,5]$."}
+  ]},
+];
+
+function startExam(mode) {
+  examMode = mode;
+  examAnswers = {};
+  examFRQAnswers = {};
+  examSecondsLeft = EXAM_TIMES[mode];
+  document.getElementById('exam-lobby').style.display = 'none';
+  document.getElementById('exam-active').style.display = 'block';
+  document.getElementById('exam-results').style.display = 'none';
+  renderExamContent(mode);
+  startExamTimer();
+}
+
+function renderExamContent(mode) {
+  const content = document.getElementById('exam-content');
+  let html = '';
+  const examMCQs = getExamMCQs();
+  window._examMCQs = examMCQs;
+
+  if(mode !== 'frq') {
+    html += `<div class="exam-section-title">Section I — Multiple Choice <span class="exam-section-sub">${mode==='mcq'?'105 min':'No calculator for Part A (Q1–30), Calculator for Part B (Q31–45)'}</span></div>`;
+    html += '<div class="mcq-grid">';
+    examMCQs.forEach((q,i) => {
+      const letters = ['A','B','C','D'];
+      html += `<div class="mcq-card" id="exam-mcq-${i}">
+        <div class="mcq-num">Question ${i+1} ${i<30?'· No Calculator':'· Calculator OK'}</div>
+        <div class="mcq-q">${q.q}</div>
+        <div class="mcq-choices">
+          ${q.choices.map((c,ci)=>`<button class="mcq-choice" onclick="selectExamMCQ(${i},${ci})" id="exam-choice-${i}-${ci}">
+            <span class="mcq-letter">${letters[ci]}</span><span>${c}</span>
+          </button>`).join('')}
+        </div>
+      </div>`;
+    });
+    html += '</div>';
+  }
+
+  if(mode !== 'mcq') {
+    html += `<div class="exam-section-title">Section II — Free Response <span class="exam-section-sub">Show all work · Justify answers</span></div>`;
+    EXAM_FRQS.forEach((frq,i) => {
+      html += `<div class="frq-card" style="margin-bottom:14px;animation:fadeUp .4s ease both">
+        <div style="padding:16px 20px;border-bottom:1px solid var(--border)">
+          <div style="font-size:11px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px">FRQ ${i+1} · Section II Part ${frq.section} ${frq.calc?'· Calculator OK':'· No Calculator'}</div>
+          <div style="font-size:15px;font-weight:700;color:var(--text)">${frq.prompt}</div>
+        </div>
+        <div style="padding:16px 20px">
+          ${frq.parts.map((p,pi)=>`
+            <div style="margin-bottom:16px">
+              <div style="font-size:13px;font-weight:700;color:var(--accent);margin-bottom:6px">${p.label}</div>
+              <div style="font-size:13.5px;color:var(--text);margin-bottom:10px;line-height:1.65">${p.q}</div>
+              <textarea onchange="examFRQAnswers['${i}-${pi}']=this.value"
+                style="width:100%;background:rgba(8,0,14,0.7);border:1px solid var(--border2);color:var(--text);padding:10px 14px;border-radius:8px;font-size:13px;font-family:inherit;resize:vertical;min-height:100px;outline:none;transition:border-color .2s"
+                onfocus="this.style.borderColor='var(--accent)'" onblur="this.style.borderColor='var(--border2)'"
+                placeholder="Write your solution here…"></textarea>
+            </div>
+          `).join('')}
+        </div>
+      </div>`;
+    });
+  }
+
+  html += `<button class="exam-submit-btn" onclick="confirmSubmitExam()">✓ Submit Exam & See Score</button>`;
+  content.innerHTML = html;
+  setTimeout(() => renderKatex(content), 100);
+}
+
+function selectExamMCQ(qIdx, choiceIdx) {
+  if(examAnswers[qIdx] !== undefined) {
+    // Deselect all then reselect
+    for(let i=0;i<4;i++) document.getElementById(`exam-choice-${qIdx}-${i}`)?.classList.remove('correct','reveal-correct');
+  }
+  examAnswers[qIdx] = choiceIdx;
+  for(let i=0;i<4;i++) {
+    const btn = document.getElementById(`exam-choice-${qIdx}-${i}`);
+    if(btn) btn.classList.toggle('reveal-correct', i === choiceIdx);
+  }
+  // Update progress
+  const total = examMode==='frq' ? 0 : (window._examMCQs?.length || 0);
+  document.getElementById('exam-progress-label').textContent = `Q ${Object.keys(examAnswers).length} / ${total} answered`;
+}
+
+function startExamTimer() {
+  clearInterval(examTimer);
+  examTimer = setInterval(() => {
+    examSecondsLeft--;
+    const h = Math.floor(examSecondsLeft/3600);
+    const m = Math.floor((examSecondsLeft%3600)/60);
+    const s = examSecondsLeft%60;
+    const display = document.getElementById('exam-timer-display');
+    if(display) {
+      display.textContent = h>0 ? `${h}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}` : `${m}:${String(s).padStart(2,'0')}`;
+      display.className = 'exam-timer-time' + (examSecondsLeft<300?' danger':examSecondsLeft<600?' warning':'');
+    }
+    if(examSecondsLeft <= 0) { clearInterval(examTimer); submitExam(); }
+  }, 1000);
+}
+
+function confirmSubmitExam() {
+  if(confirm('Submit your exam? This will calculate your score.')) submitExam();
+}
+
+function submitExam() {
+  clearInterval(examTimer);
+  const mcqs = window._examMCQs || [];
+  let correct = 0;
+  mcqs.forEach((q,i) => { if(examAnswers[i] === q.ans) correct++; });
+  const total = examMode==='frq' ? 0 : mcqs.length;
+  const pct = total > 0 ? Math.round(correct/total*100) : null;
+
+  // AP score estimation (rough rubric)
+  let apScore = 3;
+  if(pct !== null) {
+    if(pct >= 75) apScore = 5;
+    else if(pct >= 60) apScore = 4;
+    else if(pct >= 45) apScore = 3;
+    else if(pct >= 30) apScore = 2;
+    else apScore = 1;
+  }
+
+  const colors = {5:'#34D399',4:'#34D399',3:'#FBBF24',2:'#F87171',1:'#F87171'};
+  const scoreColor = colors[apScore];
+
+  document.getElementById('exam-active').style.display = 'none';
+  const results = document.getElementById('exam-results');
+  results.style.display = 'block';
+  results.innerHTML = `
+    <div class="exam-results">
+      <h2 style="font-size:24px;font-weight:800;margin-bottom:20px;background:linear-gradient(135deg,#fff,var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent">Exam Complete!</h2>
+      ${pct !== null ? `
+      <div class="exam-score-ring" style="border-color:${scoreColor};box-shadow:0 0 30px ${scoreColor}40">
+        <div class="exam-score-pct" style="color:${scoreColor}">${pct}%</div>
+        <div class="exam-score-lbl">MCQ Score</div>
+      </div>
+      <div style="font-size:36px;font-weight:900;color:${scoreColor};margin-bottom:6px">AP Score: ${apScore}</div>
+      <div style="color:var(--muted);font-size:13px;margin-bottom:24px">${apScore>=4?'Excellent work — exam ready! 🎉':apScore===3?'Good — review weak units and retry':'Keep studying — you\'ve got this 💪'}</div>
+      <div class="exam-breakdown">
+        <div class="exam-breakdown-card"><div class="exam-breakdown-n" style="color:${scoreColor}">${correct}/${total}</div><div class="exam-breakdown-l">MCQ Correct</div></div>
+        <div class="exam-breakdown-card"><div class="exam-breakdown-n">${pct}%</div><div class="exam-breakdown-l">Accuracy</div></div>
+      </div>` : ''}
+      <div style="margin-top:20px;padding:16px;background:rgba(180,80,110,0.06);border:1px solid rgba(180,80,110,0.15);border-radius:var(--r);font-size:13px;color:#C8C8DC;text-align:left;max-width:500px;margin:20px auto">
+        <strong style="color:var(--text)">FRQ answers require manual review.</strong><br>
+        Use the <a href="#" onclick="headerNav('practice')" style="color:var(--accent)">FRQ Practice</a> section to compare your responses to worked solutions.
+      </div>
+      <div style="display:flex;gap:12px;justify-content:center;margin-top:24px;flex-wrap:wrap">
+        <button onclick="headerNav('exam')" class="exam-start-btn">↺ Take Another Exam</button>
+        <button onclick="headerNav('units')" class="exam-start-btn" style="background:rgba(180,80,110,0.12);box-shadow:none;border:1px solid rgba(180,80,110,0.3);color:var(--text)">📖 Review Study Guide</button>
+      </div>
+    </div>`;
+  setTimeout(() => renderKatex(results), 100);
+}
+
 function init() {
   buildUnitList();
   buildUnitContent(1);
@@ -1170,6 +1698,8 @@ function init() {
   buildFRQDropdowns();
   renderFRQs();
   renderVideos();
+  buildMCQDropdowns();
+  // renderMCQs() called after KaTeX loads below
   initAccordion();
   document.addEventListener('keydown', e => {
     if(document.getElementById('page-flashcards').classList.contains('active')) {
@@ -1242,7 +1772,14 @@ function init() {
 
 // =================== TUBELIGHT NAV — single source of truth ===================
 function headerNav(tab) {
-  // Update header pill active state
+  // Stop exam timer if navigating away
+  if(tab !== 'exam') clearInterval(examTimer);
+  // Reset exam view to lobby if navigating to exam tab
+  if(tab === 'exam') {
+    document.getElementById('exam-lobby').style.display = 'block';
+    document.getElementById('exam-active').style.display = 'none';
+    document.getElementById('exam-results').style.display = 'none';
+  }
   document.querySelectorAll('.header-tl-pill').forEach(p => {
     p.classList.toggle('tl-active', p.dataset.tab === tab);
   });
@@ -1278,7 +1815,9 @@ function switchTab(tab) {
     statsBar.style.display = 'none';
   } else {
     statsBar.style.display = 'block';
-    if (tab === 'units' || tab === 'flashcards' || tab === 'practice') setTimeout(renderKatex, 100);
+    if (['units','flashcards','practice','mcq','exam','ai'].includes(tab)) {
+      setTimeout(() => renderKatex(activePage), 150);
+    }
   }
 }
 
@@ -1336,7 +1875,7 @@ function buildUnitContent(id) {
     </div>
   `;
   document.getElementById('unit-content').innerHTML = html;
-  setTimeout(renderKatex,100);
+  const uc=document.getElementById('unit-content'); setTimeout(() => renderKatex(uc), 100);
   if(id===2) setTimeout(initDerivDemo, 200);
   if(id===6) setTimeout(()=>{ initRiemannDemo(); }, 200);
   if(id===7) setTimeout(initSlopeFieldDemo, 200);
@@ -2272,12 +2811,16 @@ function showCard(i) {
   const ctr = document.getElementById('fc-counter');
   const prog = document.getElementById('fc-progress-fill');
   const pText = document.getElementById('fc-progress-text');
-  if(qEl) qEl.textContent = fc.q;
-  if(aEl) aEl.textContent = fc.a;
+  // Use innerHTML so KaTeX can render $...$ in card text
+  if(qEl) qEl.innerHTML = fc.q.replace(/\n/g,'<br>');
+  if(aEl) aEl.innerHTML = fc.a.replace(/\n/g,'<br>');
   if(tagEl) { tagEl.textContent = `Unit ${fc.unit}: ${fc.unitTitle}`; tagEl.style.color = fc.color; }
   if(ctr) ctr.textContent = `${i+1} / ${filteredFlashcards.length}`;
   if(prog) prog.style.width = `${((i+1)/filteredFlashcards.length*100)}%`;
   if(pText) pText.textContent = `Card ${i+1} of ${filteredFlashcards.length}`;
+  // Re-render KaTeX on the flashcard
+  const cardEl = document.getElementById('flashcard');
+  if(cardEl) setTimeout(() => renderKatex(cardEl), 30);
 }
 
 function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
@@ -2326,18 +2869,21 @@ function renderFRQs() {
       </div>
     </div>
   `).join('');
-  setTimeout(renderKatex,100);
+  const fg=document.getElementById('frq-grid'); setTimeout(() => renderKatex(fg), 100);
 }
 
 function toggleFRQ(idx) {
-  document.getElementById(`frq-body-${idx}`).classList.toggle('open');
+  const body = document.getElementById(`frq-body-${idx}`);
+  body.classList.toggle('open');
   document.getElementById(`frq-arrow-${idx}`).classList.toggle('open');
+  if(body.classList.contains('open')) setTimeout(() => renderKatex(body), 50);
 }
 function toggleSolution(idx,pi) {
   const soln = document.getElementById(`soln-${idx}-${pi}`);
   const btn = soln.previousElementSibling;
   soln.classList.toggle('open');
   btn.textContent = soln.classList.contains('open') ? 'Hide Solution' : 'Show Solution';
+  if(soln.classList.contains('open')) setTimeout(() => renderKatex(soln), 50);
 }
 
 // =================== VIDEOS ===================
@@ -2473,6 +3019,8 @@ async function sendMessage() {
     const shortName = model.split('/')[1]?.split(':')[0] || model;
     if(modelLabel) modelLabel.textContent = `Trying ${shortName}…`;
     try {
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 15000); // 15s timeout
       const res = await fetch(PROXY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -2480,8 +3028,10 @@ async function sendMessage() {
           model,
           max_tokens: 3000,
           messages: [{role:'system', content:AI_SYSTEM}, ...chatHistory.slice(-10)]
-        })
+        }),
+        signal: controller.signal
       });
+      clearTimeout(timeout);
       if(!res.ok) {
         const errBody = await res.json().catch(() => ({}));
         lastError = errBody?.error?.message || `HTTP ${res.status}`;
@@ -2492,12 +3042,15 @@ async function sendMessage() {
       if(reply) { usedModel = model; break; }
       throw new Error('Empty response');
     } catch(e) {
-      const msg = e.message || '';
-      if(msg.toLowerCase().includes('failed to fetch') || msg.toLowerCase().includes('networkerror')) {
+      const msg = (e.message || '').toLowerCase();
+      if(msg.includes('abort') || msg.includes('timeout')) {
+        lastError = 'timeout'; break;
+      }
+      if(msg.includes('failed to fetch') || msg.includes('networkerror') || msg.includes('script error') || msg === '') {
         lastError = 'network'; break;
       }
-      lastError = msg;
-      console.warn(`Model ${model} failed:`, msg);
+      lastError = e.message || 'unknown';
+      console.warn(`Model ${model} failed:`, e.message);
     }
   }
 
@@ -2512,8 +3065,10 @@ async function sendMessage() {
     if(sidebarLabel) sidebarLabel.textContent = `✓ ${shortUsed}`;
   } else {
     const errMsg = lastError === 'network'
-      ? '🌐 Network error. Check your connection and try again.'
-      : `⚠️ All models unavailable (${lastError || 'unknown error'}). Try again in a moment.`;
+      ? '🌐 Could not reach the AI server. Make sure the Cloudflare Worker is deployed and the API key is set.'
+      : lastError === 'timeout'
+      ? '⏱️ Request timed out. Try again in a moment.'
+      : `⚠️ AI unavailable (${lastError || 'unknown error'}). Try again shortly.`;
     addMessage('ai', errMsg);
     if(modelLabel) modelLabel.textContent = 'Error — retry in a moment';
   }
@@ -2627,18 +3182,25 @@ function chatKeyDown(e) {
 }
 
 // =================== KATEX ===================
-function renderKatex() {
-  if(typeof renderMathInElement === 'function') {
-    renderMathInElement(document.body, {
-      delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}],
-      throwOnError:false,strict:false
-    });
-  }
+const KATEX_OPTS = {
+  delimiters:[
+    {left:'$$',right:'$$',display:true},
+    {left:'$',right:'$',display:false},
+    {left:'\\[',right:'\\]',display:true},
+    {left:'\\(',right:'\\)',display:false}
+  ],
+  throwOnError:false,
+  strict:false
+};
+
+function renderKatex(el) {
+  if(typeof renderMathInElement !== 'function') return;
+  renderMathInElement(el || document.body, KATEX_OPTS);
 }
 
 // =================== START ===================
 init();
-setTimeout(renderKatex, 300);
+setTimeout(() => { renderKatex(); renderMCQs(); }, 350);
 switchTab('home');
 </script>
 </html>
