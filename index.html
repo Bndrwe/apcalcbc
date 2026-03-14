@@ -2477,9 +2477,7 @@ async function sendMessage() {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${OPENROUTER_KEY}`,
-          'HTTP-Referer': window.location.origin,
-          'X-Title': 'AP Calc BC Study Guide'
+          'Authorization': `Bearer ${OPENROUTER_KEY}`
         },
         body: JSON.stringify({
           model,
