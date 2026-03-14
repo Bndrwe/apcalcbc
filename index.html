@@ -259,7 +259,11 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 .msg.ai{align-self:flex-start}
 .msg-bubble{padding:10px 14px;border-radius:12px;font-size:13px;line-height:1.6}
 .msg.user .msg-bubble{background:linear-gradient(135deg,#A04060,#C2607A);color:#fff;border-radius:12px 12px 3px 12px;box-shadow:0 0 12px rgba(99,102,241,0.3)}
-.msg.ai .msg-bubble{background:rgba(8,0,14,0.92);border:1px solid var(--border);border-radius:12px 12px 12px 3px;color:#C8C8DC}
+.msg.ai .msg-bubble{background:rgba(8,0,14,0.92);border:1px solid var(--border);border-radius:12px 12px 12px 3px;color:#C8C8DC;line-height:1.65}
+.msg.ai .msg-bubble strong{color:var(--text)}
+.msg.ai .msg-bubble em{color:#D8B8C8;font-style:italic}
+.msg.ai .msg-bubble .katex{font-size:1em!important}
+.msg.ai .msg-bubble .katex-display{margin:.5em 0!important;overflow-x:auto}
 .msg-time{font-size:10px;color:var(--muted);padding:0 4px}
 .chat-input-area{padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:8px}
 .chat-input{flex:1;background:rgba(8,0,14,0.92);border:1px solid var(--border2);color:var(--text);padding:10px 14px;border-radius:8px;font-size:13px;resize:none;min-height:42px;max-height:120px;font-family:inherit;outline:none;transition:border-color .2s}
@@ -700,7 +704,7 @@ body::after{
       <div class="ai-sidebar-card">
         <h4>AI Models</h4>
         <div class="model-badge">⚡ Free Waterfall</div>
-        <p class="model-status" id="model-status-text" style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.6">Llama 3.3 → Gemini Flash → Qwen → Mistral 7B → auto</p>
+        <p class="model-status" id="model-status-text" style="margin-top:8px;font-size:11px;color:var(--muted);line-height:1.6">GPT-OSS 120B → Nemotron 120B → Llama 3.3 70B → Qwen3 80B → auto</p>
         <div id="ai-current-model" style="font-size:11px;color:var(--muted);margin-top:6px">Ready</div>
       </div>
     </div>
@@ -752,16 +756,16 @@ body::after{
 })();
 
 // =================== CONFIG ===================
-let OPENROUTER_KEY = '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';
+let OPENROUTER_KEY = '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';
 const AI_SYSTEM = `You are an expert AP Calculus BC tutor. Help students master calculus with clear, pedagogically effective explanations. When writing math, use simple notation like f'(x), ∫, Σ, lim, → that renders well as text. Be encouraging, concise, and always connect theory to exam strategy. Highlight BC-specific content (series, parametric, polar, Euler's method, logistic growth, etc.) when relevant.`;
 
-// Free model waterfall — tries each in order until one succeeds
 const FREE_MODELS = [
+  'openai/gpt-oss-120b:free',
+  'nvidia/nemotron-3-super-120b-a12b:free',
   'meta-llama/llama-3.3-70b-instruct:free',
-  'google/gemini-2.0-flash-exp:free',
-  'qwen/qwen3-14b:free',
-  'mistralai/mistral-7b-instruct:free',
-  'openrouter/auto'
+  'qwen/qwen3-next-80b-a3b-instruct:free',
+  'arcee-ai/trinity-large-preview:free',
+  'openrouter/free'
 ];
 
 // =================== UNIT DATA ===================
@@ -2513,7 +2517,7 @@ async function sendMessage() {
     if(sidebarLabel) sidebarLabel.textContent = `✓ ${shortUsed}`;
   } else {
     const errMsg = lastError === 'network'
-      ? '🌐 Network error reaching OpenRouter. Check your connection and try again.'
+      ? '🌐 Network error. Check your connection and try again.'
       : `⚠️ All models unavailable (${lastError || 'unknown error'}). Try again in a moment.`;
     addMessage('ai', errMsg);
     if(modelLabel) modelLabel.textContent = 'Error — retry in a moment';
@@ -2521,12 +2525,88 @@ async function sendMessage() {
   btn.disabled = false;
 }
 
+function renderMarkdown(text) {
+  // Protect LaTeX blocks before markdown processing
+  const latexBlocks = [];
+  text = text.replace(/\$\$[\s\S]+?\$\$/g, m => { latexBlocks.push({type:'block',src:m}); return `%%LATEX${latexBlocks.length-1}%%`; });
+  text = text.replace(/\\\[[\s\S]+?\\\]/g, m => { latexBlocks.push({type:'block',src:m}); return `%%LATEX${latexBlocks.length-1}%%`; });
+  text = text.replace(/\\\([\s\S]+?\\\)/g, m => { latexBlocks.push({type:'inline',src:m}); return `%%LATEX${latexBlocks.length-1}%%`; });
+  text = text.replace(/\$(?!\$)([^$\n]+?)\$/g, (m,inner) => { latexBlocks.push({type:'inline',src:m}); return `%%LATEX${latexBlocks.length-1}%%`; });
+
+  // Escape HTML
+  text = text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+  // Horizontal rules
+  text = text.replace(/^---+$/gm, '<hr style="border:none;border-top:1px solid rgba(180,80,110,0.2);margin:12px 0">');
+
+  // Headers
+  text = text.replace(/^### (.+)$/gm, '<div style="font-size:13px;font-weight:700;color:var(--text);margin:14px 0 4px">$1</div>');
+  text = text.replace(/^## (.+)$/gm,  '<div style="font-size:14px;font-weight:800;color:var(--text);margin:16px 0 6px;padding-bottom:4px;border-bottom:1px solid rgba(180,80,110,0.15)">$1</div>');
+  text = text.replace(/^# (.+)$/gm,   '<div style="font-size:15px;font-weight:800;color:var(--text);margin:16px 0 8px">$1</div>');
+
+  // Bold & italic
+  text = text.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+  text = text.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  text = text.replace(/\*([^*\n]+?)\*/g, '<em>$1</em>');
+
+  // Inline code
+  text = text.replace(/`([^`]+)`/g, '<code style="background:rgba(180,80,110,0.12);border:1px solid rgba(180,80,110,0.18);padding:1px 5px;border-radius:4px;font-size:12px;font-family:monospace">$1</code>');
+
+  // Tables — detect lines with | separators
+  text = text.replace(/((?:^[^\n]*\|[^\n]*\n)+)/gm, tableBlock => {
+    const rows = tableBlock.trim().split('\n');
+    let html = '<table style="border-collapse:collapse;width:100%;margin:10px 0;font-size:12px">';
+    let isHeader = true;
+    rows.forEach(row => {
+      if(/^[\|\s\-:]+$/.test(row)) { isHeader = false; return; }
+      const cells = row.split('|').filter((_,i,a)=> i>0 && i<a.length-1).map(c=>c.trim());
+      const tag = isHeader ? 'th' : 'td';
+      const style = isHeader
+        ? 'padding:6px 10px;text-align:left;font-weight:700;color:var(--text);border-bottom:1px solid rgba(180,80,110,0.25);background:rgba(180,80,110,0.08)'
+        : 'padding:5px 10px;text-align:left;color:#C8C8DC;border-bottom:1px solid rgba(255,255,255,0.05)';
+      html += `<tr>${cells.map(c=>`<${tag} style="${style}">${c}</${tag}>`).join('')}</tr>`;
+      if(isHeader) isHeader = false;
+    });
+    html += '</table>';
+    return html;
+  });
+
+  // Numbered lists
+  text = text.replace(/((?:^\d+\. .+\n?)+)/gm, block => {
+    const items = block.trim().split('\n').map(l => `<li style="padding:3px 0;color:#C8C8DC">${l.replace(/^\d+\.\s*/,'')}</li>`).join('');
+    return `<ol style="margin:8px 0;padding-left:20px">${items}</ol>`;
+  });
+
+  // Bullet lists
+  text = text.replace(/((?:^[-*•] .+\n?)+)/gm, block => {
+    const items = block.trim().split('\n').map(l => `<li style="padding:3px 0;color:#C8C8DC">${l.replace(/^[-*•]\s*/,'')}</li>`).join('');
+    return `<ul style="margin:8px 0;padding-left:18px">${items}</ul>`;
+  });
+
+  // Paragraphs — double newlines
+  text = text.replace(/\n{2,}/g, '</p><p style="margin:8px 0">');
+  text = text.replace(/\n/g, '<br>');
+  text = `<p style="margin:0">${text}</p>`;
+
+  // Restore LaTeX
+  text = text.replace(/%%LATEX(\d+)%%/g, (_, i) => {
+    const {type, src} = latexBlocks[i];
+    const inner = src.replace(/^\$\$|\$\$$|^\\\[|\\\]$|^\\\(|\\\)$|^\$|\$$/g,'').replace(/&amp;/g,'&').replace(/&lt;/g,'<').replace(/&gt;/g,'>');
+    try {
+      return katex.renderToString(inner, {displayMode: type==='block', throwOnError:false});
+    } catch(e) { return `<code>${inner}</code>`; }
+  });
+
+  return text;
+}
+
 function addMessage(role, text) {
   const msgs = document.getElementById('chat-messages');
   const div = document.createElement('div');
   div.className = `msg ${role}`;
   const now = new Date().toLocaleTimeString([],{hour:'2-digit',minute:'2-digit'});
-  div.innerHTML = `<div class="msg-bubble">${text.replace(/\n/g,'<br>')}</div><div class="msg-time">${now}</div>`;
+  const rendered = role === 'ai' ? renderMarkdown(text) : text.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/\n/g,'<br>');
+  div.innerHTML = `<div class="msg-bubble">${rendered}</div><div class="msg-time">${now}</div>`;
   msgs.appendChild(div);
   msgs.scrollTop = msgs.scrollHeight;
   return div;
