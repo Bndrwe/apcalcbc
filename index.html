@@ -3020,7 +3020,7 @@ async function sendMessage() {
     if(modelLabel) modelLabel.textContent = `Trying ${shortName}…`;
     try {
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), 60000); // 60s timeout
+      const timeout = setTimeout(() => controller.abort(), 80000); // 80s timeout
       const res = await fetch(PROXY_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
