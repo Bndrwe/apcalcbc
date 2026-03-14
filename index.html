@@ -760,11 +760,11 @@ let OPENROUTER_KEY = 'sk-or-v1-ae4a8ddadbbaea7da3c02b2d77b72e05c19bc2a123791caf2
 const AI_SYSTEM = `You are an expert AP Calculus BC tutor. Help students master calculus with clear, pedagogically effective explanations. When writing math, use simple notation like f'(x), ∫, Σ, lim, → that renders well as text. Be encouraging, concise, and always connect theory to exam strategy. Highlight BC-specific content (series, parametric, polar, Euler's method, logistic growth, etc.) when relevant.`;
 
 const FREE_MODELS = [
-  'openai/gpt-oss-120b:free',
-  'nvidia/nemotron-3-super-120b-a12b:free',
   'meta-llama/llama-3.3-70b-instruct:free',
   'qwen/qwen3-next-80b-a3b-instruct:free',
-  'arcee-ai/trinity-large-preview:free',
+  'nvidia/nemotron-3-super-120b-a12b:free',
+  'openai/gpt-oss-120b:free',
+  'z-ai/glm-4.5-air:free',
   'openrouter/free'
 ];
 
@@ -2478,7 +2478,7 @@ async function sendMessage() {
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${OPENROUTER_KEY}`,
-          'HTTP-Referer': 'https://apcalcbc.study',
+          'HTTP-Referer': window.location.origin,
           'X-Title': 'AP Calc BC Study Guide'
         },
         body: JSON.stringify({
